@@ -1,0 +1,32 @@
+modLoader="javafml"
+loaderVersion="[46,)"
+license="MIT"
+issueTrackerURL=""
+
+[[mods]]
+modId="pvz_kedit"
+version="${file.jarVersion}"
+displayName="Pvz Mod by keletu"
+credits="keletu, Ai_myh"
+authors="keletu, Ai_myh"
+logoFile="logo.png"
+description="PVZ mod by keletu and Ai_myh"
+
+[[dependencies.pvz_kedit]]
+    modId="forge"
+    mandatory=true
+    versionRange="[46,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.pvz_kedit]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20,1.21)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.pvz_kedit]]
+    modId="geckolib"
+    mandatory=true
+    versionRange="[1.0,)"
+    ordering="AFTER"
+    side="BOTH"
