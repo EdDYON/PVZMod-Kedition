@@ -74,7 +74,7 @@ public class TrueRangedAttackGoal extends Goal {
     }
 
     public void tick() {
-        if (this.target == null || !this.target.isAlive()) {
+        if (this.target == null || !this.target.isAlive() || !this.mob.canAttack(this.target)) {
             this.target = null;
             this.mob.setTarget(null);
             this.mob.setShooting(false);

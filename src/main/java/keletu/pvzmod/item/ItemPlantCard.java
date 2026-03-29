@@ -55,7 +55,7 @@ public class ItemPlantCard extends Item {
                         entity.moveTo(clickedPos.getX() + 0.5D, clickedPos.getY() + 1.0D, clickedPos.getZ() + 0.5D, 0.0F, 0.0F);
                         level.setBlockAndUpdate(clickedPos, Blocks.GRASS_BLOCK.defaultBlockState());
                     } else {
-                        entity.moveTo(clickedPos.getX() + 0.5D, clickedPos.getY(), clickedPos.getZ() + 0.5D, 0.0F, 0.0F);
+                        entity.moveTo(clickedPos.getX() + 0.5D, clickedPos.getY() + 1.0D, clickedPos.getZ() + 0.5D, 0.0F, 0.0F);
                     }
 
                     level.addFreshEntity(entity);

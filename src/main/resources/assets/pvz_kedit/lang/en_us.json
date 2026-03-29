@@ -2,6 +2,11 @@
   "language": "English",
   "language.code": "en_us",
   "language.region": "United States",
+
   "item.pvz_kedit.pea": "Pea",
-  "item.pvz_kedit.peashooter_card": "Pea Shooter"
+  "item.pvz_kedit.peashooter_card": "Pea Shooter",
+
+  "entity.pvz_kedit.pea_shooter": "Pea Shooter",
+
+  "creativetab.pvz_kedit": "Plants Vs Zombies"
 }
