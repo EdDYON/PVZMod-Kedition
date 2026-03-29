@@ -1,5 +1,9 @@
 package keletu.pvzmod.entities;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
@@ -7,7 +11,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
@@ -18,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class EntityPlantShooterBase extends EntityPlantBase implements RangedAttackMob {
+    private static final EntityDataAccessor<Boolean> IS_SHOOTING = SynchedEntityData.defineId(EntityPlantShooterBase.class, EntityDataSerializers.BOOLEAN);
 
     public EntityPlantShooterBase(EntityType<? extends EntityPlantBase> entityType, Level level) {
         super(entityType, level);
@@ -29,7 +33,7 @@ public class EntityPlantShooterBase extends EntityPlantBase implements RangedAtt
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new RangedAttackGoal(this, 0.0F, 35, this.range));
+        this.goalSelector.addGoal(1, new TrueRangedAttackGoal(this, 0.0F, 30, this.range));
 
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
@@ -58,6 +62,34 @@ public class EntityPlantShooterBase extends EntityPlantBase implements RangedAtt
         if (target instanceof PathfinderMob) {
             ((PathfinderMob) target).setTarget(this);
         }
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(IS_SHOOTING, false);
+    }
+
+    public boolean isShooting() {
+        return this.entityData.get(IS_SHOOTING);
+    }
+
+    public void setShooting(boolean shooting) {
+        this.entityData.set(IS_SHOOTING, shooting);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag pCompound) {
+        super.addAdditionalSaveData(pCompound);
+        pCompound.putBoolean("Shooting", this.isShooting());
+        //this.addPersistentAngerSaveData(pCompound);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag pCompound) {
+        super.readAdditionalSaveData(pCompound);
+        this.setShooting(pCompound.getBoolean("Shooting"));
+        //this.readPersistentAngerSaveData(this.level(), pCompound);
     }
 
     public ThrowableProjectile entitySelect(Level level) {

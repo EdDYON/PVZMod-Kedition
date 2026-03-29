@@ -4,11 +4,7 @@ import keletu.pvzmod.PVZMod;
 import keletu.pvzmod.entities.EntityPeaShooter;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.cache.object.GeoBone;
-import software.bernie.geckolib.constant.DataTickets;
-import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
-import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.model.data.EntityModelData;
 
 import java.util.Optional;
 

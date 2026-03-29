@@ -2,7 +2,9 @@ package keletu.pvzmod.init;
 
 import keletu.pvzmod.PVZMod;
 import keletu.pvzmod.entities.EntityPeaShooter;
+import keletu.pvzmod.entities.projectile.PeaProjectile;
 import keletu.pvzmod.models.RenderPeaShooter;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,7 +17,13 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class PVZEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, PVZMod.MODID);
-    public static final RegistryObject<EntityType<EntityPeaShooter>> PEA_SHOOTER = PVZEntities.ENTITIES.register("pea_shooter", () -> EntityType.Builder.of(EntityPeaShooter::new, MobCategory.CREATURE).sized(1.0F, 0.8F).clientTrackingRange(8).build(PVZMod.MODID + ".pea_shooter"));
+    public static final RegistryObject<EntityType<EntityPeaShooter>> PEA_SHOOTER = PVZEntities.ENTITIES.register("pea_shooter", () -> EntityType.Builder.of(EntityPeaShooter::new, MobCategory.MISC).sized(1.0F, 0.8F).clientTrackingRange(8).build(PVZMod.MODID + ".pea_shooter"));
+    public static final RegistryObject<EntityType<PeaProjectile>> PEA_PROJECTILE = PVZEntities.ENTITIES.register("pea_projectile",
+            () -> EntityType.Builder.<PeaProjectile>of(PeaProjectile::new, MobCategory.MISC)
+                    .sized(0.25F, 0.25F)
+                    .clientTrackingRange(4)
+                    .updateInterval(10)
+                    .build("pea_projectile"));
 
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
         event.put(PEA_SHOOTER.get(), EntityPeaShooter.createAttributes().build());
@@ -24,5 +32,6 @@ public class PVZEntities {
     @OnlyIn(Dist.CLIENT)
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(PEA_SHOOTER.get(), RenderPeaShooter::new);
+        event.registerEntityRenderer(PEA_PROJECTILE.get(), ThrownItemRenderer::new);
     }
 }
