@@ -1,5 +1,8 @@
 package keletu.pvzmod.entities;
 
+import keletu.pvzmod.entities.ai.PlanterHurtByTargetGoal;
+import keletu.pvzmod.entities.ai.PlanterHurtTargetGoal;
+import keletu.pvzmod.entities.ai.TrueRangedAttackGoal;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -20,7 +23,7 @@ import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class EntityPlantShooterBase extends EntityPlantBase implements RangedAttackMob {
+public abstract class EntityPlantShooterBase extends EntityPlantBase implements RangedAttackMob {
     private static final EntityDataAccessor<Boolean> IS_SHOOTING = SynchedEntityData.defineId(EntityPlantShooterBase.class, EntityDataSerializers.BOOLEAN);
 
     public EntityPlantShooterBase(EntityType<? extends EntityPlantBase> entityType, Level level) {
@@ -38,7 +41,9 @@ public class EntityPlantShooterBase extends EntityPlantBase implements RangedAtt
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
 
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Monster.class, true));
+        this.targetSelector.addGoal(1, new PlanterHurtByTargetGoal(this));
+        this.targetSelector.addGoal(2, new PlanterHurtTargetGoal(this));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Monster.class, true));
     }
 
     @Override

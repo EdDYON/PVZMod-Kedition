@@ -1,6 +1,7 @@
 package keletu.pvzmod.init;
 
 import keletu.pvzmod.PVZMod;
+import keletu.pvzmod.item.ItemPlantCard;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
@@ -17,4 +18,7 @@ public class PVZItems {
                     .fast()
                     .build())
             .stacksTo(64)));
+
+    public static final RegistryObject<Item> PEASHOOTER_CARD = ITEMS.register("peashooter_card",
+            () -> new ItemPlantCard(new Item.Properties(), PVZEntities.PEA_SHOOTER));
 }

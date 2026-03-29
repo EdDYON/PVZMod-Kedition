@@ -1,21 +1,30 @@
 package keletu.pvzmod.entities;
 
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobType;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.players.OldUsersConverter;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.JumpControl;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.animal.AbstractGolem;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class EntityPlantBase extends AbstractGolem {
+import javax.annotation.Nullable;
+import java.util.Optional;
+import java.util.UUID;
+
+public abstract class EntityPlantBase extends AbstractGolem implements OwnableEntity {
+    protected static final EntityDataAccessor<Optional<UUID>> DATA_OWNERUUID_ID = SynchedEntityData.defineId(EntityPlantBase.class, EntityDataSerializers.OPTIONAL_UUID);
     private String texture;
     private String livingSound;
     private String hurtSound;
@@ -36,6 +45,48 @@ public class EntityPlantBase extends AbstractGolem {
     @Override
     public float maxUpStep() {
         return 0.0F;
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_OWNERUUID_ID, Optional.empty());
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag pCompound) {
+        super.addAdditionalSaveData(pCompound);
+        if (this.getOwnerUUID() != null) {
+            pCompound.putUUID("Owner", this.getOwnerUUID());
+        }
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag pCompound) {
+        super.readAdditionalSaveData(pCompound);
+        UUID uuid;
+        if (pCompound.hasUUID("Owner")) {
+            uuid = pCompound.getUUID("Owner");
+        } else {
+            String s = pCompound.getString("Owner");
+            uuid = OldUsersConverter.convertMobOwnerIfNecessary(this.getServer(), s);
+        }
+
+        if (uuid != null) {
+            this.setOwnerUUID(uuid);
+        }
+    }
+
+    public UUID getOwnerUUID() {
+        return this.entityData.get(DATA_OWNERUUID_ID).orElse(null);
+    }
+
+    public void setOwnerUUID(@Nullable UUID pUuid) {
+        this.entityData.set(DATA_OWNERUUID_ID, Optional.ofNullable(pUuid));
+    }
+
+    public boolean isOwnedBy(LivingEntity pEntity) {
+        return pEntity == this.getOwner();
     }
 
     @Override
@@ -107,12 +158,28 @@ public class EntityPlantBase extends AbstractGolem {
     }
 
     @Override
-    public boolean canAttack(net.minecraft.world.entity.LivingEntity target) {
-        return !(target instanceof Creeper) && !(target instanceof Ghast);
+    public boolean canAttack(LivingEntity target) {
+        return super.canAttack(target) && !this.isOwnedBy(target) && !(target instanceof Creeper) && !(target instanceof Ghast);
     }
 
     @Override
     public boolean isNoAi() {
         return false;
+    }
+
+    public boolean wantsToAttack(LivingEntity pTarget, LivingEntity pOwner) {
+        if (!(pTarget instanceof Creeper) && !(pTarget instanceof Ghast)) {
+            if (pTarget instanceof EntityPlantBase) {
+                return false;
+            } else if (pTarget instanceof Player && pOwner instanceof Player && !((Player) pOwner).canHarmPlayer((Player) pTarget)) {
+                return false;
+            } else if (pTarget instanceof AbstractHorse && ((AbstractHorse) pTarget).isTamed()) {
+                return false;
+            } else {
+                return !(pTarget instanceof TamableAnimal) || !((TamableAnimal) pTarget).isTame();
+            }
+        } else {
+            return false;
+        }
     }
 }

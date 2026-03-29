@@ -1,5 +1,7 @@
 {
   "language": "English",
   "language.code": "en_us",
-  "language.region": "United States"
+  "language.region": "United States",
+  "item.pvz_kedit.pea": "Pea",
+  "item.pvz_kedit.peashooter_card": "Pea Shooter"
 }

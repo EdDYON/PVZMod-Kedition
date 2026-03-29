@@ -1,5 +1,6 @@
-package keletu.pvzmod.entities;
+package keletu.pvzmod.entities.ai;
 
+import keletu.pvzmod.entities.EntityPlantShooterBase;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -101,7 +102,7 @@ public class TrueRangedAttackGoal extends Goal {
             }
 
             float f2 = (float) Math.sqrt(living) / this.attackRadius;
-            float f3 = Mth.clamp(f2, 0.1F, 1.0F);
+            float f3 = Mth.clamp(f2, 0.1F, 0.5F);
             this.rangedAttackMob.performRangedAttack(this.target, f3);
             this.attackTime = 20;
         } else if (this.attackTime < 0) {

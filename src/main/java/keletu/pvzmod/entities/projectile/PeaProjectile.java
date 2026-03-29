@@ -1,5 +1,6 @@
 package keletu.pvzmod.entities.projectile;
 
+import keletu.pvzmod.entities.EntityPlantBase;
 import keletu.pvzmod.init.PVZEntities;
 import keletu.pvzmod.init.PVZItems;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -7,7 +8,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -17,14 +17,16 @@ import net.minecraft.world.phys.EntityHitResult;
 
 public class PeaProjectile extends ThrowableItemProjectile {
     private float damage = 2.0F;
+    private EntityPlantBase shooter;
 
     public PeaProjectile(EntityType<? extends PeaProjectile> type, Level level) {
         super(type, level);
     }
 
-    public PeaProjectile(Level level, LivingEntity shooter, float damage) {
+    public PeaProjectile(Level level, EntityPlantBase shooter, float damage) {
         super(PVZEntities.PEA_PROJECTILE.get(), shooter, level);
         this.damage = damage;
+        this.shooter = shooter;
     }
 
     @Override
@@ -35,6 +37,9 @@ public class PeaProjectile extends ThrowableItemProjectile {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
+
+        if (result.getEntity() instanceof EntityPlantBase || (this.shooter != null && result.getEntity() == shooter.getOwner()))
+            return;
 
         result.getEntity().hurt(this.damageSources().thrown(this, this.getOwner()), damage);
 
