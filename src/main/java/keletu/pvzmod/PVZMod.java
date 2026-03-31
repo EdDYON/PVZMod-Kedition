@@ -1,5 +1,6 @@
 package keletu.pvzmod;
 
+import keletu.pvzmod.init.PVZEffects;
 import keletu.pvzmod.init.PVZEntities;
 import keletu.pvzmod.init.PVZItems;
 import keletu.pvzmod.init.PVZTabs;
@@ -16,6 +17,7 @@ public class PVZMod {
 
         PVZItems.ITEMS.register(modEventBus);
         PVZEntities.ENTITIES.register(modEventBus);
+        PVZEffects.EFFECTS.register(modEventBus);
         modEventBus.addListener(PVZEntities::registerEntityAttributes);
 
         PVZTabs.TABS.register(modEventBus);

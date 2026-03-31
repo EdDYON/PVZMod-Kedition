@@ -1,6 +1,6 @@
 package keletu.pvzmod.entities;
 
-import keletu.pvzmod.entities.projectile.PeaProjectile;
+import keletu.pvzmod.entities.projectile.SnowPeaProjectile;
 import keletu.pvzmod.init.PVZItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -20,14 +20,14 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class EntityPeaShooter extends EntityPlantShooterBase implements GeoEntity {
+public class EntitySnowPea extends EntityPlantShooterBase implements GeoEntity {
 
     public static final RawAnimation STAND = RawAnimation.begin().thenLoop("stand");
     public static final RawAnimation SHOOT = RawAnimation.begin().thenLoop("shoot");
-    private static final EntityDataAccessor<Boolean> IS_SHOOTING = SynchedEntityData.defineId(EntityPeaShooter.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> IS_SHOOTING = SynchedEntityData.defineId(EntitySnowPea.class, EntityDataSerializers.BOOLEAN);
 
-    public EntityPeaShooter(EntityType<? extends EntityPlantShooterBase> entityType, Level par1World) {
-        super(entityType, par1World, new ItemStack(PVZItems.PEASHOOTER_CARD.get()));
+    public EntitySnowPea(EntityType<? extends EntityPlantShooterBase> entityType, Level par1World) {
+        super(entityType, par1World, new ItemStack(PVZItems.SNOWPEA_CARD.get()));
     }
 
     @Override
@@ -55,7 +55,7 @@ public class EntityPeaShooter extends EntityPlantShooterBase implements GeoEntit
 
     @Override
     public ThrowableProjectile entitySelect(Level world) {
-        PeaProjectile ent = new PeaProjectile(world, this, 3);
+        SnowPeaProjectile ent = new SnowPeaProjectile(world, this, 3);
         return ent;
     }
 

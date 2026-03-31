@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pvz_kedit:item/card/green",
+    "layer1": "pvz_kedit:item/plant/snow_pea",
+    "layer2": "pvz_kedit:item/card/green_bord"
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "format_version": "1.9.0",
+  "credit": "Made with Blockbench",
+  "textures": {
+    "1": "pvz_kedit:item/ice_pea",
+    "particle": "pvz_kedit:item/ice_pea"
+  },
+  "elements": [
+    {
+      "from": [
+        6,
+        6,
+        6
+      ],
+      "to": [
+        10,
+        10,
+        10
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          6,
+          6,
+          7
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            8,
+            4,
+            12
+          ],
+          "texture": "#1"
+        },
+        "east": {
+          "uv": [
+            0,
+            8,
+            4,
+            12
+          ],
+          "texture": "#1"
+        },
+        "south": {
+          "uv": [
+            11,
+            0,
+            15,
+            4
+          ],
+          "texture": "#1"
+        },
+        "west": {
+          "uv": [
+            15,
+            0,
+            11,
+            4
+          ],
+          "texture": "#1"
+        },
+        "up": {
+          "uv": [
+            11,
+            0,
+            15,
+            4
+          ],
+          "texture": "#1"
+        },
+        "down": {
+          "uv": [
+            0,
+            8,
+            4,
+            12
+          ],
+          "texture": "#1"
+        }
+      }
+    },
+    {
+      "from": [
+        5.9,
+        5.9,
+        5.9
+      ],
+      "to": [
+        10.1,
+        10.1,
+        13.1
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          6,
+          6,
+          9
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            11,
+            4,
+            15,
+            8
+          ],
+          "texture": "#1"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            7,
+            4
+          ],
+          "texture": "#1"
+        },
+        "south": {
+          "uv": [
+            11,
+            8,
+            15,
+            12
+          ],
+          "texture": "#1"
+        },
+        "west": {
+          "uv": [
+            0,
+            4,
+            7,
+            8
+          ],
+          "texture": "#1"
+        },
+        "up": {
+          "uv": [
+            11,
+            7,
+            7,
+            0
+          ],
+          "texture": "#1"
+        },
+        "down": {
+          "uv": [
+            11,
+            7,
+            7,
+            14
+          ],
+          "texture": "#1"
+        }
+      }
+    }
+  ],
+  "display": {
+    "head": {
+      "translation": [
+        0,
+        -2,
+        -8
+      ]
+    }
+  }
+}
