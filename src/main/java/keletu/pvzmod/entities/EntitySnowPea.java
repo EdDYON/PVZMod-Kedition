@@ -2,9 +2,6 @@ package keletu.pvzmod.entities;
 
 import keletu.pvzmod.entities.projectile.SnowPeaProjectile;
 import keletu.pvzmod.init.PVZItems;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -24,24 +21,9 @@ public class EntitySnowPea extends EntityPlantShooterBase implements GeoEntity {
 
     public static final RawAnimation STAND = RawAnimation.begin().thenLoop("stand");
     public static final RawAnimation SHOOT = RawAnimation.begin().thenLoop("shoot");
-    private static final EntityDataAccessor<Boolean> IS_SHOOTING = SynchedEntityData.defineId(EntitySnowPea.class, EntityDataSerializers.BOOLEAN);
 
     public EntitySnowPea(EntityType<? extends EntityPlantShooterBase> entityType, Level par1World) {
         super(entityType, par1World, new ItemStack(PVZItems.SNOWPEA_CARD.get()));
-    }
-
-    @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(IS_SHOOTING, false);
-    }
-
-    public boolean isShooting() {
-        return this.entityData.get(IS_SHOOTING);
-    }
-
-    public void setShooting(boolean shooting) {
-        this.entityData.set(IS_SHOOTING, shooting);
     }
 
     // protected Item getDropItem() {

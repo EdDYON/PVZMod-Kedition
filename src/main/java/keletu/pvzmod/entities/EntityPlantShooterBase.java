@@ -48,24 +48,26 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
 
     @Override
     public void performRangedAttack(LivingEntity target, float distanceFactor) {
-        ThrowableProjectile projectile = entitySelect(this.level());
-        projectile.setPos(this.getX(), this.getEyeY() - 0.1D, this.getZ());
+        if (!this.level().isClientSide) {
+            ThrowableProjectile projectile = entitySelect(this.level());
+            projectile.setPos(this.getX(), this.getEyeY() - 0.1D, this.getZ());
 
-        double toX = target.getX() - this.getX();
-        float percentToMouth = 0.5F;
-        double toY = target.getY() + target.getEyeHeight() * percentToMouth - 1.0D - projectile.getY();
-        double toZ = target.getZ() - this.getZ();
+            double toX = target.getX() - this.getX();
+            float percentToMouth = 0.5F;
+            double toY = target.getY() + target.getEyeHeight() * percentToMouth - 1.0D - projectile.getY();
+            double toZ = target.getZ() - this.getZ();
 
-        float horizontalDistance = Mth.sqrt((float) (toX * toX + toZ * toZ)) * 0.2F;
+            float horizontalDistance = Mth.sqrt((float) (toX * toX + toZ * toZ)) * 0.2F;
 
-        projectile.shoot(toX, toY + horizontalDistance, toZ, 1.6F, 0.0F);
+            projectile.shoot(toX, toY + horizontalDistance, toZ, 1.6F, 0.0F);
 
-        this.playSound(SoundEvents.ARROW_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+            this.playSound(SoundEvents.ARROW_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 
-        this.level().addFreshEntity(projectile);
+            this.level().addFreshEntity(projectile);
 
-        if (target instanceof PathfinderMob) {
-            ((PathfinderMob) target).setTarget(this);
+            if (target instanceof PathfinderMob) {
+                ((PathfinderMob) target).setTarget(this);
+            }
         }
     }
 

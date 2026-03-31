@@ -41,15 +41,14 @@ public class SnowPeaProjectile extends ThrowableItemProjectile {
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
 
-        if (result.getEntity() instanceof EntityPlantBase || (this.shooter != null && result.getEntity() == shooter.getOwner()))
+        if (result.getEntity() instanceof EntityPlantBase || (this.shooter != null && this.shooter.getOwner() != null && result.getEntity() == shooter.getOwner()))
             return;
 
-        if (result.getEntity() instanceof LivingEntity mob) {
+        if (!this.level().isClientSide && result.getEntity() instanceof LivingEntity mob) {
             mob.addEffect(new MobEffectInstance(PVZEffects.SNOW.get(), 100, 0));
-            mob.hurt(this.damageSources().thrown(this, this.getOwner()), damage);
-        }
+            mob.hurt(this.damageSources().mobProjectile(this, this.shooter), damage);
+            mob.invulnerableTime = 0;
 
-        if (!this.level().isClientSide) {
             this.spawnBreakParticles();
             this.playSound(SoundEvents.GRASS_BREAK, 0.8F, 1.2F);
             this.discard();

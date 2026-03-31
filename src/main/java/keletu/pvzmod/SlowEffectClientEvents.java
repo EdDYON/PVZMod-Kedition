@@ -1,11 +1,14 @@
 package keletu.pvzmod;
 
-import keletu.pvzmod.init.PVZEffects;
+import keletu.pvzmod.potion.SnowEffect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.phys.AABB;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,22 +23,25 @@ public class SlowEffectClientEvents {
 
         Minecraft mc = Minecraft.getInstance();
         ClientLevel level = mc.level;
-        LivingEntity player = mc.player;
 
-        if (level == null || player == null) return;
+        if (level == null) return;
 
         if (level.getGameTime() % 2 != 0) return;
 
-        double range = 32.0D;
-        AABB area = player.getBoundingBox().inflate(range);
+        for (Entity entity : level.entitiesForRendering()) {
+            if (!(entity instanceof LivingEntity living)) continue;
 
-        for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, area)) {
-            if (!entity.hasEffect(PVZEffects.SNOW.get())) continue;
+
+            AttributeInstance speed = living.getAttribute(Attributes.MOVEMENT_SPEED);
+            if (speed == null) continue;
+
+            AttributeModifier snow = speed.getModifier(SnowEffect.MOVEMENT_SPEED_MODIFIER_UUID);
+            if (snow == null) continue;
 
             for (int i = 0; i < 3; i++) {
-                double x = entity.getX() + (level.random.nextDouble() - 0.5D) * entity.getBbWidth();
-                double y = entity.getY() + level.random.nextDouble() * entity.getBbHeight() + 0.2D;
-                double z = entity.getZ() + (level.random.nextDouble() - 0.5D) * entity.getBbWidth();
+                double x = living.getX() + (level.random.nextDouble() - 0.5D) * living.getBbWidth();
+                double y = living.getY() + level.random.nextDouble() * living.getBbHeight() + 0.2D;
+                double z = living.getZ() + (level.random.nextDouble() - 0.5D) * living.getBbWidth();
 
                 double vx = (level.random.nextDouble() - 0.5D) * 0.02D;
                 double vy = 0.01D;

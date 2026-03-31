@@ -2,9 +2,6 @@ package keletu.pvzmod.entities;
 
 import keletu.pvzmod.entities.projectile.PeaProjectile;
 import keletu.pvzmod.init.PVZItems;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -24,24 +21,9 @@ public class EntityPeaShooter extends EntityPlantShooterBase implements GeoEntit
 
     public static final RawAnimation STAND = RawAnimation.begin().thenLoop("stand");
     public static final RawAnimation SHOOT = RawAnimation.begin().thenLoop("shoot");
-    private static final EntityDataAccessor<Boolean> IS_SHOOTING = SynchedEntityData.defineId(EntityPeaShooter.class, EntityDataSerializers.BOOLEAN);
 
     public EntityPeaShooter(EntityType<? extends EntityPlantShooterBase> entityType, Level par1World) {
         super(entityType, par1World, new ItemStack(PVZItems.PEASHOOTER_CARD.get()));
-    }
-
-    @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(IS_SHOOTING, false);
-    }
-
-    public boolean isShooting() {
-        return this.entityData.get(IS_SHOOTING);
-    }
-
-    public void setShooting(boolean shooting) {
-        this.entityData.set(IS_SHOOTING, shooting);
     }
 
     // protected Item getDropItem() {

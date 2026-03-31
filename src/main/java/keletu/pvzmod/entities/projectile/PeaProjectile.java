@@ -8,6 +8,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -41,9 +42,9 @@ public class PeaProjectile extends ThrowableItemProjectile {
         if (result.getEntity() instanceof EntityPlantBase || (this.shooter != null && result.getEntity() == shooter.getOwner()))
             return;
 
-        result.getEntity().hurt(this.damageSources().thrown(this, this.getOwner()), damage);
-
         if (!this.level().isClientSide) {
+            result.getEntity().hurt(this.damageSources().mobProjectile(this, (LivingEntity) this.getOwner()), damage);
+
             this.spawnBreakParticles();
             this.playSound(SoundEvents.GRASS_BREAK, 0.8F, 1.2F);
             this.discard();

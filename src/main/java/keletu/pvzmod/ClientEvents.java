@@ -22,8 +22,6 @@ public class ClientEvents {
         }
 
         addLayerToPlayers(event);
-
-        System.out.println("SlowBlueLayer registration complete");
     }
 
     private static void addLayerToPlayers(EntityRenderersEvent.AddLayers event) {
