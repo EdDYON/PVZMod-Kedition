@@ -17,27 +17,41 @@ public class TrueRangedAttackGoal extends Goal {
     private int attackTime;
     private final double speedModifier;
     private int seeTime;
-    private final int attackIntervalMin;
-    private final int attackIntervalMax;
     private final float attackRadius;
     private final float attackRadiusSqr;
 
+    private final int burstCount;
+    private final int burstDelay;
+    private int remainingShots;
+    private int burstTimer;
+
     public TrueRangedAttackGoal(EntityPlantShooterBase pRangedAttackMob, double pSpeedModifier, int pAttackInterval, float pAttackRadius) {
-        this(pRangedAttackMob, pSpeedModifier, pAttackInterval, pAttackInterval, pAttackRadius);
+        this(pRangedAttackMob, pSpeedModifier, pAttackInterval, pAttackInterval, pAttackRadius, 1, 0);
+    }
+
+    public TrueRangedAttackGoal(EntityPlantShooterBase pRangedAttackMob, double pSpeedModifier, int pAttackInterval, float pAttackRadius, int pBurstCount, int pBurstDelay) {
+        this(pRangedAttackMob, pSpeedModifier, pAttackInterval, pAttackInterval, pAttackRadius, pBurstCount, pBurstDelay);
     }
 
     public TrueRangedAttackGoal(EntityPlantShooterBase pRangedAttackMob, double pSpeedModifier, int pAttackIntervalMin, int pAttackIntervalMax, float pAttackRadius) {
+        this(pRangedAttackMob, pSpeedModifier, pAttackIntervalMin, pAttackIntervalMax, pAttackRadius, 1, 0);
+    }
+
+    public TrueRangedAttackGoal(EntityPlantShooterBase pRangedAttackMob, double pSpeedModifier, int pAttackIntervalMin, int pAttackIntervalMax, float pAttackRadius, int pBurstCount, int pBurstDelay) {
         this.attackTime = -1;
+        this.remainingShots = 0;
+        this.burstTimer = 0;
+
         if (pRangedAttackMob == null) {
             throw new IllegalArgumentException("ArrowAttackGoal requires Mob implements RangedAttackMob");
         } else {
             this.rangedAttackMob = pRangedAttackMob;
             this.mob = pRangedAttackMob;
             this.speedModifier = pSpeedModifier;
-            this.attackIntervalMin = pAttackIntervalMin;
-            this.attackIntervalMax = pAttackIntervalMax;
             this.attackRadius = pAttackRadius;
             this.attackRadiusSqr = pAttackRadius * pAttackRadius;
+            this.burstCount = Math.max(1, pBurstCount);
+            this.burstDelay = Math.max(0, pBurstDelay);
             this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
         }
     }
@@ -66,6 +80,8 @@ public class TrueRangedAttackGoal extends Goal {
         this.target = this.mob.getTarget();
         this.seeTime = 0;
         this.attackTime = -1;
+        this.remainingShots = 0;
+        this.burstTimer = 0;
         this.mob.setShooting(false);
     }
 
@@ -83,6 +99,7 @@ public class TrueRangedAttackGoal extends Goal {
 
         double living = this.mob.distanceToSqr(this.target.getX(), this.target.getY(), this.target.getZ());
         boolean hasSight = this.mob.getSensing().hasLineOfSight(this.target);
+
         if (hasSight) {
             ++this.seeTime;
         } else {
@@ -96,6 +113,23 @@ public class TrueRangedAttackGoal extends Goal {
         }
 
         this.mob.getLookControl().setLookAt(this.target, 30.0F, 30.0F);
+
+        if (this.remainingShots > 0) {
+            --this.burstTimer;
+            if (this.burstTimer <= 0) {
+                if (hasSight && this.target != null && this.target.isAlive()) {
+                    float f2 = (float) Math.sqrt(living) / this.attackRadius;
+                    float f3 = Mth.clamp(f2, 0.1F, 1.0F);
+                    this.rangedAttackMob.performRangedAttack(this.target, f3);
+                }
+                --this.remainingShots;
+
+                if (this.remainingShots > 0) {
+                    this.burstTimer = this.burstDelay;
+                }
+            }
+        }
+
         if (--this.attackTime == 0) {
             if (!hasSight) {
                 return;
@@ -103,11 +137,17 @@ public class TrueRangedAttackGoal extends Goal {
 
             float f2 = (float) Math.sqrt(living) / this.attackRadius;
             float f3 = Mth.clamp(f2, 0.1F, 1.0F);
+
             this.rangedAttackMob.performRangedAttack(this.target, f3);
+
+            this.remainingShots = this.burstCount - 1;
+            if (this.remainingShots > 0) {
+                this.burstTimer = this.burstDelay;
+            }
+
             this.attackTime = 20;
         } else if (this.attackTime < 0) {
             this.attackTime = 20;
         }
-
     }
 }

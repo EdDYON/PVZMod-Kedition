@@ -44,6 +44,7 @@ public class PeaProjectile extends ThrowableItemProjectile {
 
         if (!this.level().isClientSide) {
             result.getEntity().hurt(this.damageSources().mobProjectile(this, (LivingEntity) this.getOwner()), damage);
+            result.getEntity().invulnerableTime = 0;
 
             this.spawnBreakParticles();
             this.playSound(SoundEvents.GRASS_BREAK, 0.8F, 1.2F);

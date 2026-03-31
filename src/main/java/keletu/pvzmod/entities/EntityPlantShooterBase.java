@@ -36,7 +36,7 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new TrueRangedAttackGoal(this, 0.0F, 30, this.range));
+        this.goalSelector.addGoal(1, createRangedAttackGoal());
 
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
@@ -44,6 +44,10 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
         this.targetSelector.addGoal(1, new PlanterHurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new PlanterHurtTargetGoal(this));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Monster.class, true));
+    }
+
+    protected TrueRangedAttackGoal createRangedAttackGoal() {
+        return new TrueRangedAttackGoal(this, 0.0F, 30, this.range, 1, 0);
     }
 
     @Override
