@@ -2,17 +2,16 @@
   "language": "English",
   "language.code": "en_us",
   "language.region": "United States",
-
   "item.pvz_kedit.pea": "Pea",
   "item.pvz_kedit.ice_pea": "Ice Pea",
-
   "item.pvz_kedit.peashooter_card": "Pea Shooter",
   "item.pvz_kedit.snowpea_card": "Snow Pea",
   "item.pvz_kedit.repeater_card": "Repeater",
-
+  "item.pvz_kedit.gatling_pea_card": "Gatling Pea",
   "entity.pvz_kedit.pea_shooter": "Pea Shooter",
   "entity.pvz_kedit.snow_pea": "Pea Shooter",
   "entity.pvz_kedit.repeater": "Repeater",
-
+  "entity.pvz_kedit.gatling_pea": "Gatling Pea",
+  "effect.pvz_kedit.snow": "Iced",
   "creativetab.pvz_kedit": "Plants Vs Zombies"
 }

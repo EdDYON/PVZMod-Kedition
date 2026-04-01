@@ -33,4 +33,6 @@ public class PVZItems {
             () -> new ItemPlantCard(new Item.Properties(), PVZEntities.SNOW_PEA));
     public static final RegistryObject<Item> REPEATER_CARD = ITEMS.register("repeater_card",
             () -> new ItemPlantCard(new Item.Properties(), PVZEntities.REPEATER));
+    public static final RegistryObject<Item> GATLING_PEA_CARD = ITEMS.register("gatling_pea_card",
+            () -> new ItemPlantCard(new Item.Properties(), PVZEntities.GATLING_PEA));
 }
