@@ -24,7 +24,7 @@ public class EntityRepeater extends EntityPlantShooterBase implements GeoEntity 
     public static final RawAnimation SHOOT = RawAnimation.begin().thenLoop("shoot");
 
     public EntityRepeater(EntityType<? extends EntityPlantShooterBase> entityType, Level par1World) {
-        super(entityType, par1World, new ItemStack(PVZItems.PEASHOOTER_CARD.get()));
+        super(entityType, par1World, new ItemStack(PVZItems.REPEATER_CARD.get()));
     }
 
     // protected Item getDropItem() {
