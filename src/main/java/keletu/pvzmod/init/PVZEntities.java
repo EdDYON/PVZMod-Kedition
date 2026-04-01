@@ -1,16 +1,11 @@
 package keletu.pvzmod.init;
 
 import keletu.pvzmod.PVZMod;
-import keletu.pvzmod.entities.EntityGatlingPea;
-import keletu.pvzmod.entities.EntityPeaShooter;
-import keletu.pvzmod.entities.EntityRepeater;
-import keletu.pvzmod.entities.EntitySnowPea;
+import keletu.pvzmod.entities.*;
 import keletu.pvzmod.entities.projectile.PeaProjectile;
+import keletu.pvzmod.entities.projectile.PrimalPeaProjectile;
 import keletu.pvzmod.entities.projectile.SnowPeaProjectile;
-import keletu.pvzmod.models.RenderGatlingPea;
-import keletu.pvzmod.models.RenderPeaShooter;
-import keletu.pvzmod.models.RenderRepeater;
-import keletu.pvzmod.models.RenderSnowPea;
+import keletu.pvzmod.models.*;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -28,6 +23,7 @@ public class PVZEntities {
     public static final RegistryObject<EntityType<EntitySnowPea>> SNOW_PEA = PVZEntities.ENTITIES.register("snow_pea", () -> EntityType.Builder.of(EntitySnowPea::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".snow_pea"));
     public static final RegistryObject<EntityType<EntityRepeater>> REPEATER = PVZEntities.ENTITIES.register("repeater", () -> EntityType.Builder.of(EntityRepeater::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".repeater"));
     public static final RegistryObject<EntityType<EntityGatlingPea>> GATLING_PEA = PVZEntities.ENTITIES.register("gatling_pea", () -> EntityType.Builder.of(EntityGatlingPea::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".gatling_pea"));
+    public static final RegistryObject<EntityType<EntityPrimalPeashooter>> PRIMAL_PEASHOOTER = PVZEntities.ENTITIES.register("primal_peashooter", () -> EntityType.Builder.of(EntityPrimalPeashooter::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".primal_peashooter"));
     public static final RegistryObject<EntityType<PeaProjectile>> PEA_PROJECTILE = PVZEntities.ENTITIES.register("pea_projectile",
             () -> EntityType.Builder.<PeaProjectile>of(PeaProjectile::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F)
@@ -40,12 +36,19 @@ public class PVZEntities {
                     .clientTrackingRange(4)
                     .updateInterval(10)
                     .build("snow_pea_projectile"));
+    public static final RegistryObject<EntityType<PrimalPeaProjectile>> PRIMAL_PEA_PROJECTILE = PVZEntities.ENTITIES.register("primal_pea_projectile",
+            () -> EntityType.Builder.<PrimalPeaProjectile>of(PrimalPeaProjectile::new, MobCategory.MISC)
+                    .sized(0.25F, 0.25F)
+                    .clientTrackingRange(4)
+                    .updateInterval(10)
+                    .build("primal_pea_projectile"));
 
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
         event.put(PEA_SHOOTER.get(), EntityPeaShooter.createAttributes().build());
         event.put(SNOW_PEA.get(), EntitySnowPea.createAttributes().build());
         event.put(REPEATER.get(), EntityRepeater.createAttributes().build());
         event.put(GATLING_PEA.get(), EntityRepeater.createAttributes().build());
+        event.put(PRIMAL_PEASHOOTER.get(), EntityRepeater.createAttributes().build());
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -58,5 +61,8 @@ public class PVZEntities {
 
         event.registerEntityRenderer(REPEATER.get(), RenderRepeater::new);
         event.registerEntityRenderer(GATLING_PEA.get(), RenderGatlingPea::new);
+
+        event.registerEntityRenderer(PRIMAL_PEASHOOTER.get(), RenderPrimalPeashooter::new);
+        event.registerEntityRenderer(PRIMAL_PEA_PROJECTILE.get(), ThrownItemRenderer::new);
     }
 }

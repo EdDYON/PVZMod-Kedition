@@ -4,14 +4,22 @@
   "language.region": "United States",
   "item.pvz_kedit.pea": "Pea",
   "item.pvz_kedit.ice_pea": "Ice Pea",
+  "item.pvz_kedit.primal_pea": "Primal Pea",
+  "item.pvz_kedit.small_stone": "Small Cobblestone",
+
   "item.pvz_kedit.peashooter_card": "Pea Shooter",
   "item.pvz_kedit.snowpea_card": "Snow Pea",
   "item.pvz_kedit.repeater_card": "Repeater",
   "item.pvz_kedit.gatling_pea_card": "Gatling Pea",
+  "item.pvz_kedit.primal_peashooter_card": "Primal Peashooter",
+
   "entity.pvz_kedit.pea_shooter": "Pea Shooter",
   "entity.pvz_kedit.snow_pea": "Pea Shooter",
   "entity.pvz_kedit.repeater": "Repeater",
   "entity.pvz_kedit.gatling_pea": "Gatling Pea",
+  "entity.pvz_kedit.primal_peashooter": "Primal Peashooter",
+
   "effect.pvz_kedit.snow": "Iced",
+
   "creativetab.pvz_kedit": "Plants Vs Zombies"
 }

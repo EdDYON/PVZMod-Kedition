@@ -1,7 +1,7 @@
 package keletu.pvzmod.entities;
 
 import keletu.pvzmod.entities.ai.TrueRangedAttackGoal;
-import keletu.pvzmod.entities.projectile.PeaProjectile;
+import keletu.pvzmod.entities.projectile.PrimalPeaProjectile;
 import keletu.pvzmod.init.PVZItems;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -17,13 +17,13 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class EntityRepeater extends EntityPlantShooterBase implements GeoEntity {
+public class EntityPrimalPeashooter extends EntityPlantShooterBase implements GeoEntity {
 
     public static final RawAnimation STAND = RawAnimation.begin().thenLoop("stand");
     public static final RawAnimation SHOOT = RawAnimation.begin().thenLoop("shoot");
 
-    public EntityRepeater(EntityType<? extends EntityPlantShooterBase> entityType, Level par1World) {
-        super(entityType, par1World, new ItemStack(PVZItems.REPEATER_CARD.get()));
+    public EntityPrimalPeashooter(EntityType<? extends EntityPlantShooterBase> entityType, Level par1World) {
+        super(entityType, par1World, new ItemStack(PVZItems.PRIMAL_PEASHOOTER_CARD.get()));
     }
 
     // protected Item getDropItem() {
@@ -32,7 +32,7 @@ public class EntityRepeater extends EntityPlantShooterBase implements GeoEntity 
 
     @Override
     protected TrueRangedAttackGoal createRangedAttackGoal() {
-        return new TrueRangedAttackGoal(this, 0.0F, 30, this.range, 2, 2, 20);
+        return new TrueRangedAttackGoal(this, 0.0F, 30, this.range, 1, 2, 30);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class EntityRepeater extends EntityPlantShooterBase implements GeoEntity 
 
     @Override
     public ThrowableProjectile entitySelect(Level world) {
-        PeaProjectile ent = new PeaProjectile(world, this, 3);
+        PrimalPeaProjectile ent = new PrimalPeaProjectile(world, this, 3, this.random.nextInt(100) < 15 ? 1 : 0);
         return ent;
     }
 

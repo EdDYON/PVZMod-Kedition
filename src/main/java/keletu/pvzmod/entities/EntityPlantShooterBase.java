@@ -47,7 +47,7 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
     }
 
     protected TrueRangedAttackGoal createRangedAttackGoal() {
-        return new TrueRangedAttackGoal(this, 0.0F, 30, this.range, 1, 0);
+        return new TrueRangedAttackGoal(this, 0.0F, 30, this.range, 1, 0, 20);
     }
 
     @Override
@@ -73,6 +73,17 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
                 ((PathfinderMob) target).setTarget(this);
             }
         }
+    }
+
+    @Override
+    public boolean canAttack(LivingEntity target) {
+        if (target != null) {
+            double yDiff = Math.abs(target.getY() - this.getY());
+            if (yDiff > 1.5D) {
+                return false;
+            }
+        }
+        return super.canAttack(target);
     }
 
     @Override

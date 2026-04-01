@@ -6,7 +6,6 @@ import keletu.pvzmod.init.PVZItems;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
@@ -38,24 +37,13 @@ public class EntityGatlingPea extends EntityPlantShooterBase implements GeoEntit
 
     @Override
     protected TrueRangedAttackGoal createRangedAttackGoal() {
-        return new TrueRangedAttackGoal(this, 0.0F, 30, this.range, 4, 1);
+        return new TrueRangedAttackGoal(this, 0.0F, 30, this.range, 4, 1, 20);
     }
 
     @Override
     public ThrowableProjectile entitySelect(Level world) {
         PeaProjectile ent = new PeaProjectile(world, this, 3);
         return ent;
-    }
-
-    @Override
-    public boolean canAttack(LivingEntity target) {
-        if (target != null) {
-            double yDiff = Math.abs(target.getY() - this.getY());
-            if (yDiff > 1.5D) {
-                return false;
-            }
-        }
-        return super.canAttack(target);
     }
 
     @Override

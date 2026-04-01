@@ -27,6 +27,18 @@ public class PVZItems {
                     .effect(() -> new MobEffectInstance(PVZEffects.SNOW.get(), 100, 0), 1.0F)
                     .build())
             .stacksTo(64)));
+
+    public static final RegistryObject<Item> PRIMAL_PEA = ITEMS.register("primal_pea", () -> new Item(new Item.Properties()
+            .food(new FoodProperties.Builder()
+                    .nutrition(4)
+                    .saturationMod(1.0F)
+                    .fast()
+                    .build())
+            .stacksTo(16)));
+
+    public static final RegistryObject<Item> SMALL_STONE = ITEMS.register("small_stone", () -> new Item(new Item.Properties()
+            .stacksTo(64)));
+
     public static final RegistryObject<Item> PEASHOOTER_CARD = ITEMS.register("peashooter_card",
             () -> new ItemPlantCard(new Item.Properties(), PVZEntities.PEA_SHOOTER));
     public static final RegistryObject<Item> SNOWPEA_CARD = ITEMS.register("snowpea_card",
@@ -35,4 +47,6 @@ public class PVZItems {
             () -> new ItemPlantCard(new Item.Properties(), PVZEntities.REPEATER));
     public static final RegistryObject<Item> GATLING_PEA_CARD = ITEMS.register("gatling_pea_card",
             () -> new ItemPlantCard(new Item.Properties(), PVZEntities.GATLING_PEA));
+    public static final RegistryObject<Item> PRIMAL_PEASHOOTER_CARD = ITEMS.register("primal_peashooter_card",
+            () -> new ItemPlantCard(new Item.Properties(), PVZEntities.PRIMAL_PEASHOOTER));
 }
