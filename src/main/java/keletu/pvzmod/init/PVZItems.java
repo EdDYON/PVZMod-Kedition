@@ -32,7 +32,6 @@ public class PVZItems {
             .food(new FoodProperties.Builder()
                     .nutrition(4)
                     .saturationMod(1.0F)
-                    .fast()
                     .build())
             .stacksTo(16)));
 

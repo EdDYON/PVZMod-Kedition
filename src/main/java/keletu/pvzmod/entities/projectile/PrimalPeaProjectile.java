@@ -69,7 +69,7 @@ public class PrimalPeaProjectile extends ThrowableItemProjectile {
                 mob.addEffect(new MobEffectInstance(PVZEffects.STUN.get(), 10));
             } else {
                 Vec3 motion = this.getDeltaMovement();
-                mob.knockback(3.0D, -motion.x, -motion.z);
+                mob.knockback(2.5D, -motion.x, -motion.z);
             }
             result.getEntity().hurt(this.damageSources().mobProjectile(this, (LivingEntity) this.getOwner()), getProjectileType() == 1 ? damage * 2 : damage);
             result.getEntity().invulnerableTime = 0;
