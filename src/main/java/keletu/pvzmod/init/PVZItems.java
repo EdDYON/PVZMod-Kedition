@@ -1,6 +1,7 @@
 package keletu.pvzmod.init;
 
 import keletu.pvzmod.PVZMod;
+import keletu.pvzmod.item.ItemGardenShovel;
 import keletu.pvzmod.item.ItemPlantCard;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;
@@ -48,4 +49,7 @@ public class PVZItems {
             () -> new ItemPlantCard(new Item.Properties(), PVZEntities.GATLING_PEA));
     public static final RegistryObject<Item> PRIMAL_PEASHOOTER_CARD = ITEMS.register("primal_peashooter_card",
             () -> new ItemPlantCard(new Item.Properties(), PVZEntities.PRIMAL_PEASHOOTER));
+
+    public static final RegistryObject<Item> GARDEN_SHOVEL = ITEMS.register("garden_shovel", () -> new ItemGardenShovel(new Item.Properties()
+            .durability(999)));
 }
