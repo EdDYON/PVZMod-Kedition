@@ -1,6 +1,9 @@
 package keletu.pvzmod.item;
 
 import keletu.pvzmod.entities.EntityPlantBase;
+import keletu.pvzmod.models.GardenShovelRenderer;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -16,8 +19,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class ItemGardenShovel extends ShovelItem {
+import javax.annotation.Nonnull;
+import java.util.function.Consumer;
+
+public class ItemGardenShovel extends ShovelItem implements GeoItem {
 
     public ItemGardenShovel(Properties properties) {
         super(Tiers.IRON, 3.0F, -2.4F, properties);
@@ -53,5 +64,37 @@ public class ItemGardenShovel extends ShovelItem {
         } else {
             return InteractionResult.PASS;
         }
+    }
+
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+
+    }
+
+    @Override
+    public void initializeClient(@Nonnull Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new IClientItemExtensions() {
+            private GardenShovelRenderer renderer;
+
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                if (renderer == null) {
+                    this.renderer = new GardenShovelRenderer();
+                }
+                return renderer;
+            }
+
+            @Override
+            public HumanoidModel.ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
+                return HumanoidModel.ArmPose.ITEM;
+            }
+        });
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 }
