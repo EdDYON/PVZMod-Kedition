@@ -1,6 +1,7 @@
 package keletu.pvzmod.entities.projectile;
 
 import keletu.pvzmod.entities.EntityPlantBase;
+import keletu.pvzmod.init.PVZEffects;
 import keletu.pvzmod.init.PVZEntities;
 import keletu.pvzmod.init.PVZItems;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -66,10 +67,10 @@ public class PrimalPeaProjectile extends ThrowableItemProjectile {
 
         if (!this.level().isClientSide && result.getEntity() instanceof LivingEntity mob) {
             if (this.random.nextInt(100) < 50) {
-                mob.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10, 2));
+                mob.addEffect(new MobEffectInstance(PVZEffects.STUN.get(), 10));
             } else {
                 Vec3 motion = this.getDeltaMovement();
-                mob.knockback(1.5D, -motion.x, -motion.z);
+                mob.knockback(3.0D, -motion.x, -motion.z);
             }
             result.getEntity().hurt(this.damageSources().mobProjectile(this, (LivingEntity) this.getOwner()), getProjectileType() == 1 ? damage * 2 : damage);
             result.getEntity().invulnerableTime = 0;
