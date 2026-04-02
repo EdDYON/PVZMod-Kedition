@@ -28,6 +28,7 @@ public class PeaProjectile extends ThrowableItemProjectile {
         super(PVZEntities.PEA_PROJECTILE.get(), shooter, level);
         this.damage = damage;
         this.shooter = shooter;
+        this.setNoGravity(true);
     }
 
     @Override
@@ -50,6 +51,16 @@ public class PeaProjectile extends ThrowableItemProjectile {
             this.playSound(SoundEvents.GRASS_BREAK, 0.8F, 1.2F);
             this.discard();
         }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        this.setDeltaMovement(this.getDeltaMovement().x, 0.0F, this.getDeltaMovement().z);
+
+        if (this.tickCount > 200 || this.touchingUnloadedChunk())
+            this.discard();
     }
 
     @Override

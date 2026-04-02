@@ -5,7 +5,6 @@ import keletu.pvzmod.init.PVZItems;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
@@ -39,17 +38,6 @@ public class EntitySnowPea extends EntityPlantShooterBase implements GeoEntity {
     public ThrowableProjectile entitySelect(Level world) {
         SnowPeaProjectile ent = new SnowPeaProjectile(world, this, 3);
         return ent;
-    }
-
-    @Override
-    public boolean canAttack(LivingEntity target) {
-        if (target != null) {
-            double yDiff = Math.abs(target.getY() - this.getY());
-            if (yDiff > 1.5D) {
-                return false;
-            }
-        }
-        return super.canAttack(target);
     }
 
     @Override
