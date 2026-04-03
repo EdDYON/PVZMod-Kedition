@@ -20,13 +20,13 @@ public class RenderPrimalPea extends ThrownItemRenderer<PrimalPeaProjectile> {
     }
 
     @Override
-    public void render(PrimalPeaProjectile entity, float entityYaw, float partialTicks, PoseStack matrixStackIn, @NotNull MultiBufferSource bufferIn, int packedLightIn) {
+    public void render(PrimalPeaProjectile entity, float entityYaw, float partialTicks, PoseStack matrixStackIn, @NotNull MultiBufferSource bufferIn, int pPackedLight) {
         matrixStackIn.pushPose();
         matrixStackIn.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entity.yRotO, entity.getYRot()) - 90.0F));
         matrixStackIn.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.xRotO, entity.getXRot())));
         matrixStackIn.mulPose(Axis.YP.rotationDegrees(0.0F));
         matrixStackIn.mulPose(Axis.ZN.rotationDegrees((entity.tickCount + partialTicks) * 30.0F));
-        Minecraft.getInstance().getItemRenderer().renderStatic(((ItemSupplier) entity).getItem(), ItemDisplayContext.GROUND, 240, OverlayTexture.NO_OVERLAY, matrixStackIn, bufferIn, Minecraft.getInstance().level, 0);
+        Minecraft.getInstance().getItemRenderer().renderStatic(((ItemSupplier)entity).getItem(), ItemDisplayContext.GROUND, pPackedLight, OverlayTexture.NO_OVERLAY, matrixStackIn, bufferIn, entity.level(), entity.getId());
         matrixStackIn.popPose();
     }
 }

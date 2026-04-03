@@ -12,6 +12,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 
 import java.util.function.Supplier;
 
@@ -47,6 +48,11 @@ public class ItemPlantCard extends Item {
         boolean isWaterLily = clickedState.is(Blocks.LILY_PAD);
 
         if (isEndowedGrass || isWaterLily) {
+            AABB checkBox = new AABB(spawnPos);
+            if (!level.getEntitiesOfClass(EntityPlantBase.class, checkBox).isEmpty()) {
+                return InteractionResult.FAIL;
+            }
+
             if (!level.isClientSide) {
                 Entity entity = entityTypeSupplier.get().create(level);
                 if (entity instanceof EntityPlantBase base) {
