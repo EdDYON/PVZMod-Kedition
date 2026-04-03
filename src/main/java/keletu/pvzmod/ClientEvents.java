@@ -2,6 +2,7 @@ package keletu.pvzmod;
 
 import keletu.pvzmod.init.PVZEntities;
 import keletu.pvzmod.potion.SlowBlueLayer;
+import keletu.pvzmod.potion.StunStarsLayer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.world.entity.EntityType;
@@ -48,6 +49,7 @@ public class ClientEvents {
     @SuppressWarnings({"rawtypes", "unchecked"})
     private static void addLayerSafe(LivingEntityRenderer renderer) {
         renderer.addLayer(new SlowBlueLayer(renderer));
+        renderer.addLayer(new StunStarsLayer(renderer));
     }
 
     @SubscribeEvent

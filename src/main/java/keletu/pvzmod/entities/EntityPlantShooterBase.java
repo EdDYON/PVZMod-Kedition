@@ -63,7 +63,7 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
 
             float horizontalDistance = Mth.sqrt((float) (toX * toX + toZ * toZ)) * 0.2F;
 
-            projectile.shoot(toX, toY + horizontalDistance, toZ, 1.6F, 0.0F);
+            projectile.shoot(toX, 0, toZ, 1.6F, 0.0F);
 
             this.playSound(SoundEvents.ARROW_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 

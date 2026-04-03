@@ -1,7 +1,6 @@
 package keletu.pvzmod;
 
 import keletu.pvzmod.potion.SnowEffect;
-import keletu.pvzmod.potion.StunEffect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.particles.ParticleTypes;
@@ -48,28 +47,6 @@ public class SlowEffectClientEvents {
                     double vz = (level.random.nextDouble() - 0.5D) * 0.02D;
 
                     level.addParticle(ParticleTypes.SNOWFLAKE, x, y, z, vx, vy, vz);
-                }
-            }
-
-            AttributeModifier stun = speed.getModifier(StunEffect.MOVEMENT_SPEED_MODIFIER);
-            if (stun != null) {
-
-                double radius = 0.6D;
-                double y = entity.getY() + entity.getBbHeight() + 0.3D;
-                int points = 12;
-
-                double rotation = entity.tickCount * 0.25D;
-
-                for (int i = 0; i < points; i++) {
-                    double angle = 2.0D * Math.PI * i / points + rotation;
-                    double x = entity.getX() + Math.cos(angle) * radius;
-                    double z = entity.getZ() + Math.sin(angle) * radius;
-
-                    level.addParticle(
-                            ParticleTypes.CRIT,
-                            x, y, z,
-                            0.0D, 0.0D, 0.0D
-                    );
                 }
             }
         }

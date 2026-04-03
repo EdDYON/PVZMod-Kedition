@@ -60,10 +60,9 @@ public class SnowPeaProjectile extends ThrowableItemProjectile {
     public void tick() {
         super.tick();
 
-        this.setDeltaMovement(this.getDeltaMovement().x, 0.0F, this.getDeltaMovement().z);
-
-        if (this.tickCount > 200 || this.touchingUnloadedChunk())
-            this.discard();
+        if (this.tickCount > 60) {
+            this.setDeltaMovement(this.getDeltaMovement().add(0, -0.01F, 0));
+        }
     }
 
     @Override
