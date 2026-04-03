@@ -19,7 +19,7 @@ public class PlanterHurtByTargetGoal extends TargetGoal {
     }
 
     public boolean canUse() {
-        if (this.tameAnimal.getOwner() != null && !(this.targetMob instanceof EntityPlantBase)) {
+        if (targetMob != null && this.tameAnimal.getOwner() != null && !(this.targetMob instanceof EntityPlantBase) && this.targetMob.distanceTo(tameAnimal) <= 24) {
             LivingEntity living = this.tameAnimal.getOwner();
             if (living == null) {
                 return false;

@@ -63,6 +63,6 @@ public class PVZEntities {
         event.registerEntityRenderer(GATLING_PEA.get(), RenderGatlingPea::new);
 
         event.registerEntityRenderer(PRIMAL_PEASHOOTER.get(), RenderPrimalPeashooter::new);
-        event.registerEntityRenderer(PRIMAL_PEA_PROJECTILE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(PRIMAL_PEA_PROJECTILE.get(), RenderPrimalPea::new);
     }
 }

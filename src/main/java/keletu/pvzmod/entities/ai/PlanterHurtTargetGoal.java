@@ -19,7 +19,7 @@ public class PlanterHurtTargetGoal extends TargetGoal {
     }
 
     public boolean canUse() {
-        if (this.tameAnimal.getOwner() != null) {
+        if (this.tameAnimal.getOwner() != null && this.targetMob != null && this.targetMob.distanceTo(this.tameAnimal) <= 24) {
             LivingEntity $$0 = this.tameAnimal.getOwner();
             if ($$0 == null) {
                 return false;

@@ -6,6 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.Goal;
 
 import java.util.UUID;
 
@@ -25,7 +26,13 @@ public class StunEffect extends MobEffect {
         entity.zza = 0;
 
         if (entity instanceof Mob mob) {
-            mob.getNavigation().stop();
+            entity.setXRot(30.0F);
+            entity.xRotO = 30.0F;
+            if (!mob.level().isClientSide) {
+                mob.goalSelector.setControlFlag(Goal.Flag.MOVE, false);
+                mob.goalSelector.setControlFlag(Goal.Flag.JUMP, false);
+                mob.goalSelector.setControlFlag(Goal.Flag.LOOK, false);
+            }
         }
     }
 

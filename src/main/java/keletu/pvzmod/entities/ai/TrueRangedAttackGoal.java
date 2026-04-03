@@ -70,7 +70,7 @@ public class TrueRangedAttackGoal extends Goal {
     }
 
     public boolean canContinueToUse() {
-        if (this.target == null || !this.target.isAlive()) {
+        if (this.target == null || !this.target.isAlive() || this.target.distanceTo(this.mob) > 24) {
             this.target = null;
             this.mob.setTarget(null);
             return false;
