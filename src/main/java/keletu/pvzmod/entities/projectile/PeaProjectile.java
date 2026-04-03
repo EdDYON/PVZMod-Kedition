@@ -57,7 +57,7 @@ public class PeaProjectile extends ThrowableItemProjectile {
     public void tick() {
         super.tick();
 
-        if (this.tickCount > 60) {
+        if (this.tickCount > 40) {
             this.setDeltaMovement(this.getDeltaMovement().add(0, -0.01F, 0));
         }
     }

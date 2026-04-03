@@ -24,7 +24,6 @@ public class StunStarsLayer<T extends LivingEntity, M extends EntityModel<T>> ex
     private static final ResourceLocation STAR_TEXTURE =
             new ResourceLocation(PVZMod.MODID, "textures/particle/stun_star.png");
 
-    // 满亮，避免夜晚/阴影里发黑
     private static final int FULL_BRIGHT = 0xF000F0;
 
     public StunStarsLayer(RenderLayerParent<T, M> parent) {
@@ -43,7 +42,7 @@ public class StunStarsLayer<T extends LivingEntity, M extends EntityModel<T>> ex
         float angularSpeed = 6.0F;
         float radius = Math.max(entity.getBbWidth() * 0.7F, 0.55F);
         float height = entity.getBbHeight();
-        float starSize = 0.22F;
+        float starSize = 1.0F;
 
         poseStack.pushPose();
         poseStack.translate(0.0D, -height + 1.0F, 0.0D);
