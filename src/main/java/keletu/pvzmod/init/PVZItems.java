@@ -49,6 +49,10 @@ public class PVZItems {
             () -> new ItemPlantCard(new Item.Properties(), PVZEntities.GATLING_PEA));
     public static final RegistryObject<Item> PRIMAL_PEASHOOTER_CARD = ITEMS.register("primal_peashooter_card",
             () -> new ItemPlantCard(new Item.Properties(), PVZEntities.PRIMAL_PEASHOOTER));
+    public static final RegistryObject<Item> WALNUT_CARD = ITEMS.register("walnut_card",
+            () -> new ItemPlantCard(new Item.Properties(), PVZEntities.WALNUT));
+    public static final RegistryObject<Item> TALL_NUT_CARD = ITEMS.register("tall_nut_card",
+            () -> new ItemPlantCard(new Item.Properties(), PVZEntities.TALL_NUT));
 
     public static final RegistryObject<Item> GARDEN_SHOVEL = ITEMS.register("garden_shovel", () -> new ItemGardenShovel(new Item.Properties()
             .durability(999)));

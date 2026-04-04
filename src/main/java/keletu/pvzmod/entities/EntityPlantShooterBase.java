@@ -69,7 +69,7 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
 
             this.level().addFreshEntity(projectile);
 
-            if (target instanceof PathfinderMob) {
+            if (target instanceof PathfinderMob && (((PathfinderMob) target).getTarget() == null || !((PathfinderMob) target).getTarget().isAlive())) {
                 ((PathfinderMob) target).setTarget(this);
             }
         }

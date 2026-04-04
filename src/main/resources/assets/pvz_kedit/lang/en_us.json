@@ -13,12 +13,16 @@
   "item.pvz_kedit.repeater_card": "Repeater",
   "item.pvz_kedit.gatling_pea_card": "Gatling Pea",
   "item.pvz_kedit.primal_peashooter_card": "Primal Peashooter",
+  "item.pvz_kedit.walnut_card": "Walnut",
+  "item.pvz_kedit.tall_nut_card": "Tall-nut",
 
   "entity.pvz_kedit.pea_shooter": "Pea Shooter",
   "entity.pvz_kedit.snow_pea": "Pea Shooter",
   "entity.pvz_kedit.repeater": "Repeater",
   "entity.pvz_kedit.gatling_pea": "Gatling Pea",
   "entity.pvz_kedit.primal_peashooter": "Primal Peashooter",
+  "entity.pvz_kedit.walnut": "Walnut",
+  "entity.pvz_kedit.tall_nut": "Tall-nut",
 
   "effect.pvz_kedit.snow": "Iced",
   "effect.pvz_kedit.stun": "Stun",

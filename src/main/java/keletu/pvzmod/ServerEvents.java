@@ -1,7 +1,7 @@
 package keletu.pvzmod;
-/*
-import keletu.pvzmod.init.PVZEntities;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+
+import keletu.pvzmod.entities.EntityTallnut;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -9,7 +9,9 @@ import net.minecraftforge.fml.common.Mod;
 public class ServerEvents {
 
     @SubscribeEvent
-    public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
-        PVZEntities.registerEntityAttributes(event);
+    public static void livingHurtEvent(LivingDamageEvent event) {
+        if (event.getEntity() instanceof EntityTallnut tallnut && event.getAmount() > tallnut.getMaxHealth() * 1 / 2) {
+            event.setAmount(tallnut.getMaxHealth() * 1 / 2);
+        }
     }
-}*/
+}

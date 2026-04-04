@@ -41,7 +41,7 @@ public class ItemGardenShovel extends ShovelItem implements GeoItem {
                 return InteractionResult.SUCCESS;
             } else {
                 BlockPos pos = BlockPos.containing(entity.position());
-                if ((target.getOwner() != null && target.getOwner() == playerIn) || target.getOwner() == null) {
+                if (target.getOwnerUUID() == null || target.getOwnerUUID().equals(playerIn.getUUID())) {
                     target.remove(Entity.RemovalReason.DISCARDED);
                     playerIn.level().playSound(null, pos, SoundEvents.GRASS_BREAK, SoundSource.PLAYERS);
                     ((ServerLevel) playerIn.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.DIRT.defaultBlockState()),

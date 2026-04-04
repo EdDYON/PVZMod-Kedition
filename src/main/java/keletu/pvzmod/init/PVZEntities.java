@@ -9,6 +9,7 @@ import keletu.pvzmod.models.*;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -24,6 +25,8 @@ public class PVZEntities {
     public static final RegistryObject<EntityType<EntityRepeater>> REPEATER = PVZEntities.ENTITIES.register("repeater", () -> EntityType.Builder.of(EntityRepeater::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".repeater"));
     public static final RegistryObject<EntityType<EntityGatlingPea>> GATLING_PEA = PVZEntities.ENTITIES.register("gatling_pea", () -> EntityType.Builder.of(EntityGatlingPea::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".gatling_pea"));
     public static final RegistryObject<EntityType<EntityPrimalPeashooter>> PRIMAL_PEASHOOTER = PVZEntities.ENTITIES.register("primal_peashooter", () -> EntityType.Builder.of(EntityPrimalPeashooter::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".primal_peashooter"));
+    public static final RegistryObject<EntityType<EntityWalnut>> WALNUT = PVZEntities.ENTITIES.register("walnut", () -> EntityType.Builder.of((EntityType<EntityWalnut> event, Level level) -> new EntityWalnut(event, level, 10F), MobCategory.MISC).sized(1.0F, 1.2F).clientTrackingRange(8).build(PVZMod.MODID + ".walnut"));
+    public static final RegistryObject<EntityType<EntityTallnut>> TALL_NUT = PVZEntities.ENTITIES.register("tallnut", () -> EntityType.Builder.of(EntityTallnut::new, MobCategory.MISC).sized(1.0F, 1.8F).clientTrackingRange(8).build(PVZMod.MODID + ".tallnut"));
     public static final RegistryObject<EntityType<PeaProjectile>> PEA_PROJECTILE = PVZEntities.ENTITIES.register("pea_projectile",
             () -> EntityType.Builder.<PeaProjectile>of(PeaProjectile::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F)
@@ -49,6 +52,9 @@ public class PVZEntities {
         event.put(REPEATER.get(), EntityRepeater.createAttributes().build());
         event.put(GATLING_PEA.get(), EntityRepeater.createAttributes().build());
         event.put(PRIMAL_PEASHOOTER.get(), EntityRepeater.createAttributes().build());
+
+        event.put(WALNUT.get(), EntityWalnut.createAttributes().build());
+        event.put(TALL_NUT.get(), EntityTallnut.createAttributes().build());
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -64,5 +70,8 @@ public class PVZEntities {
 
         event.registerEntityRenderer(PRIMAL_PEASHOOTER.get(), RenderPrimalPeashooter::new);
         event.registerEntityRenderer(PRIMAL_PEA_PROJECTILE.get(), RenderPrimalPea::new);
+
+        event.registerEntityRenderer(WALNUT.get(), WalnutRender::new);
+        event.registerEntityRenderer(TALL_NUT.get(), TallnutRender::new);
     }
 }
