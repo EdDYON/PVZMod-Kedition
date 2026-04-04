@@ -30,7 +30,12 @@ public class EntityWalnut extends EntityPlantBase implements GeoEntity {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return EntityPlantBase.createAttributes().add(Attributes.MAX_HEALTH, 20.0D * 16);
+        return EntityPlantBase.createAttributes().add(Attributes.MAX_HEALTH, 10.0D * 16);
+    }
+
+    @Override
+    protected void registerGoals() {
+        this.getNavigation().setCanFloat(false);
     }
 
     @Override

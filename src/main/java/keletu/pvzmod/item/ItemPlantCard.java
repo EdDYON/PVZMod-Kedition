@@ -31,12 +31,16 @@ public class ItemPlantCard extends Item {
         Player player = context.getPlayer();
         ItemStack itemStack = context.getItemInHand();
 
-        if (player != null && !player.mayUseItemAt(clickedPos, context.getClickedFace(), itemStack)) {
+        if (player == null) {
+            return InteractionResult.FAIL;
+        }
+
+        if (!player.mayUseItemAt(clickedPos, context.getClickedFace(), itemStack)) {
             return InteractionResult.FAIL;
         }
 
         BlockState clickedState = level.getBlockState(clickedPos);
-        BlockPos spawnPos = clickedPos.above();
+        BlockPos spawnPos = clickedPos.above((int) Math.ceil(entityTypeSupplier.get().getHeight()));
 
         if (!level.getBlockState(spawnPos).isAir() && !level.getBlockState(spawnPos).canBeReplaced()) {
             return InteractionResult.PASS;
@@ -57,20 +61,34 @@ public class ItemPlantCard extends Item {
                 Entity entity = entityTypeSupplier.get().create(level);
                 if (entity instanceof EntityPlantBase base) {
 
+                    double spawnX;
+                    double spawnY;
+                    double spawnZ;
+
                     if (isEndowedGrass) {
-                        entity.moveTo(clickedPos.getX() + 0.5D, clickedPos.getY() + 1.0D, clickedPos.getZ() + 0.5D, 0.0F, 0.0F);
+                        spawnX = clickedPos.getX() + 0.5D;
+                        spawnY = clickedPos.getY() + 1.0D;
+                        spawnZ = clickedPos.getZ() + 0.5D;
                         level.setBlockAndUpdate(clickedPos, Blocks.GRASS_BLOCK.defaultBlockState());
                     } else {
-                        entity.moveTo(clickedPos.getX() + 0.5D, clickedPos.getY() + 1.0D, clickedPos.getZ() + 0.5D, 0.0F, 0.0F);
+                        spawnX = clickedPos.getX() + 0.5D;
+                        spawnY = clickedPos.getY() + 0.5D;
+                        spawnZ = clickedPos.getZ() + 0.5D;
                     }
+
+                    float yaw = (float) (Math.atan2(player.getZ() - spawnZ, player.getX() - spawnX) * (180F / Math.PI)) - 90.0F;
+
+                    entity.moveTo(spawnX, spawnY, spawnZ, yaw, 0.0F);
+                    entity.setYRot(yaw);
+                    entity.setYBodyRot(yaw);
+                    entity.setYHeadRot(yaw);
 
                     level.addFreshEntity(entity);
 
-                    if (player != null) {
-                        base.setOwnerUUID(player.getUUID());
+                    base.setOwnerUUID(player.getUUID());
 
-                        if (!player.isCreative())
-                            itemStack.shrink(1);
+                    if (!player.isCreative()) {
+                        itemStack.shrink(1);
                     }
                 }
             }

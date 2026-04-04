@@ -16,6 +16,6 @@ public class EntityTallnut extends EntityWalnut {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return EntityPlantBase.createAttributes().add(Attributes.MAX_HEALTH, 20.0D * 32);
+        return EntityPlantBase.createAttributes().add(Attributes.MAX_HEALTH, 20.0D * 21);
     }
 }
