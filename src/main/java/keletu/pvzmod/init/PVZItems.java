@@ -36,6 +36,13 @@ public class PVZItems {
                     .build())
             .stacksTo(16)));
 
+    public static final RegistryObject<Item> ELECTRIC_PEA = ITEMS.register("electric_pea", () -> new Item(new Item.Properties()
+            .food(new FoodProperties.Builder()
+                    .nutrition(1)
+                    .saturationMod(0.25F)
+                    .effect(() -> new MobEffectInstance(PVZEffects.STUN.get(), 60, 0), 1.0F)
+                    .build())
+            .stacksTo(64)));
     public static final RegistryObject<Item> SMALL_STONE = ITEMS.register("small_stone", () -> new Item(new Item.Properties()
             .stacksTo(64)));
 
