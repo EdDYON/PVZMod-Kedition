@@ -160,7 +160,7 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase implements Geo
         float yawOffset = (this.random.nextFloat() * 15.0F) - 7.5F;
         float pitchOffset = (this.random.nextFloat() * 15.0F) - 7.5F;
 
-        float shootYaw = this.getYRot() + yawOffset;
+        float shootYaw = this.yHeadRot + yawOffset;
         float shootPitch = this.getXRot() + pitchOffset;
 
         Vec3 look = Vec3.directionFromRotation(shootPitch, shootYaw);

@@ -12,7 +12,7 @@ public class EntitySuperPrimalGatlingPea extends EntitySuperGatlingPea {
 
     @Override
     public ThrowableProjectile entitySelect(Level world) {
-        PrimalPeaProjectile ent = new PrimalPeaProjectile(world, this, 3, 1);
+        PrimalPeaProjectile ent = new PrimalPeaProjectile(world, this, 3, this.random.nextInt(100) < 15 ? 1 : 0);
         return ent;
     }
 }

@@ -15,6 +15,7 @@
   "item.pvz_kedit.primal_peashooter_card": "Primal Peashooter",
   "item.pvz_kedit.walnut_card": "Walnut",
   "item.pvz_kedit.tall_nut_card": "Tall-nut",
+  "item.pvz_kedit.super_gatling_pea_card": "Super Gatling Pea",
 
   "entity.pvz_kedit.pea_shooter": "Pea Shooter",
   "entity.pvz_kedit.snow_pea": "Pea Shooter",
@@ -23,6 +24,10 @@
   "entity.pvz_kedit.primal_peashooter": "Primal Peashooter",
   "entity.pvz_kedit.walnut": "Walnut",
   "entity.pvz_kedit.tall_nut": "Tall-nut",
+  "entity.pvz_kedit.super_gatling_pea": "Super Gatling Pea",
+  "entity.pvz_kedit.super_snow_gatling_pea": "Super Gatling Pea (Snowy)",
+  "entity.pvz_kedit.super_primal_gatling_pea": "Super Gatling Pea (Primal)",
+  "entity.pvz_kedit.super_electric_gatling_pea": "Super Gatling Pea (Electric)",
 
   "effect.pvz_kedit.snow": "Iced",
   "effect.pvz_kedit.stun": "Stun",
