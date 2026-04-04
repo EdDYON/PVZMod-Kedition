@@ -12,6 +12,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -46,7 +47,7 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Monster.class, true));
     }
 
-    protected TrueRangedAttackGoal createRangedAttackGoal() {
+    protected Goal createRangedAttackGoal() {
         return new TrueRangedAttackGoal(this, 0.0F, 30, this.range, 1, 0, 20);
     }
 

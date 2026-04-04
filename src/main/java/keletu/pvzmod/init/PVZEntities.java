@@ -6,6 +6,7 @@ import keletu.pvzmod.entities.projectile.PeaProjectile;
 import keletu.pvzmod.entities.projectile.PrimalPeaProjectile;
 import keletu.pvzmod.entities.projectile.SnowPeaProjectile;
 import keletu.pvzmod.models.*;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -17,6 +18,7 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class PVZEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, PVZMod.MODID);
@@ -27,6 +29,9 @@ public class PVZEntities {
     public static final RegistryObject<EntityType<EntityPrimalPeashooter>> PRIMAL_PEASHOOTER = PVZEntities.ENTITIES.register("primal_peashooter", () -> EntityType.Builder.of(EntityPrimalPeashooter::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".primal_peashooter"));
     public static final RegistryObject<EntityType<EntityWalnut>> WALNUT = PVZEntities.ENTITIES.register("walnut", () -> EntityType.Builder.of((EntityType<EntityWalnut> event, Level level) -> new EntityWalnut(event, level, 10F), MobCategory.MISC).sized(1.0F, 1.2F).clientTrackingRange(8).build(PVZMod.MODID + ".walnut"));
     public static final RegistryObject<EntityType<EntityTallnut>> TALL_NUT = PVZEntities.ENTITIES.register("tallnut", () -> EntityType.Builder.of(EntityTallnut::new, MobCategory.MISC).sized(1.0F, 1.8F).clientTrackingRange(8).build(PVZMod.MODID + ".tallnut"));
+    public static final RegistryObject<EntityType<EntitySuperGatlingPea>> SUPER_GATLING_PEA = PVZEntities.ENTITIES.register("super_gatling_pea", () -> EntityType.Builder.of(EntitySuperGatlingPea::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".super_gatling_pea"));
+    public static final RegistryObject<EntityType<EntitySuperSnowGatlingPea>> SUPER_SNOW_GATLING_PEA = PVZEntities.ENTITIES.register("super_snow_gatling_pea", () -> EntityType.Builder.of(EntitySuperSnowGatlingPea::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".super_snow_gatling_pea"));
+    public static final RegistryObject<EntityType<EntitySuperPrimalGatlingPea>> SUPER_PRIMAL_GATLING_PEA = PVZEntities.ENTITIES.register("super_primal_gatling_pea", () -> EntityType.Builder.of(EntitySuperPrimalGatlingPea::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".super_primal_gatling_pea"));
     public static final RegistryObject<EntityType<PeaProjectile>> PEA_PROJECTILE = PVZEntities.ENTITIES.register("pea_projectile",
             () -> EntityType.Builder.<PeaProjectile>of(PeaProjectile::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F)
@@ -50,11 +55,15 @@ public class PVZEntities {
         event.put(PEA_SHOOTER.get(), EntityPeaShooter.createAttributes().build());
         event.put(SNOW_PEA.get(), EntitySnowPea.createAttributes().build());
         event.put(REPEATER.get(), EntityRepeater.createAttributes().build());
-        event.put(GATLING_PEA.get(), EntityRepeater.createAttributes().build());
-        event.put(PRIMAL_PEASHOOTER.get(), EntityRepeater.createAttributes().build());
+        event.put(GATLING_PEA.get(), EntityGatlingPea.createAttributes().build());
+        event.put(PRIMAL_PEASHOOTER.get(), EntityPrimalPeashooter.createAttributes().build());
 
         event.put(WALNUT.get(), EntityWalnut.createAttributes().build());
         event.put(TALL_NUT.get(), EntityTallnut.createAttributes().build());
+
+        event.put(SUPER_GATLING_PEA.get(), EntitySuperGatlingPea.createAttributes().build());
+        event.put(SUPER_SNOW_GATLING_PEA.get(), EntitySuperSnowGatlingPea.createAttributes().build());
+        event.put(SUPER_PRIMAL_GATLING_PEA.get(), EntitySuperPrimalGatlingPea.createAttributes().build());
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -70,6 +79,10 @@ public class PVZEntities {
 
         event.registerEntityRenderer(PRIMAL_PEASHOOTER.get(), RenderPrimalPeashooter::new);
         event.registerEntityRenderer(PRIMAL_PEA_PROJECTILE.get(), RenderPrimalPea::new);
+
+        event.registerEntityRenderer(SUPER_GATLING_PEA.get(), ((EntityRendererProvider.Context context) -> new GeoEntityRenderer<>(context, new SuperGatlingPeaModel())));
+        event.registerEntityRenderer(SUPER_SNOW_GATLING_PEA.get(), ((EntityRendererProvider.Context context) -> new GeoEntityRenderer<>(context, new SuperSnowGatlingPeaModel())));
+        event.registerEntityRenderer(SUPER_PRIMAL_GATLING_PEA.get(), ((EntityRendererProvider.Context context) -> new GeoEntityRenderer<>(context, new SuperPrimalGatlingPeaModel())));
 
         event.registerEntityRenderer(WALNUT.get(), WalnutRender::new);
         event.registerEntityRenderer(TALL_NUT.get(), TallnutRender::new);

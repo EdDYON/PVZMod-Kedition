@@ -1,82 +1,66 @@
 package keletu.pvzmod.entities.ai;
 
-import keletu.pvzmod.entities.EntityPlantShooterBase;
+import keletu.pvzmod.entities.EntitySuperGatlingPea;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 
-import javax.annotation.Nullable;
 import java.util.EnumSet;
 
-public class TrueRangedAttackGoal extends Goal {
-    private final EntityPlantShooterBase mob;
-    @Nullable
+public class TrueSuperRangedAttackGoal extends Goal {
+    private final EntitySuperGatlingPea mob;
     private LivingEntity target;
-    private int attackTime;
     private final double speedModifier;
-    private int seeTime;
+    private int attackTime = -1;
+    private final int attackIntervalMin;
+    private final float attackIntervalMax;
     private final float attackRadius;
     private final float attackRadiusSqr;
-
+    private int seeTime;
     private final int burstCount;
     private final int burstDelay;
     private int remainingShots;
     private int burstTimer;
-    private int cooldown;
 
-    public TrueRangedAttackGoal(EntityPlantShooterBase pRangedAttackMob, double pSpeedModifier, int pAttackInterval, float pAttackRadius) {
-        this(pRangedAttackMob, pSpeedModifier, pAttackInterval, pAttackInterval, pAttackRadius, 1, 0, 20);
+    public TrueSuperRangedAttackGoal(EntitySuperGatlingPea attacker, double speedModifier, int attackIntervalMin, float attackIntervalMax, float attackRadius) {
+        this(attacker, speedModifier, attackIntervalMin, attackIntervalMax, attackRadius, 1, 0);
     }
 
-    public TrueRangedAttackGoal(EntityPlantShooterBase pRangedAttackMob, double pSpeedModifier, int pAttackInterval, float pAttackRadius, int pBurstCount, int pBurstDelay, int cooldown) {
-        this(pRangedAttackMob, pSpeedModifier, pAttackInterval, pAttackInterval, pAttackRadius, pBurstCount, pBurstDelay, cooldown);
-    }
-
-    public TrueRangedAttackGoal(EntityPlantShooterBase pRangedAttackMob, double pSpeedModifier, int pAttackIntervalMin, int pAttackIntervalMax, float pAttackRadius) {
-        this(pRangedAttackMob, pSpeedModifier, pAttackIntervalMin, pAttackIntervalMax, pAttackRadius, 1, 0, 20);
-    }
-
-    public TrueRangedAttackGoal(EntityPlantShooterBase pRangedAttackMob, double pSpeedModifier, int pAttackIntervalMin, int pAttackIntervalMax, float pAttackRadius, int pBurstCount, int pBurstDelay, int cooldown) {
-        this.attackTime = -1;
-        this.remainingShots = 0;
-        this.burstTimer = 0;
-
-        if (pRangedAttackMob == null) {
+    public TrueSuperRangedAttackGoal(EntitySuperGatlingPea attacker, double speedModifier, int attackIntervalMin, float attackIntervalMax, float attackRadius, int burstCount, int burstDelay) {
+        if (attacker == null) {
             throw new IllegalArgumentException("ArrowAttackGoal requires Mob implements RangedAttackMob");
-        } else {
-            this.mob = pRangedAttackMob;
-            this.speedModifier = pSpeedModifier;
-            this.attackRadius = pAttackRadius;
-            this.attackRadiusSqr = pAttackRadius * pAttackRadius;
-            this.burstCount = Math.max(1, pBurstCount);
-            this.burstDelay = Math.max(0, pBurstDelay);
-            this.cooldown = cooldown;
-            this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
         }
+
+        this.mob = attacker;
+        this.speedModifier = speedModifier;
+        this.attackIntervalMin = attackIntervalMin;
+        this.attackIntervalMax = attackIntervalMax;
+        this.attackRadius = attackRadius;
+        this.attackRadiusSqr = attackRadius * attackRadius;
+        this.burstCount = Math.max(1, burstCount);
+        this.burstDelay = Math.max(0, burstDelay);
+        this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }
 
+    @Override
     public boolean canUse() {
-        LivingEntity living = this.mob.getTarget();
-        if (living != null && living.isAlive()) {
-            this.target = living;
+        LivingEntity livingentity = this.mob.getTarget();
+        if (livingentity != null && livingentity.isAlive()) {
+            this.target = livingentity;
             this.mob.setShooting(true);
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
+    @Override
     public boolean canContinueToUse() {
-        if (this.target == null || !this.target.isAlive() || this.target.distanceTo(this.mob) > 24) {
-            this.target = null;
-            this.mob.setTarget(null);
-            return false;
-        }
-        return true;
+        return this.canUse();
     }
 
+    @Override
     public void stop() {
-        this.target = this.mob.getTarget();
+        this.target = null;
         this.seeTime = 0;
         this.attackTime = -1;
         this.remainingShots = 0;
@@ -84,15 +68,28 @@ public class TrueRangedAttackGoal extends Goal {
         this.mob.setShooting(false);
     }
 
+    @Override
     public boolean requiresUpdateEveryTick() {
         return true;
     }
 
+    @Override
     public void tick() {
         if (this.target == null || !this.target.isAlive() || !this.mob.canAttack(this.target)) {
+            if (this.mob.isSuperFiring()) {
+                this.mob.setShooting(true);
+                return;
+            }
+
             this.target = null;
             this.mob.setTarget(null);
             this.mob.setShooting(false);
+            return;
+        }
+
+        if (this.mob.isSuperFiring()) {
+            this.mob.getLookControl().setLookAt(this.target, 30.0F, 30.0F);
+            this.mob.setShooting(true);
             return;
         }
 
@@ -113,6 +110,9 @@ public class TrueRangedAttackGoal extends Goal {
 
         this.mob.getLookControl().setLookAt(this.target, 30.0F, 30.0F);
 
+        double distanceSqr = Math.sqrt(living);
+        int cooldown = Mth.floor(Mth.lerp(distanceSqr / this.attackRadius, this.attackIntervalMin, this.attackIntervalMax));
+
         if (this.remainingShots > 0) {
             --this.burstTimer;
             if (this.burstTimer <= 0) {
@@ -120,6 +120,7 @@ public class TrueRangedAttackGoal extends Goal {
                     float f2 = (float) Math.sqrt(living) / this.attackRadius;
                     float f3 = Mth.clamp(f2, 0.1F, 1.0F);
                     this.mob.performRangedAttack(this.target, f3);
+                    this.tryTriggerSuperRapidFire();
                 }
                 --this.remainingShots;
 
@@ -137,6 +138,7 @@ public class TrueRangedAttackGoal extends Goal {
             float f2 = (float) Math.sqrt(living) / this.attackRadius;
             float f3 = Mth.clamp(f2, 0.1F, 1.0F);
 
+            this.tryTriggerSuperRapidFire();
             this.mob.performRangedAttack(this.target, f3);
 
             this.remainingShots = this.burstCount - 1;
@@ -147,6 +149,12 @@ public class TrueRangedAttackGoal extends Goal {
             this.attackTime = cooldown;
         } else if (this.attackTime < 0) {
             this.attackTime = cooldown;
+        }
+    }
+
+    private void tryTriggerSuperRapidFire() {
+        if (this.mob.canTriggerSuperRapidFire() && this.mob.getRandom().nextFloat() < EntitySuperGatlingPea.SUPER_RAPID_FIRE_CHANCE) {
+            this.mob.triggerSuperRapidFire();
         }
     }
 }

@@ -1,10 +1,22 @@
 package keletu.pvzmod.item;
 
 import keletu.pvzmod.entities.EntityPlantBase;
+import keletu.pvzmod.entities.EntityPlantShooterBase;
+import keletu.pvzmod.entities.EntitySnowPea;
+import keletu.pvzmod.entities.EntitySuperGatlingPea;
+import keletu.pvzmod.init.PVZEntities;
+import keletu.pvzmod.init.PVZItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -22,6 +34,61 @@ public class ItemPlantCard extends Item {
     public ItemPlantCard(Properties properties, Supplier<? extends EntityType<?>> entityTypeSupplier) {
         super(properties);
         this.entityTypeSupplier = entityTypeSupplier;
+    }
+
+    @Override
+    public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
+        if (entity instanceof EntitySuperGatlingPea target) {
+            if (entity.level().isClientSide) {
+                return InteractionResult.SUCCESS;
+            } else {
+                if (this != PVZItems.SNOWPEA_CARD.get() && this != PVZItems.PRIMAL_PEASHOOTER_CARD.get()) {
+                    return InteractionResult.FAIL;
+                }
+
+                BlockPos pos = BlockPos.containing(entity.position());
+                if (target.getOwnerUUID() == null || target.getOwnerUUID().equals(player.getUUID())) {
+                    target.remove(Entity.RemovalReason.DISCARDED);
+                    player.level().playSound(null, pos, SoundEvents.GRASS_PLACE, SoundSource.PLAYERS);
+                    ((ServerLevel) player.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.DIRT.defaultBlockState()),
+                            pos.getX() + 0.5,
+                            pos.getY(),
+                            pos.getZ() + 0.5,
+                            20,
+                            0.25D,
+                            0.25D,
+                            0.25D,
+                            0.15D);
+
+
+                    EntityPlantShooterBase newOne = entityTypeSupplier.get().create(player.level()) instanceof EntitySnowPea ? PVZEntities.SUPER_SNOW_GATLING_PEA.get().create(player.level()) : PVZEntities.SUPER_PRIMAL_GATLING_PEA.get().create(player.level());
+
+                    if (newOne == null)
+                        return InteractionResult.FAIL;
+
+                    double spawnX = target.getX();
+                    double spawnY = target.getY() + 0.25F;
+                    double spawnZ = target.getZ();
+                    float yaw = (float) (Math.atan2(player.getZ() - spawnZ, player.getX() - spawnX) * (180F / Math.PI)) - 90.0F;
+
+                    newOne.moveTo(spawnX, spawnY, spawnZ, yaw, 0.0F);
+                    newOne.setYRot(yaw);
+                    newOne.setYBodyRot(yaw);
+                    newOne.setYHeadRot(yaw);
+
+                    player.level().addFreshEntity(newOne);
+
+                    newOne.setOwnerUUID(player.getUUID());
+
+                    if (!player.isCreative()) {
+                        stack.shrink(1);
+                    }
+                }
+                return InteractionResult.SUCCESS;
+            }
+        } else {
+            return InteractionResult.PASS;
+        }
     }
 
     @Override
