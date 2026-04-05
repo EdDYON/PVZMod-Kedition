@@ -50,7 +50,7 @@ public class ElectricPeaProjectile extends ThrowableItemProjectile {
             return;
 
         if (!this.level().isClientSide) {
-            result.getEntity().hurt(PVZDamageTypes.causeElectricPeaProjectileDamage(this, this.getOwner()), damage);
+            result.getEntity().hurt(PVZDamageTypes.causeElectricPeaProjectileDamage(this.level(), this, this.getOwner()), damage);
             result.getEntity().invulnerableTime = 0;
 
             this.shockNearbyEntities();
@@ -123,7 +123,7 @@ public class ElectricPeaProjectile extends ThrowableItemProjectile {
             }
 
             living.hurt(
-                    PVZDamageTypes.causeElectricPeaProjectileDamage(this, this.getOwner()),
+                    PVZDamageTypes.causeElectricPeaProjectileDamage(this.level(), this, this.getOwner()),
                     shockDamage
             );
             living.invulnerableTime = 0;

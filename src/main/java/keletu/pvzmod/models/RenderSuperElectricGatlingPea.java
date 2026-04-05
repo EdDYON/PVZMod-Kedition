@@ -42,10 +42,10 @@ public class RenderSuperElectricGatlingPea extends GeoEntityRenderer<EntitySuper
                            RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer,
                            float partialTick, int packedLight, int packedOverlay) {
 
-            RenderType emissiveType = RenderType.eyes(EMISSIVE);   // 或 entityTranslucentCull / eyes 看效果
+            RenderType emissiveType = RenderType.eyes(EMISSIVE);
             VertexConsumer emissiveBuffer = bufferSource.getBuffer(emissiveType);
 
-            getRenderer().reRender(bakedModel, poseStack, bufferSource, animatable, emissiveType, emissiveBuffer, partialTick, 0xF000F0, packedOverlay, 1.0f, 1.0f, 1.0f, 1.0f);
+            getRenderer().reRender(bakedModel, poseStack, bufferSource, animatable, emissiveType, emissiveBuffer, partialTick, 15728640, packedOverlay, 0.5f, 1.0f, 0.5f, 1.0f);
         }
     }
 }
