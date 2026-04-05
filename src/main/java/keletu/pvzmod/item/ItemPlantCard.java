@@ -38,7 +38,7 @@ public class ItemPlantCard extends Item {
 
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
-        if (entity instanceof EntitySuperGatlingPea target) {
+        if (entity instanceof EntitySuperGatlingPea target && target.getType() == PVZEntities.SUPER_GATLING_PEA.get()) {
             if (entity.level().isClientSide) {
                 return InteractionResult.SUCCESS;
             } else {
@@ -67,7 +67,7 @@ public class ItemPlantCard extends Item {
                         return InteractionResult.FAIL;
 
                     double spawnX = target.getX();
-                    double spawnY = target.getY() + 0.25F;
+                    double spawnY = target.getY();
                     double spawnZ = target.getZ();
                     float yaw = (float) (Math.atan2(player.getZ() - spawnZ, player.getX() - spawnX) * (180F / Math.PI)) - 90.0F;
 
