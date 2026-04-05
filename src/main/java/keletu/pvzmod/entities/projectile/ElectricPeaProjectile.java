@@ -111,7 +111,7 @@ public class ElectricPeaProjectile extends ThrowableItemProjectile {
             return;
         }
 
-        AABB range = this.getBoundingBox().inflate(1.0D);
+        AABB range = this.getBoundingBox().inflate(2.0D);
 
         for (LivingEntity living : this.level().getEntitiesOfClass(LivingEntity.class, range)) {
             if (!canShock(living)) {

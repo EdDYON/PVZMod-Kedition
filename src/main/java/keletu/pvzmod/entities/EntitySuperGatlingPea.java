@@ -22,7 +22,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 public class EntitySuperGatlingPea extends EntityPlantShooterBase implements GeoEntity {
     public static final int SUPER_RAPID_FIRE_DURATION = 200;
     public static final int SUPER_RAPID_FIRE_COOLDOWN = 300;
-    public static final float SUPER_RAPID_FIRE_CHANCE = 0.1F;
+    public static final float SUPER_RAPID_FIRE_CHANCE = 0.02F;
     public static final RawAnimation STAND = RawAnimation.begin().thenLoop("stand");
     public static final RawAnimation SHOOT = RawAnimation.begin().thenLoop("shoot");
 
@@ -157,13 +157,13 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase implements Geo
 
         ThrowableProjectile pea = this.entitySelect(this.level());
 
-        float yawOffset = (this.random.nextFloat() * 15.0F) - 7.5F;
-        float pitchOffset = (this.random.nextFloat() * 15.0F) - 7.5F;
+        float yawOffset = (this.random.nextFloat() * 30.0F) - 7.5F;
+        float pitchOffset = (this.random.nextFloat() * 30.0F) - 7.5F;
 
         float shootYaw = this.yHeadRot + yawOffset;
-        float shootPitch = this.getXRot() + pitchOffset;
+        //float shootPitch = this.getXRot() + pitchOffset;
 
-        Vec3 look = Vec3.directionFromRotation(shootPitch, shootYaw);
+        Vec3 look = Vec3.directionFromRotation(0, shootYaw);
 
         pea.setPos(this.getX(), this.getEyeY() - 0.1D, this.getZ());
         pea.shoot(look.x, look.y, look.z, 1.2F, 0.0F);

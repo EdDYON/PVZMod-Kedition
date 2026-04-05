@@ -19,15 +19,11 @@ public class PlanterHurtTargetGoal extends TargetGoal {
     }
 
     public boolean canUse() {
-        if (this.tameAnimal.getOwner() != null && this.targetMob != null && this.targetMob.distanceTo(this.tameAnimal) <= 24) {
-            LivingEntity $$0 = this.tameAnimal.getOwner();
-            if ($$0 == null) {
-                return false;
-            } else {
-                this.ownerLastHurt = $$0.getLastHurtMob();
-                int $$1 = $$0.getLastHurtMobTimestamp();
-                return $$1 != this.timestamp && this.canAttack(this.ownerLastHurt, TargetingConditions.DEFAULT) && this.tameAnimal.wantsToAttack(this.ownerLastHurt, $$0);
-            }
+        if (this.tameAnimal.getOwner() != null) {
+            LivingEntity living = this.tameAnimal.getOwner();
+            this.ownerLastHurt = living.getLastHurtMob();
+            int i = living.getLastHurtMobTimestamp();
+            return i != this.timestamp && this.canAttack(this.ownerLastHurt, TargetingConditions.DEFAULT) && this.tameAnimal.wantsToAttack(this.ownerLastHurt, living);
         } else {
             return false;
         }
@@ -35,9 +31,9 @@ public class PlanterHurtTargetGoal extends TargetGoal {
 
     public void start() {
         this.mob.setTarget(this.ownerLastHurt);
-        LivingEntity $$0 = this.tameAnimal.getOwner();
-        if ($$0 != null) {
-            this.timestamp = $$0.getLastHurtMobTimestamp();
+        LivingEntity living = this.tameAnimal.getOwner();
+        if (living != null) {
+            this.timestamp = living.getLastHurtMobTimestamp();
         }
 
         super.start();
