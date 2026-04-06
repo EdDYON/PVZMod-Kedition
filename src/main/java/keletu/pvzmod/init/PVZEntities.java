@@ -94,7 +94,7 @@ public class PVZEntities {
         event.registerEntityRenderer(SUPER_PRIMAL_GATLING_PEA.get(), ((EntityRendererProvider.Context context) -> new GeoEntityRenderer<>(context, new SuperPrimalGatlingPeaModel())));
         event.registerEntityRenderer(SUPER_ELECTRIC_GATLING_PEA.get(), RenderSuperElectricGatlingPea::new);
 
-        event.registerEntityRenderer(ELECTRIC_PEA_PROJECTILE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ELECTRIC_PEA_PROJECTILE.get(), ElectricPeaProjectileRenderer::new);
 
         event.registerEntityRenderer(WALNUT.get(), WalnutRender::new);
         event.registerEntityRenderer(TALL_NUT.get(), TallnutRender::new);

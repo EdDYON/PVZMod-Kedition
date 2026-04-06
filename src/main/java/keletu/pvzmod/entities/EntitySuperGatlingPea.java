@@ -20,7 +20,7 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class EntitySuperGatlingPea extends EntityPlantShooterBase implements GeoEntity {
-    public static final int SUPER_RAPID_FIRE_DURATION = 200;
+    public static final int SUPER_RAPID_FIRE_DURATION = 100;
     public static final int SUPER_RAPID_FIRE_COOLDOWN = 300;
     public static final float SUPER_RAPID_FIRE_CHANCE = 0.02F;
     public static final RawAnimation STAND = RawAnimation.begin().thenLoop("stand");
