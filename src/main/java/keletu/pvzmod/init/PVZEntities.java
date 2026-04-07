@@ -34,6 +34,7 @@ public class PVZEntities {
     public static final RegistryObject<EntityType<EntitySuperSnowGatlingPea>> SUPER_SNOW_GATLING_PEA = PVZEntities.ENTITIES.register("super_snow_gatling_pea", () -> EntityType.Builder.of(EntitySuperSnowGatlingPea::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".super_snow_gatling_pea"));
     public static final RegistryObject<EntityType<EntitySuperPrimalGatlingPea>> SUPER_PRIMAL_GATLING_PEA = PVZEntities.ENTITIES.register("super_primal_gatling_pea", () -> EntityType.Builder.of(EntitySuperPrimalGatlingPea::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".super_primal_gatling_pea"));
     public static final RegistryObject<EntityType<EntitySuperElectricGatlingPea>> SUPER_ELECTRIC_GATLING_PEA = PVZEntities.ENTITIES.register("super_electric_gatling_pea", () -> EntityType.Builder.of(EntitySuperElectricGatlingPea::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".super_electric_gatling_pea"));
+    public static final RegistryObject<EntityType<EntityPotatoMine>> POTATO_MINE = PVZEntities.ENTITIES.register("potato_mine", () -> EntityType.Builder.of(EntityPotatoMine::new, MobCategory.MISC).sized(1.0F, 0.5F).clientTrackingRange(8).build(PVZMod.MODID + ".potato_mine"));
     public static final RegistryObject<EntityType<PeaProjectile>> PEA_PROJECTILE = PVZEntities.ENTITIES.register("pea_projectile",
             () -> EntityType.Builder.<PeaProjectile>of(PeaProjectile::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F)
@@ -73,6 +74,8 @@ public class PVZEntities {
         event.put(SUPER_SNOW_GATLING_PEA.get(), EntitySuperSnowGatlingPea.createAttributes().build());
         event.put(SUPER_PRIMAL_GATLING_PEA.get(), EntitySuperPrimalGatlingPea.createAttributes().build());
         event.put(SUPER_ELECTRIC_GATLING_PEA.get(), EntitySuperElectricGatlingPea.createAttributes().build());
+
+        event.put(POTATO_MINE.get(), EntityPotatoMine.createAttributes().build());
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -98,5 +101,7 @@ public class PVZEntities {
 
         event.registerEntityRenderer(WALNUT.get(), WalnutRender::new);
         event.registerEntityRenderer(TALL_NUT.get(), TallnutRender::new);
+
+        event.registerEntityRenderer(POTATO_MINE.get(), ((EntityRendererProvider.Context context) -> new GeoEntityRenderer<>(context, new PotatoMineModel())));
     }
 }

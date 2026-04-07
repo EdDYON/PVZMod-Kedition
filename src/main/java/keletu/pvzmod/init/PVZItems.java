@@ -62,7 +62,8 @@ public class PVZItems {
             () -> new ItemPlantCard(new Item.Properties(), PVZEntities.TALL_NUT));
     public static final RegistryObject<Item> SUPER_GATLING_PEA_CARD = ITEMS.register("super_gatling_pea_card",
             () -> new ItemPlantCard(new Item.Properties(), PVZEntities.SUPER_GATLING_PEA));
-
+    public static final RegistryObject<Item> POTATO_MINE_CARD = ITEMS.register("potato_mine_card",
+            () -> new ItemPlantCard(new Item.Properties(), PVZEntities.POTATO_MINE));
     public static final RegistryObject<Item> GARDEN_SHOVEL = ITEMS.register("garden_shovel", () -> new ItemGardenShovel(new Item.Properties()
             .durability(999)));
 }
