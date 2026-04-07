@@ -2,10 +2,7 @@ package keletu.pvzmod.init;
 
 import keletu.pvzmod.PVZMod;
 import keletu.pvzmod.entities.*;
-import keletu.pvzmod.entities.projectile.ElectricPeaProjectile;
-import keletu.pvzmod.entities.projectile.PeaProjectile;
-import keletu.pvzmod.entities.projectile.PrimalPeaProjectile;
-import keletu.pvzmod.entities.projectile.SnowPeaProjectile;
+import keletu.pvzmod.entities.projectile.*;
 import keletu.pvzmod.models.*;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -35,6 +32,7 @@ public class PVZEntities {
     public static final RegistryObject<EntityType<EntitySuperPrimalGatlingPea>> SUPER_PRIMAL_GATLING_PEA = PVZEntities.ENTITIES.register("super_primal_gatling_pea", () -> EntityType.Builder.of(EntitySuperPrimalGatlingPea::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".super_primal_gatling_pea"));
     public static final RegistryObject<EntityType<EntitySuperElectricGatlingPea>> SUPER_ELECTRIC_GATLING_PEA = PVZEntities.ENTITIES.register("super_electric_gatling_pea", () -> EntityType.Builder.of(EntitySuperElectricGatlingPea::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".super_electric_gatling_pea"));
     public static final RegistryObject<EntityType<EntityPotatoMine>> POTATO_MINE = PVZEntities.ENTITIES.register("potato_mine", () -> EntityType.Builder.of(EntityPotatoMine::new, MobCategory.MISC).sized(1.0F, 0.5F).clientTrackingRange(8).build(PVZMod.MODID + ".potato_mine"));
+    public static final RegistryObject<EntityType<PuffShroomEntity>> PUFF_SHROOM = PVZEntities.ENTITIES.register("puff_shroom", () -> EntityType.Builder.of(PuffShroomEntity::new, MobCategory.MISC).sized(1.0F, 0.75F).clientTrackingRange(8).build(PVZMod.MODID + ".puff_shroom"));
     public static final RegistryObject<EntityType<PeaProjectile>> PEA_PROJECTILE = PVZEntities.ENTITIES.register("pea_projectile",
             () -> EntityType.Builder.<PeaProjectile>of(PeaProjectile::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F)
@@ -59,6 +57,12 @@ public class PVZEntities {
                     .clientTrackingRange(4)
                     .updateInterval(10)
                     .build("electric_pea_projectile"));
+    public static final RegistryObject<EntityType<SporeProjectile>> SPORE_PROJECTILE = PVZEntities.ENTITIES.register("spore_projectile",
+            () -> EntityType.Builder.<SporeProjectile>of(SporeProjectile::new, MobCategory.MISC)
+                    .sized(0.25F, 0.25F)
+                    .clientTrackingRange(4)
+                    .updateInterval(10)
+                    .build("spore_projectile"));
 
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
         event.put(PEA_SHOOTER.get(), EntityPeaShooter.createAttributes().build());
@@ -76,6 +80,8 @@ public class PVZEntities {
         event.put(SUPER_ELECTRIC_GATLING_PEA.get(), EntitySuperElectricGatlingPea.createAttributes().build());
 
         event.put(POTATO_MINE.get(), EntityPotatoMine.createAttributes().build());
+
+        event.put(PUFF_SHROOM.get(), PuffShroomEntity.createAttributes().build());
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -103,5 +109,8 @@ public class PVZEntities {
         event.registerEntityRenderer(TALL_NUT.get(), TallnutRender::new);
 
         event.registerEntityRenderer(POTATO_MINE.get(), ((EntityRendererProvider.Context context) -> new GeoEntityRenderer<>(context, new PotatoMineModel())));
+
+        event.registerEntityRenderer(PUFF_SHROOM.get(), ((EntityRendererProvider.Context context) -> new GeoEntityRenderer<>(context, new PuffShroomModel())));
+        event.registerEntityRenderer(SPORE_PROJECTILE.get(), ThrownItemRenderer::new);
     }
 }

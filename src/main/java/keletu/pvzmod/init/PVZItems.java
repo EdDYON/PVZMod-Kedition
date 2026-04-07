@@ -45,6 +45,8 @@ public class PVZItems {
                     .saturationMod(0.25F)
                     .effect(() -> new MobEffectInstance(PVZEffects.STUN.get(), 60, 0), 1.0F)
                     .build())
+            .stacksTo(16)));
+    public static final RegistryObject<Item> SPORE = ITEMS.register("spore", () -> new Item(new Item.Properties()
             .stacksTo(64)));
     public static final RegistryObject<Item> SMALL_STONE = ITEMS.register("small_stone", () -> new Item(new Item.Properties()
             .stacksTo(64)));
@@ -67,6 +69,8 @@ public class PVZItems {
             () -> new ItemPlantCard(new Item.Properties(), PVZEntities.SUPER_GATLING_PEA));
     public static final RegistryObject<Item> POTATO_MINE_CARD = ITEMS.register("potato_mine_card",
             () -> new ItemPlantCard(new Item.Properties(), PVZEntities.POTATO_MINE));
+    public static final RegistryObject<Item> PUFF_SHROOM_CARD = ITEMS.register("puff_shroom_card",
+            () -> new ItemPlantCard(new Item.Properties(), PVZEntities.PUFF_SHROOM));
     public static final RegistryObject<Item> GARDEN_SHOVEL = ITEMS.register("garden_shovel", () -> new ItemGardenShovel(new Item.Properties()
             .durability(999)));
 }

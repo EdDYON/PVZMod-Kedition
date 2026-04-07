@@ -1,0 +1,10 @@
+{
+  "puff_shroom_shoot": {
+    "sounds": [
+      {
+        "name": "pvz_kedit:puff_shroom_shoot",
+        "stream": false
+      }
+    ]
+  }
+}
