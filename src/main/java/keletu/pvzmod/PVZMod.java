@@ -1,9 +1,6 @@
 package keletu.pvzmod;
 
-import keletu.pvzmod.init.PVZEffects;
-import keletu.pvzmod.init.PVZEntities;
-import keletu.pvzmod.init.PVZItems;
-import keletu.pvzmod.init.PVZTabs;
+import keletu.pvzmod.init.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -15,9 +12,12 @@ public class PVZMod {
     public PVZMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        PVZBlocks.BLOCKS.register(modEventBus);
+        PVZBlocks.BLOCK_ENTITIES.register(modEventBus);
         PVZItems.ITEMS.register(modEventBus);
         PVZEntities.ENTITIES.register(modEventBus);
         PVZEffects.EFFECTS.register(modEventBus);
+        PVZSounds.SOUNDS.register(modEventBus);
         modEventBus.addListener(PVZEntities::registerEntityAttributes);
 
         PVZTabs.TABS.register(modEventBus);

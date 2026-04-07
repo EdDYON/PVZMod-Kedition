@@ -28,7 +28,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class EntityPotatoMine extends EntityPlantBase implements GeoEntity {
     private final int waitTime = 315;
-    private final int growTime = 15;
+    private final int growTime = 20;
     private static final EntityDataAccessor<Integer> GROW_TIME = SynchedEntityData.defineId(EntityPotatoMine.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> BOOM_TIME = SynchedEntityData.defineId(EntityPotatoMine.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> START_BOOM = SynchedEntityData.defineId(EntityPotatoMine.class, EntityDataSerializers.BOOLEAN);
@@ -123,7 +123,7 @@ public class EntityPotatoMine extends EntityPlantBase implements GeoEntity {
             this.setBoomTime(this.getBoomTime() + 1);
         }
 
-        if (this.getBoomTime() == 15) {
+        if (this.getBoomTime() == growTime) {
             explodeAndDamage();
             this.remove(RemovalReason.DISCARDED);
         }

@@ -1,6 +1,7 @@
 package keletu.pvzmod.item;
 
 import keletu.pvzmod.entities.EntityPlantBase;
+import keletu.pvzmod.init.PVZBlocks;
 import keletu.pvzmod.models.GardenShovelRenderer;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -18,7 +19,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -32,6 +37,21 @@ public class ItemGardenShovel extends ShovelItem implements GeoItem {
 
     public ItemGardenShovel(Properties properties) {
         super(Tiers.IRON, 3.0F, -2.4F, properties);
+    }
+
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
+        Level level = context.getLevel();
+        BlockPos blockpos = context.getClickedPos();
+        BlockState blockstate = level.getBlockState(blockpos);
+        BlockPos checkPos = blockpos.above();
+        AABB checkBox = new AABB(checkPos).inflate(0, 1, 0);
+        if (blockstate.getBlock() == PVZBlocks.POT.get() && level.getEntitiesOfClass(EntityPlantBase.class, checkBox).isEmpty()) {
+            level.destroyBlock(blockpos, false);
+            return InteractionResult.SUCCESS;
+        } else {
+            return super.useOn(context);
+        }
     }
 
     @Override

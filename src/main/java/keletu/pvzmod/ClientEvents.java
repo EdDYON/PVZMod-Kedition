@@ -1,5 +1,6 @@
 package keletu.pvzmod;
 
+import keletu.pvzmod.init.PVZBlocks;
 import keletu.pvzmod.init.PVZEntities;
 import keletu.pvzmod.potion.SlowBlueLayer;
 import keletu.pvzmod.potion.StunStarsLayer;
@@ -54,6 +55,7 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        PVZBlocks.registerRenderers(event);
         PVZEntities.registerRenderers(event);
     }
 }

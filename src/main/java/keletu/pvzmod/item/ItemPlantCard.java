@@ -1,9 +1,7 @@
 package keletu.pvzmod.item;
 
-import keletu.pvzmod.entities.EntityPlantBase;
-import keletu.pvzmod.entities.EntityPlantShooterBase;
-import keletu.pvzmod.entities.EntitySnowPea;
-import keletu.pvzmod.entities.EntitySuperGatlingPea;
+import keletu.pvzmod.entities.*;
+import keletu.pvzmod.init.PVZBlocks;
 import keletu.pvzmod.init.PVZEntities;
 import keletu.pvzmod.init.PVZItems;
 import net.minecraft.core.BlockPos;
@@ -108,6 +106,7 @@ public class ItemPlantCard extends Item {
 
         BlockState clickedState = level.getBlockState(clickedPos);
         BlockPos spawnPos = clickedPos.above((int) Math.ceil(entityTypeSupplier.get().getHeight()));
+        BlockPos checkPos = clickedPos.above();
 
         if (!level.getBlockState(spawnPos).isAir() && !level.getBlockState(spawnPos).canBeReplaced()) {
             return InteractionResult.PASS;
@@ -115,11 +114,11 @@ public class ItemPlantCard extends Item {
 
         //PvZBlocks.ENDOWED_GRASS
         boolean isEndowedGrass = clickedState.is(Blocks.GRASS_BLOCK);
-
         boolean isWaterLily = clickedState.is(Blocks.LILY_PAD);
+        boolean isFlowerPot = clickedState.is(PVZBlocks.POT.get());
 
-        if (isEndowedGrass || isWaterLily) {
-            AABB checkBox = new AABB(spawnPos);
+        if (isEndowedGrass || (isWaterLily) || isFlowerPot) {
+            AABB checkBox = new AABB(checkPos).inflate(0, 1, 0);
             if (!level.getEntitiesOfClass(EntityPlantBase.class, checkBox).isEmpty()) {
                 return InteractionResult.FAIL;
             }
@@ -127,6 +126,9 @@ public class ItemPlantCard extends Item {
             if (!level.isClientSide) {
                 Entity entity = entityTypeSupplier.get().create(level);
                 if (entity instanceof EntityPlantBase base) {
+                    if (isWaterLily && entity instanceof EntityPotatoMine) {
+                        return InteractionResult.FAIL;
+                    }
 
                     double spawnX;
                     double spawnY;

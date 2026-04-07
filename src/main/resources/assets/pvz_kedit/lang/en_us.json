@@ -2,6 +2,8 @@
   "language": "English",
   "language.code": "en_us",
   "language.region": "United States",
+  "block.pvz.pot": "Pot",
+
   "item.pvz_kedit.pea": "Pea",
   "item.pvz_kedit.ice_pea": "Ice Pea",
   "item.pvz_kedit.primal_pea": "Primal Pea",

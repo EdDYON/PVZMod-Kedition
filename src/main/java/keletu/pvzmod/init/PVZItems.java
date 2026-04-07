@@ -5,6 +5,7 @@ import keletu.pvzmod.item.ItemGardenShovel;
 import keletu.pvzmod.item.ItemPlantCard;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -13,6 +14,8 @@ import net.minecraftforge.registries.RegistryObject;
 public class PVZItems {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, PVZMod.MODID);
+    public static final RegistryObject<Item> POT = ITEMS.register("pot",
+            () -> new BlockItem(PVZBlocks.POT.get(), new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> PEA = ITEMS.register("pea", () -> new Item(new Item.Properties()
             .food(new FoodProperties.Builder()
                     .nutrition(1)
