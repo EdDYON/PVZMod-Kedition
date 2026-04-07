@@ -3,7 +3,7 @@
   "language.code": "en_us",
   "language.region": "United States",
 
-  "block.pvz.pot": "Pot",
+  "block.pvz_kedit.pot": "Pot",
 
   "item.pvz_kedit.pea": "Pea",
   "item.pvz_kedit.ice_pea": "Ice Pea",
@@ -22,7 +22,7 @@
   "item.pvz_kedit.tall_nut_card": "Tall-nut",
   "item.pvz_kedit.super_gatling_pea_card": "Super Gatling Pea",
   "item.pvz_kedit.potato_mine_card": "Potato Mine",
-  "item.pvz_kedit.puff_shroom": "Puff-Shroom",
+  "item.pvz_kedit.puff_shroom_card": "Puff-Shroom",
 
   "entity.pvz_kedit.pea_shooter": "Pea Shooter",
   "entity.pvz_kedit.snow_pea": "Pea Shooter",
