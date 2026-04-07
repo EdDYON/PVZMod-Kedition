@@ -75,8 +75,8 @@
 			}
 		},
 		"boom": {
-			"loop": true,
-			"animation_length": 0.7083,
+			"loop": "hold_on_last_frame",
+			"animation_length": 0.75,
 			"bones": {
 				"eye": {
 					"scale": {

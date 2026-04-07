@@ -1,12 +1,15 @@
 package keletu.pvzmod.entities;
 
 import keletu.pvzmod.init.PVZItems;
+import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -14,6 +17,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -23,6 +27,8 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class EntityPotatoMine extends EntityPlantBase implements GeoEntity {
+    private final int waitTime = 315;
+    private final int growTime = 15;
     private static final EntityDataAccessor<Integer> GROW_TIME = SynchedEntityData.defineId(EntityPotatoMine.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> BOOM_TIME = SynchedEntityData.defineId(EntityPotatoMine.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> START_BOOM = SynchedEntityData.defineId(EntityPotatoMine.class, EntityDataSerializers.BOOLEAN);
@@ -99,7 +105,7 @@ public class EntityPotatoMine extends EntityPlantBase implements GeoEntity {
     public void tick() {
         super.tick();
 
-        if (this.getGrowTime() >= 1000 && !this.startBoom()) {
+        if (this.getGrowTime() >= waitTime && !this.startBoom()) {
             double triggerRadius = 1.0D;
             for (Entity entity : this.level().getEntities(this, this.getBoundingBox().inflate(triggerRadius))) {
                 if (entity instanceof Mob mob && mob != this.getOwner() && !(mob instanceof EntityPlantBase)) {
@@ -109,7 +115,7 @@ public class EntityPotatoMine extends EntityPlantBase implements GeoEntity {
             }
         }
 
-        if (this.getGrowTime() < 1000) {
+        if (this.getGrowTime() < waitTime) {
             this.setGrowTime(this.getGrowTime() + 1);
         }
 
@@ -126,8 +132,43 @@ public class EntityPotatoMine extends EntityPlantBase implements GeoEntity {
     private void explodeAndDamage() {
         if (this.level().isClientSide) return;
 
+        ServerLevel serverLevel = (ServerLevel) this.level();
+
         double radius = 3.0D;
         float maxDamage = 90.0F;
+
+        serverLevel.playSound(null, this.blockPosition(),
+                SoundEvents.GENERIC_EXPLODE,
+                SoundSource.BLOCKS,
+                1.0F, 1.0F);
+
+        serverLevel.sendParticles(
+                ParticleTypes.EXPLOSION,
+                this.getX(),
+                this.getY(),
+                this.getZ(),
+                1,
+                0,
+                0,
+                0,
+                0.15F
+        );
+
+        for (int i = 0; i < 20; i++) {
+            double angle = (Math.PI * 2D) * i / 20;
+
+            serverLevel.sendParticles(
+                    new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(Items.POTATO)),
+                    this.getX() + Math.cos(angle) * 0.12D,
+                    this.getY() + 0.1D,
+                    this.getZ() + Math.sin(angle) * 0.12D,
+                    10,
+                    0,
+                    0,
+                    0,
+                    0.2F
+            );
+        }
 
         for (Entity entity : this.level().getEntities(this, this.getBoundingBox().inflate(radius))) {
             if (entity instanceof Mob mob && mob != this.getOwner() && !(mob instanceof EntityPlantBase)) {
@@ -136,17 +177,6 @@ public class EntityPotatoMine extends EntityPlantBase implements GeoEntity {
                     float damage = (float) (maxDamage * (1.0D - distance / radius));
                     damage = Math.max(damage, 1.0F);
                     mob.hurt(this.damageSources().explosion(this, this), damage);
-                    ((ServerLevel) this.level()).sendParticles(
-                            ParticleTypes.EXPLOSION,
-                            this.getX(),
-                            this.getY(),
-                            this.getZ(),
-                            1,
-                            0,
-                            0,
-                            0,
-                            0.15F
-                    );
                 }
             }
         }
@@ -154,7 +184,7 @@ public class EntityPotatoMine extends EntityPlantBase implements GeoEntity {
 
     @Override
     protected void doPush(Entity entity) {
-        if (entity instanceof Mob && this.getGrowTime() >= 1000) {
+        if (entity instanceof Mob && this.getGrowTime() >= waitTime) {
             this.setStartBoom(true);
         }
     }
@@ -178,6 +208,6 @@ public class EntityPotatoMine extends EntityPlantBase implements GeoEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "mine", 5, state -> state.setAndContinue(this.getBoomTime() > 0 ? BOOM : this.getGrowTime() < 990 ? WAIT : this.getGrowTime() >= 990 && this.getGrowTime() < 1000 ? GROW : WAIT_GROWN)));
+        controllers.add(new AnimationController<>(this, "mine", 5, state -> state.setAndContinue(this.getBoomTime() > 0 ? BOOM : this.getGrowTime() < waitTime - growTime ? WAIT : this.getGrowTime() >= waitTime - growTime && this.getGrowTime() < waitTime ? GROW : WAIT_GROWN)));
     }
 }
