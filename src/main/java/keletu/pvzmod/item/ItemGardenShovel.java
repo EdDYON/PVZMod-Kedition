@@ -2,6 +2,7 @@ package keletu.pvzmod.item;
 
 import keletu.pvzmod.entities.EntityPlantBase;
 import keletu.pvzmod.init.PVZBlocks;
+import keletu.pvzmod.init.PVZSounds;
 import keletu.pvzmod.models.GardenShovelRenderer;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -63,7 +64,7 @@ public class ItemGardenShovel extends ShovelItem implements GeoItem {
                 BlockPos pos = BlockPos.containing(entity.position());
                 if (target.getOwnerUUID() == null || target.getOwnerUUID().equals(playerIn.getUUID())) {
                     target.remove(Entity.RemovalReason.DISCARDED);
-                    playerIn.level().playSound(null, pos, SoundEvents.GRASS_BREAK, SoundSource.PLAYERS);
+                    playerIn.level().playSound(null, pos, PVZSounds.REMOVE.get(), SoundSource.PLAYERS);
                     ((ServerLevel) playerIn.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.DIRT.defaultBlockState()),
                             pos.getX() + 0.5,
                             pos.getY(),

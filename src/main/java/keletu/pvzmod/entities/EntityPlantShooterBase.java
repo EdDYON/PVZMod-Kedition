@@ -54,6 +54,8 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
     @Override
     public void performRangedAttack(LivingEntity target, float distanceFactor) {
         if (!this.level().isClientSide) {
+            this.faceTarget(target);
+
             ThrowableProjectile projectile = entitySelect(this.level());
             projectile.setPos(this.getX(), this.getEyeY() - 0.1D, this.getZ());
 

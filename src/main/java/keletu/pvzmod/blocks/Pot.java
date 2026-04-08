@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class Pot extends HorizontalDirectionalBlock implements EntityBlock {
 
-    protected static final VoxelShape BOTTOM_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
+    protected static final VoxelShape BOTTOM_AABB = Block.box(1.0F, 0.0D, 1.0F, 15.0D, 8.0D, 15.0D);
 
     public Pot(Properties pProperties) {
         super(pProperties);

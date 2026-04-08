@@ -55,6 +55,8 @@ public class PuffShroomEntity extends EntityPlantShooterBase implements GeoEntit
     @Override
     public void performRangedAttack(LivingEntity target, float distanceFactor) {
         if (!this.level().isClientSide) {
+            this.faceTarget(target);
+
             ThrowableProjectile projectile = entitySelect(this.level());
             projectile.setPos(this.getX(), this.getEyeY() - 0.5D, this.getZ());
 

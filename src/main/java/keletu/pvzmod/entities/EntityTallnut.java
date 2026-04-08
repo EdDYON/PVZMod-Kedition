@@ -8,10 +8,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class EntityTallnut extends EntityWalnut {
-    private static final double PROTECT_RADIUS = 16.0D;
+    private static final float PROTECT_RADIUS = 16.0F;
 
     public EntityTallnut(EntityType<? extends EntityWalnut> type, Level par1World) {
-        super(type, par1World, 16.0F);
+        super(type, par1World, PROTECT_RADIUS);
         this.spawnStack = new ItemStack(PVZItems.TALL_NUT_CARD.get(), 1);
     }
 

@@ -4,11 +4,11 @@ import keletu.pvzmod.entities.*;
 import keletu.pvzmod.init.PVZBlocks;
 import keletu.pvzmod.init.PVZEntities;
 import keletu.pvzmod.init.PVZItems;
+import keletu.pvzmod.init.PVZSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -47,7 +47,7 @@ public class ItemPlantCard extends Item {
                 BlockPos pos = BlockPos.containing(entity.position());
                 if (target.getOwnerUUID() == null || target.getOwnerUUID().equals(player.getUUID())) {
                     target.remove(Entity.RemovalReason.DISCARDED);
-                    player.level().playSound(null, pos, SoundEvents.GRASS_PLACE, SoundSource.PLAYERS);
+                    player.level().playSound(null, player.blockPosition(), PVZSounds.PLANT.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
                     ((ServerLevel) player.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.DIRT.defaultBlockState()),
                             pos.getX() + 0.5,
                             pos.getY(),

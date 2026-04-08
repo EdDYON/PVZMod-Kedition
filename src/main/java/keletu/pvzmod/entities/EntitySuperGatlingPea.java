@@ -124,6 +124,8 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase implements Geo
             return;
         }
 
+        this.faceTarget(target);
+
         ThrowableProjectile pea = this.entitySelect(this.level());
 
         pea.setPos(

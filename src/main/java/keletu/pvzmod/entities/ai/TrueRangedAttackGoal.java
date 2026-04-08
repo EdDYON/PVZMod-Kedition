@@ -96,6 +96,8 @@ public class TrueRangedAttackGoal extends Goal {
             return;
         }
 
+        this.mob.faceTarget(this.target);
+
         double living = this.mob.distanceToSqr(this.target.getX(), this.target.getY(), this.target.getZ());
         boolean hasSight = this.mob.getSensing().hasLineOfSight(this.target);
 

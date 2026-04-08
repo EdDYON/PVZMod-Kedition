@@ -5,6 +5,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.players.OldUsersConverter;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -110,7 +111,11 @@ public abstract class EntityPlantBase extends AbstractGolem implements OwnableEn
                 .add(Attributes.FOLLOW_RANGE, 24.0F);
     }
 
-    protected void jump() {
+    @Override
+    protected void doPush(Entity entity) {
+        if (entity instanceof Mob) {
+            entity.push(this);
+        }
     }
 
     @Override
@@ -149,10 +154,6 @@ public abstract class EntityPlantBase extends AbstractGolem implements OwnableEn
     }
 
     @Override
-    protected void doPush(net.minecraft.world.entity.Entity entity) {
-    }
-
-    @Override
     public boolean isPushable() {
         return false;
     }
@@ -181,5 +182,32 @@ public abstract class EntityPlantBase extends AbstractGolem implements OwnableEn
         } else {
             return false;
         }
+    }
+
+    protected void setPlantYaw(float yaw) {
+        float wrappedYaw = Mth.wrapDegrees(yaw);
+
+        this.setYRot(wrappedYaw);
+        this.yRotO = wrappedYaw;
+        this.setYBodyRot(wrappedYaw);
+        this.yBodyRotO = wrappedYaw;
+        this.setYHeadRot(wrappedYaw);
+        this.yHeadRotO = wrappedYaw;
+    }
+
+    public void faceTarget(@Nullable LivingEntity target) {
+        if (target == null) {
+            return;
+        }
+
+        double toX = target.getX() - this.getX();
+        double toZ = target.getZ() - this.getZ();
+
+        if (toX * toX + toZ * toZ < 1.0E-6D) {
+            return;
+        }
+
+        float yaw = (float) (Mth.atan2(toZ, toX) * (180.0D / Math.PI)) - 90.0F;
+        this.setPlantYaw(yaw);
     }
 }
