@@ -1,4 +1,4 @@
-package keletu.pvzmod.item;
+package keletu.pvzmod.items;
 
 import net.minecraft.world.item.Item;
 

@@ -1,6 +1,6 @@
 package keletu.pvzmod.models;
 
-import keletu.pvzmod.item.ItemGardenShovel;
+import keletu.pvzmod.items.ItemGardenShovel;
 import net.minecraft.client.Minecraft;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
 

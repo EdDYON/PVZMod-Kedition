@@ -1,4 +1,4 @@
-package keletu.pvzmod.item;
+package keletu.pvzmod.items;
 
 import keletu.pvzmod.entities.*;
 import keletu.pvzmod.init.PVZBlocks;

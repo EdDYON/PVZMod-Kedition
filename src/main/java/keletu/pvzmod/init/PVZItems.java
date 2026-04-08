@@ -1,8 +1,8 @@
 package keletu.pvzmod.init;
 
 import keletu.pvzmod.PVZMod;
-import keletu.pvzmod.item.ItemGardenShovel;
-import keletu.pvzmod.item.ItemPlantCard;
+import keletu.pvzmod.items.ItemGardenShovel;
+import keletu.pvzmod.items.ItemPlantCard;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;

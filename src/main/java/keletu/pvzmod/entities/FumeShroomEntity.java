@@ -150,7 +150,7 @@ public class FumeShroomEntity extends EntityPlantShooterBase implements GeoEntit
 
     @Override
     public boolean canAttack(LivingEntity target) {
-        return super.canAttack(target) && target.distanceTo(this) <= BEAM_LENGTH + 0.5F;
+        return super.canAttack(target) && target.distanceTo(this) <= BEAM_LENGTH + 2.0F;
     }
 
     public static AttributeSupplier.Builder createAttributes() {
