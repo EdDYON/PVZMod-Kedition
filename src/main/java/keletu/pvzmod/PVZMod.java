@@ -18,6 +18,7 @@ public class PVZMod {
         PVZEntities.ENTITIES.register(modEventBus);
         PVZEffects.EFFECTS.register(modEventBus);
         PVZSounds.SOUNDS.register(modEventBus);
+        PVZParticles.PARTICLES.register(modEventBus);
         modEventBus.addListener(PVZEntities::registerEntityAttributes);
 
         PVZTabs.TABS.register(modEventBus);

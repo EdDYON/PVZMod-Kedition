@@ -2,6 +2,8 @@ package keletu.pvzmod;
 
 import keletu.pvzmod.init.PVZBlocks;
 import keletu.pvzmod.init.PVZEntities;
+import keletu.pvzmod.init.PVZParticles;
+import keletu.pvzmod.particles.SporeParticle;
 import keletu.pvzmod.potion.SlowBlueLayer;
 import keletu.pvzmod.potion.StunStarsLayer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -10,6 +12,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -51,6 +54,11 @@ public class ClientEvents {
     private static void addLayerSafe(LivingEntityRenderer renderer) {
         renderer.addLayer(new SlowBlueLayer(renderer));
         renderer.addLayer(new StunStarsLayer(renderer));
+    }
+
+    @SubscribeEvent
+    public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(PVZParticles.SPORE.get(), SporeParticle.Provider::new);
     }
 
     @SubscribeEvent

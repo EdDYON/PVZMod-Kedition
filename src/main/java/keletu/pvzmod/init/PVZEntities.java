@@ -33,6 +33,7 @@ public class PVZEntities {
     public static final RegistryObject<EntityType<EntitySuperElectricGatlingPea>> SUPER_ELECTRIC_GATLING_PEA = PVZEntities.ENTITIES.register("super_electric_gatling_pea", () -> EntityType.Builder.of(EntitySuperElectricGatlingPea::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".super_electric_gatling_pea"));
     public static final RegistryObject<EntityType<EntityPotatoMine>> POTATO_MINE = PVZEntities.ENTITIES.register("potato_mine", () -> EntityType.Builder.of(EntityPotatoMine::new, MobCategory.MISC).sized(1.0F, 0.5F).clientTrackingRange(8).build(PVZMod.MODID + ".potato_mine"));
     public static final RegistryObject<EntityType<PuffShroomEntity>> PUFF_SHROOM = PVZEntities.ENTITIES.register("puff_shroom", () -> EntityType.Builder.of(PuffShroomEntity::new, MobCategory.MISC).sized(1.0F, 0.75F).clientTrackingRange(8).build(PVZMod.MODID + ".puff_shroom"));
+    public static final RegistryObject<EntityType<FumeShroomEntity>> FUME_SHROOM = PVZEntities.ENTITIES.register("fume_shroom", () -> EntityType.Builder.of(FumeShroomEntity::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".fume_shroom"));
     public static final RegistryObject<EntityType<PeaProjectile>> PEA_PROJECTILE = PVZEntities.ENTITIES.register("pea_projectile",
             () -> EntityType.Builder.<PeaProjectile>of(PeaProjectile::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F)
@@ -82,6 +83,7 @@ public class PVZEntities {
         event.put(POTATO_MINE.get(), EntityPotatoMine.createAttributes().build());
 
         event.put(PUFF_SHROOM.get(), PuffShroomEntity.createAttributes().build());
+        event.put(FUME_SHROOM.get(), FumeShroomEntity.createAttributes().build());
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -112,5 +114,7 @@ public class PVZEntities {
 
         event.registerEntityRenderer(PUFF_SHROOM.get(), ((EntityRendererProvider.Context context) -> new GeoEntityRenderer<>(context, new PuffShroomModel())));
         event.registerEntityRenderer(SPORE_PROJECTILE.get(), ThrownItemRenderer::new);
+
+        event.registerEntityRenderer(FUME_SHROOM.get(), ((EntityRendererProvider.Context context) -> new GeoEntityRenderer<>(context, new FumeShroomModel())));
     }
 }

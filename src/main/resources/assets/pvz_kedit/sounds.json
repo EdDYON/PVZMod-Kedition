@@ -7,6 +7,14 @@
       }
     ]
   },
+  "fume_shroom_shoot": {
+    "sounds": [
+      {
+        "name": "pvz_kedit:fume_shroom_shoot",
+        "stream": false
+      }
+    ]
+  },
   "card_select": {
     "sounds": [
       {

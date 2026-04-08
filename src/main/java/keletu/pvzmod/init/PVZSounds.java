@@ -16,5 +16,6 @@ public class PVZSounds {
     public static final RegistryObject<SoundEvent> SHOVEL_SELECT = SOUNDS.register("shovel_select", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(PVZMod.MODID, "shovel_select")));
     public static final RegistryObject<SoundEvent> PLANT = SOUNDS.register("plant_plant", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(PVZMod.MODID, "plant_plant")));
     public static final RegistryObject<SoundEvent> REMOVE = SOUNDS.register("remove_plant", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(PVZMod.MODID, "remove_plant")));
+    public static final RegistryObject<SoundEvent> FUME_SHROOM_SHOOT = SOUNDS.register("fume_shroom_shoot", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(PVZMod.MODID, "fume_shroom_shoot")));
 
 }

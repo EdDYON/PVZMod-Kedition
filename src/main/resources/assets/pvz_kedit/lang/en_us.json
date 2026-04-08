@@ -2,9 +2,7 @@
   "language": "English",
   "language.code": "en_us",
   "language.region": "United States",
-
   "block.pvz_kedit.pot": "Pot",
-
   "item.pvz_kedit.pea": "Pea",
   "item.pvz_kedit.ice_pea": "Ice Pea",
   "item.pvz_kedit.primal_pea": "Primal Pea",
@@ -12,7 +10,6 @@
   "item.pvz_kedit.spore": "Spore",
   "item.pvz_kedit.small_stone": "Small Cobblestone",
   "item.pvz_kedit.garden_shovel": "Garden Shovel",
-
   "item.pvz_kedit.peashooter_card": "Pea Shooter",
   "item.pvz_kedit.snowpea_card": "Snow Pea",
   "item.pvz_kedit.repeater_card": "Repeater",
@@ -23,7 +20,7 @@
   "item.pvz_kedit.super_gatling_pea_card": "Super Gatling Pea",
   "item.pvz_kedit.potato_mine_card": "Potato Mine",
   "item.pvz_kedit.puff_shroom_card": "Puff-Shroom",
-
+  "item.pvz_kedit.fume_shroom_card": "Fume-Shroom",
   "entity.pvz_kedit.pea_shooter": "Pea Shooter",
   "entity.pvz_kedit.snow_pea": "Pea Shooter",
   "entity.pvz_kedit.repeater": "Repeater",
@@ -37,9 +34,8 @@
   "entity.pvz_kedit.super_electric_gatling_pea": "Super Gatling Pea (Electric)",
   "entity.pvz_kedit.potato_mine": "Potato Mine",
   "entity.pvz_kedit.puff_shroom": "Puff-Shroom",
-
+  "entity.pvz_kedit.fume_shroom": "Fume-Shroom",
   "effect.pvz_kedit.snow": "Iced",
   "effect.pvz_kedit.stun": "Stun",
-
   "creativetab.pvz_kedit": "Plants Vs Zombies"
 }
