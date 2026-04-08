@@ -23,12 +23,12 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class PuffShroomEntity extends EntityPlantShooterBase implements GeoEntity {
+public class FumeShroomEntity extends EntityPlantShooterBase implements GeoEntity {
 
-    public static final RawAnimation STAND = RawAnimation.begin().thenLoop("stand");
+    public static final RawAnimation STAND = RawAnimation.begin().thenLoop("animation");
     public static final RawAnimation SHOOT = RawAnimation.begin().thenLoop("shoot");
 
-    public PuffShroomEntity(EntityType<? extends EntityPlantShooterBase> entityType, Level par1World) {
+    public FumeShroomEntity(EntityType<? extends EntityPlantShooterBase> entityType, Level par1World) {
         super(entityType, par1World, new ItemStack(PVZItems.PUFF_SHROOM_CARD.get()));
     }
 

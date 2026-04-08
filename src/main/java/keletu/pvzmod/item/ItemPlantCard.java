@@ -129,6 +129,7 @@ public class ItemPlantCard extends Item {
                     if (isWaterLily && entity instanceof EntityPotatoMine) {
                         return InteractionResult.FAIL;
                     }
+                    player.level().playSound(null, player.blockPosition(), PVZSounds.PLANT.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
 
                     double spawnX;
                     double spawnY;

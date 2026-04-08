@@ -17,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -50,6 +51,14 @@ public class ServerEvents {
                         true
                 )
         );
+    }
+
+
+    @SubscribeEvent
+    public static void onPlantKnockBack(LivingKnockBackEvent event) {
+        if (event.getEntity() instanceof EntityPlantBase) {
+            event.setCanceled(true);
+        }
     }
 
     @SubscribeEvent
