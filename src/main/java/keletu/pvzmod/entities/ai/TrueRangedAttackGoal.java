@@ -1,9 +1,13 @@
 package keletu.pvzmod.entities.ai;
 
 import keletu.pvzmod.entities.EntityPlantShooterBase;
+import keletu.pvzmod.entities.FumeShroomEntity;
+import keletu.pvzmod.init.PVZSounds;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
@@ -129,6 +133,34 @@ public class TrueRangedAttackGoal extends Goal {
             }
         }
 
+        if (attackTime == 10 && this.mob instanceof FumeShroomEntity) {
+            this.mob.playSound(
+                    PVZSounds.FUME_SHROOM_SHOOT.get(),
+                    1.0F,
+                    1.0F / (this.mob.getRandom().nextFloat() * 0.4F + 0.8F)
+            );
+        }
+
+        if (attackTime > 0 && attackTime < 16 && this.mob instanceof FumeShroomEntity entity) {
+            Vec3 flatDir = new Vec3(
+                    target.getX() - entity.getX(),
+                    0.0D,
+                    target.getZ() - entity.getZ()
+            );
+
+            Vec3 dir;
+            if (flatDir.lengthSqr() < 1.0E-6D) {
+                dir = entity.getLookAngle().multiply(1.0D, 0.0D, 1.0D).normalize();
+            } else {
+                dir = flatDir.normalize();
+            }
+
+            Vec3 nozzle = new Vec3(entity.getX(), entity.getY() + 0.7D, entity.getZ()).add(dir.scale(0.45D));
+            Vec3 end = nozzle.add(dir.scale(1.0F));
+
+            entity.spawnBeamParticles((ServerLevel) entity.level(), nozzle, dir);
+
+        }
         if (--this.attackTime == 0) {
             if (!hasSight) {
                 return;

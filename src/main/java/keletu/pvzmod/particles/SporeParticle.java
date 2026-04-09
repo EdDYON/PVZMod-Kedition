@@ -14,7 +14,7 @@ public class SporeParticle extends TextureSheetParticle {
         this.yd = yd;
         this.zd = zd;
 
-        this.lifetime = 10 + this.random.nextInt(6);
+        this.lifetime = 15 + this.random.nextInt(6);
         this.gravity = 0.0F;
 
         this.rCol = 1.0F;
@@ -29,8 +29,8 @@ public class SporeParticle extends TextureSheetParticle {
     public void tick() {
         super.tick();
 
-        float lifeProgress = (float)this.age / (float)this.lifetime;
-        this.quadSize = 0.5f - lifeProgress * 0.5F;
+        float lifeProgress = (float) this.age / (float) this.lifetime;
+        this.quadSize = (this.random.nextInt(50) < 1 ? 1.0F : 0.5F) - lifeProgress * 0.5F;
     }
 
     @Override

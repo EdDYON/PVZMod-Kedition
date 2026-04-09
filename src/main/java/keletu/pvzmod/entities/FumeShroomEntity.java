@@ -3,7 +3,6 @@ package keletu.pvzmod.entities;
 import keletu.pvzmod.entities.ai.TrueRangedAttackGoal;
 import keletu.pvzmod.init.PVZItems;
 import keletu.pvzmod.init.PVZParticles;
-import keletu.pvzmod.init.PVZSounds;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -33,7 +32,7 @@ public class FumeShroomEntity extends EntityPlantShooterBase implements GeoEntit
     public static final RawAnimation SHOOT = RawAnimation.begin().thenLoop("shoot");
 
     // 可调参数
-    private static final float BEAM_LENGTH = 7.0F;
+    private static final float BEAM_LENGTH = 10.0F;
     private static final float BEAM_RADIUS = 1.25F;
     private static final float BEAM_DAMAGE = 6.0F;
 
@@ -48,7 +47,7 @@ public class FumeShroomEntity extends EntityPlantShooterBase implements GeoEntit
 
     @Override
     protected TrueRangedAttackGoal createRangedAttackGoal() {
-        return new TrueRangedAttackGoal(this, 0.0F, this.range, 1, 0, 50, 42);
+        return new TrueRangedAttackGoal(this, 0.0F, this.range, 1, 0, 50, 40);
     }
 
     @Override
@@ -57,30 +56,25 @@ public class FumeShroomEntity extends EntityPlantShooterBase implements GeoEntit
 
         this.faceTarget(target);
 
-        Vec3 start = new Vec3(this.getX(), this.getEyeY() - 0.2D, this.getZ());
-        Vec3 dir = new Vec3(
+        Vec3 flatDir = new Vec3(
                 target.getX() - this.getX(),
                 0.0D,
                 target.getZ() - this.getZ()
-        ).normalize();
-
-        if (dir.lengthSqr() < 1.0E-6D) {
-            dir = this.getLookAngle().multiply(1.0D, 0.0D, 1.0D).normalize();
-        }
-
-        Vec3 end = start.add(dir.scale(BEAM_LENGTH));
-
-        spawnBeamParticles((ServerLevel) this.level(), start, end);
-
-        damageEntitiesAlongBeam(start, end, BEAM_RADIUS, BEAM_DAMAGE);
-
-        this.playSound(
-                PVZSounds.FUME_SHROOM_SHOOT.get(),
-                1.0F,
-                1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F)
         );
 
-        List<LivingEntity> hits = getEntitiesAlongBeam(start, end, BEAM_RADIUS);
+        Vec3 dir;
+        if (flatDir.lengthSqr() < 1.0E-6D) {
+            dir = this.getLookAngle().multiply(1.0D, 0.0D, 1.0D).normalize();
+        } else {
+            dir = flatDir.normalize();
+        }
+
+        Vec3 nozzle = new Vec3(this.getX(), this.getY() + 0.7D, this.getZ()).add(dir.scale(0.45D));
+        Vec3 end = nozzle.add(dir.scale(BEAM_LENGTH));
+
+        damageEntitiesAlongBeam(nozzle, end, BEAM_RADIUS, BEAM_DAMAGE);
+
+        List<LivingEntity> hits = getEntitiesAlongBeam(nozzle, end, BEAM_RADIUS);
         for (LivingEntity hit : hits) {
             if (hit instanceof PathfinderMob mob) {
                 if (mob.getTarget() == null || !mob.getTarget().isAlive()) {
@@ -130,20 +124,36 @@ public class FumeShroomEntity extends EntityPlantShooterBase implements GeoEntit
         return point.distanceTo(projection);
     }
 
-    private void spawnBeamParticles(ServerLevel level, Vec3 start, Vec3 end) {
-        Vec3 delta = end.subtract(start);
-        int steps = 18;
+    public void spawnBeamParticles(ServerLevel level, Vec3 nozzle, Vec3 dir) {
+        int count = 5;
 
-        for (int i = 0; i <= steps; i++) {
-            float progress = i / (float) steps;
-            Vec3 pos = start.add(delta.scale(progress));
+        Vec3 side = new Vec3(-dir.z, 0.0D, dir.x).normalize();
+
+        for (int i = 0; i < count; i++) {
+            double forwardOffset = this.random.nextDouble() * 0.9D;
+            double sideOffset = (this.random.nextDouble() - 0.5D) * 0.18D;
+            double upOffset = (this.random.nextDouble() - 0.5D) * 0.10D;
+
+            Vec3 spawnPos = nozzle
+                    .add(dir.scale(forwardOffset))
+                    .add(side.scale(sideOffset))
+                    .add(0.0D, upOffset, 0.0D);
+
+            double speed = 0.45D + this.random.nextDouble() * 0.22D;
+
+            double sideSpeed = (this.random.nextDouble() - 0.5D) * 0.06D;
+            double upSpeed = (this.random.nextDouble() - 0.5D) * 0.03D + 0.01D;
+
+            double vx = dir.x * speed + side.x * sideSpeed;
+            double vy = upSpeed;
+            double vz = dir.z * speed + side.z * sideSpeed;
 
             level.sendParticles(
                     PVZParticles.SPORE.get(),
-                    pos.x, pos.y, pos.z,
-                    4,
-                    0.12D, 0.12D, 0.12D,
-                    0.01D
+                    spawnPos.x, spawnPos.y, spawnPos.z,
+                    0,
+                    vx, vy, vz,
+                    1.0D
             );
         }
     }

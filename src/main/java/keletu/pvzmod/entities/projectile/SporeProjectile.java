@@ -57,7 +57,7 @@ public class SporeProjectile extends ThrowableItemProjectile {
     public void tick() {
         super.tick();
 
-        if (this.tickCount > 30) {
+        if (this.tickCount > 20) {
             this.setDeltaMovement(this.getDeltaMovement().add(0, -0.01F, 0));
         }
     }

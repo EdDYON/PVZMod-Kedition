@@ -58,7 +58,7 @@ public class PuffShroomEntity extends EntityPlantShooterBase implements GeoEntit
             this.faceTarget(target);
 
             ThrowableProjectile projectile = entitySelect(this.level());
-            projectile.setPos(this.getX(), this.getEyeY() - 0.5D, this.getZ());
+            projectile.setPos(this.getX(), this.getEyeY() - 0.6F, this.getZ());
 
             double toX = target.getX() - this.getX();
             double toZ = target.getZ() - this.getZ();
@@ -80,7 +80,7 @@ public class PuffShroomEntity extends EntityPlantShooterBase implements GeoEntit
                 .add(Attributes.MAX_HEALTH, 10.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
-                .add(Attributes.FOLLOW_RANGE, 16.0D);
+                .add(Attributes.FOLLOW_RANGE, 10.0F);
     }
 
     @Override
