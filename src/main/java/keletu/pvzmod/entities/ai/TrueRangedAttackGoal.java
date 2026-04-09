@@ -23,23 +23,21 @@ public class TrueRangedAttackGoal extends Goal {
     private int remainingShots;
     private int burstTimer;
     private int cooldown;
+    private int cooldown_first;
 
-    public TrueRangedAttackGoal(EntityPlantShooterBase pRangedAttackMob, double pSpeedModifier, int pAttackInterval, float pAttackRadius) {
-        this(pRangedAttackMob, pSpeedModifier, pAttackInterval, pAttackInterval, pAttackRadius, 1, 0, 20);
+    public TrueRangedAttackGoal(EntityPlantShooterBase pRangedAttackMob, double pSpeedModifier, float pAttackRadius) {
+        this(pRangedAttackMob, pSpeedModifier, pAttackRadius, 1, 0, 20, 20);
     }
 
-    public TrueRangedAttackGoal(EntityPlantShooterBase pRangedAttackMob, double pSpeedModifier, int pAttackInterval, float pAttackRadius, int pBurstCount, int pBurstDelay, int cooldown) {
-        this(pRangedAttackMob, pSpeedModifier, pAttackInterval, pAttackInterval, pAttackRadius, pBurstCount, pBurstDelay, cooldown);
+    public TrueRangedAttackGoal(EntityPlantShooterBase pRangedAttackMob, double pSpeedModifier, float pAttackRadius, int pBurstCount, int pBurstDelay, int cooldown) {
+        this(pRangedAttackMob, pSpeedModifier, pAttackRadius, pBurstCount, pBurstDelay, cooldown, cooldown);
     }
 
-    public TrueRangedAttackGoal(EntityPlantShooterBase pRangedAttackMob, double pSpeedModifier, int pAttackIntervalMin, int pAttackIntervalMax, float pAttackRadius) {
-        this(pRangedAttackMob, pSpeedModifier, pAttackIntervalMin, pAttackIntervalMax, pAttackRadius, 1, 0, 20);
-    }
-
-    public TrueRangedAttackGoal(EntityPlantShooterBase pRangedAttackMob, double pSpeedModifier, int pAttackIntervalMin, int pAttackIntervalMax, float pAttackRadius, int pBurstCount, int pBurstDelay, int cooldown) {
+    public TrueRangedAttackGoal(EntityPlantShooterBase pRangedAttackMob, double pSpeedModifier, float pAttackRadius, int pBurstCount, int pBurstDelay, int cooldown, int cooldown_first) {
         this.attackTime = -1;
         this.remainingShots = 0;
         this.burstTimer = 0;
+        this.cooldown_first = cooldown_first;
 
         if (pRangedAttackMob == null) {
             throw new IllegalArgumentException("ArrowAttackGoal requires Mob implements RangedAttackMob");
@@ -148,7 +146,7 @@ public class TrueRangedAttackGoal extends Goal {
 
             this.attackTime = cooldown;
         } else if (this.attackTime < 0) {
-            this.attackTime = cooldown;
+            this.attackTime = cooldown_first;
         }
     }
 }

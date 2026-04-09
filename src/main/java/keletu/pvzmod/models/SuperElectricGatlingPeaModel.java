@@ -2,7 +2,6 @@ package keletu.pvzmod.models;
 
 import keletu.pvzmod.PVZMod;
 import keletu.pvzmod.entities.EntitySuperElectricGatlingPea;
-import keletu.pvzmod.entities.EntitySuperElectricGatlingPea;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.constant.DataTickets;

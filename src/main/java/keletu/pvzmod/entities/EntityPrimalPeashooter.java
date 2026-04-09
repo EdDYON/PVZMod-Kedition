@@ -32,7 +32,7 @@ public class EntityPrimalPeashooter extends EntityPlantShooterBase implements Ge
 
     @Override
     protected TrueRangedAttackGoal createRangedAttackGoal() {
-        return new TrueRangedAttackGoal(this, 0.0F, 30, this.range, 1, 2, 30);
+        return new TrueRangedAttackGoal(this, 0.0F, this.range, 1, 2, 30);
     }
 
     @Override

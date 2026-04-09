@@ -1,7 +1,6 @@
 package keletu.pvzmod.models;
 
 import keletu.pvzmod.PVZMod;
-import keletu.pvzmod.blocks.PotBlockEntity;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.model.GeoModel;

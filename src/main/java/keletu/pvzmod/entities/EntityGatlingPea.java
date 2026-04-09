@@ -37,7 +37,7 @@ public class EntityGatlingPea extends EntityPlantShooterBase implements GeoEntit
 
     @Override
     protected TrueRangedAttackGoal createRangedAttackGoal() {
-        return new TrueRangedAttackGoal(this, 0.0F, 30, this.range, 4, 1, 20);
+        return new TrueRangedAttackGoal(this, 0.0F, this.range, 4, 1, 20);
     }
 
     @Override
