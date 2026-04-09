@@ -22,6 +22,7 @@ public class PeaProjectile extends ThrowableItemProjectile {
 
     public PeaProjectile(EntityType<? extends PeaProjectile> type, Level level) {
         super(type, level);
+        this.setNoGravity(true);
     }
 
     public PeaProjectile(Level level, EntityPlantBase shooter, float damage) {

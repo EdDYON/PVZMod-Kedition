@@ -30,6 +30,7 @@ public class PrimalPeaProjectile extends ThrowableItemProjectile {
 
     public PrimalPeaProjectile(EntityType<? extends PrimalPeaProjectile> type, Level level) {
         super(type, level);
+        this.setNoGravity(true);
     }
 
     public PrimalPeaProjectile(Level level, EntityPlantBase shooter, float damage, int type) {

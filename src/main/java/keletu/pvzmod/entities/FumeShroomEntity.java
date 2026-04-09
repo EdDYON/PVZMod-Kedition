@@ -48,7 +48,7 @@ public class FumeShroomEntity extends EntityPlantShooterBase implements GeoEntit
 
     @Override
     protected TrueRangedAttackGoal createRangedAttackGoal() {
-        return new TrueRangedAttackGoal(this, 0.0F, this.range, 1, 0, 50, 40);
+        return new TrueRangedAttackGoal(this, 0.0F, this.range, 1, 0, 50, 42);
     }
 
     @Override
