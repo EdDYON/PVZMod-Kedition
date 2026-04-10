@@ -118,15 +118,17 @@ public class FumeShroomEntity extends EntityPlantShooterBase {
 
     public void spawnBeamParticles(ServerLevel level, Vec3 nozzle, Vec3 dir) {
         int count = 5;
+        double nozzleForwardOffset = 0.22D;
 
         Vec3 side = new Vec3(-dir.z, 0.0D, dir.x).normalize();
+        Vec3 basePos = nozzle.add(dir.scale(nozzleForwardOffset));
 
         for (int i = 0; i < count; i++) {
             double forwardOffset = this.random.nextDouble() * 0.9D;
             double sideOffset = (this.random.nextDouble() - 0.5D) * 0.18D;
             double upOffset = (this.random.nextDouble() - 0.5D) * 0.10D;
 
-            Vec3 spawnPos = nozzle
+            Vec3 spawnPos = basePos
                     .add(dir.scale(forwardOffset))
                     .add(side.scale(sideOffset))
                     .add(0.0D, upOffset, 0.0D);
