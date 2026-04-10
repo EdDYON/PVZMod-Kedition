@@ -80,7 +80,8 @@ public class PotatoMineModel extends HierarchicalModel<EntityPotatoMine> {
 
         PartDefinition cube_r6 = bone6.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(44, 25).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 1.5F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.2182F, 0.0F));
 
-        PartDefinition dirty1 = all.addOrReplaceChild("dirty1", CubeListBuilder.create().texOffs(-16, 0).addBox(-8.0F, 0.0F, -8.0F, 16.0F, 0.0F, 16.0F, new CubeDeformation(0.0F)), PartPose.offset(1.5F, 1.25F, 8.025F));
+        PartDefinition dirty1 = all.addOrReplaceChild("dirty1", CubeListBuilder.create().texOffs(-16, 0).addBox(-8.0F, -0.1F, -8.0F, 16.0F, 0.0F, 16.0F, new CubeDeformation(0.0F))
+                .texOffs(-16, 35).addBox(-8.0F, 0.0F, -8.0F, 16.0F, 0.0F, 16.0F, new CubeDeformation(0.0F)), PartPose.offset(1.5F, 1.25F, 8.025F));
 
         PartDefinition dirty = all.addOrReplaceChild("dirty", CubeListBuilder.create().texOffs(43, 10).mirror().addBox(-0.5F, -1.5F, -6.05F, 2.0F, 1.5F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(1.5F, 1.25F, 8.025F));
 
