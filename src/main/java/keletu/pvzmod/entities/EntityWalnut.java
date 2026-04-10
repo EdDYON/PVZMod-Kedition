@@ -38,6 +38,10 @@ public class EntityWalnut extends EntityPlantBase {
     public void tick() {
         super.tick();
 
+        if (this.level().isClientSide()) {
+            setupAnimationStates();
+        }
+
         if (this.level().isClientSide || this.tickCount % RETARGET_INTERVAL != 0) {
             return;
         }
@@ -62,10 +66,6 @@ public class EntityWalnut extends EntityPlantBase {
         if (entity instanceof Mob) {
             entity.push(this);
         }
-
-        if (this.level().isClientSide()) {
-            setupAnimationStates();
-        }
     }
 
     @Override
@@ -73,7 +73,7 @@ public class EntityWalnut extends EntityPlantBase {
         return true;
     }
 
-    private void setupAnimationStates() {
+    public void setupAnimationStates() {
         if (this.getHealth() > this.getMaxHealth() * 2 / 3) {
             this.idleAnimation1.stop();
             this.idleAnimation2.stop();

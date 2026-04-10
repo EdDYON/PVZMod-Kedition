@@ -70,6 +70,10 @@ public class ClientEvents {
         event.registerLayerDefinition(TallNutModel0.LAYER_LOCATION, TallNutModel0::createBodyLayer);
         event.registerLayerDefinition(TallNutModel1.LAYER_LOCATION, TallNutModel1::createBodyLayer);
         event.registerLayerDefinition(TallNutModel2.LAYER_LOCATION, TallNutModel2::createBodyLayer);
+
+        event.registerLayerDefinition(WalnutModel0.LAYER_LOCATION, WalnutModel0::createBodyLayer);
+        event.registerLayerDefinition(WalnutModel1.LAYER_LOCATION, WalnutModel1::createBodyLayer);
+        event.registerLayerDefinition(WalnutModel2.LAYER_LOCATION, WalnutModel2::createBodyLayer);
     }
 
     @SubscribeEvent

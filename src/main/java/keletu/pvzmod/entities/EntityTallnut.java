@@ -24,7 +24,8 @@ public class EntityTallnut extends EntityWalnut {
         return EntityPlantBase.createAttributes().add(Attributes.MAX_HEALTH, 20.0D * 21);
     }
 
-    private void setupAnimationStates() {
+    @Override
+    public void setupAnimationStates() {
         if (this.getHealth() > this.getMaxHealth() * 2 / 3) {
             this.idleAnimation1.stop();
             this.idleAnimation2.stop();
