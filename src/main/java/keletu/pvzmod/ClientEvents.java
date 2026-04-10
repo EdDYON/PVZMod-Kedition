@@ -3,6 +3,8 @@ package keletu.pvzmod;
 import keletu.pvzmod.init.PVZBlocks;
 import keletu.pvzmod.init.PVZEntities;
 import keletu.pvzmod.init.PVZParticles;
+import keletu.pvzmod.models.FumeShroomModelVanilla;
+import keletu.pvzmod.models.PotatoMineModel;
 import keletu.pvzmod.particles.SporeParticle;
 import keletu.pvzmod.potion.SlowBlueLayer;
 import keletu.pvzmod.potion.StunStarsLayer;
@@ -59,6 +61,12 @@ public class ClientEvents {
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(PVZParticles.SPORE.get(), SporeParticle.Provider::new);
+    }
+
+    @SubscribeEvent
+    public static void registerParticleFactories(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(FumeShroomModelVanilla.LAYER_LOCATION, FumeShroomModelVanilla::createBodyLayer);
+        event.registerLayerDefinition(PotatoMineModel.LAYER_LOCATION, PotatoMineModel::createBodyLayer);
     }
 
     @SubscribeEvent

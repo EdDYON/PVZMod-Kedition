@@ -6,10 +6,7 @@ import keletu.pvzmod.init.PVZParticles;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -17,20 +14,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class FumeShroomEntity extends EntityPlantShooterBase implements GeoEntity {
+public class FumeShroomEntity extends EntityPlantShooterBase {
 
-    public static final RawAnimation STAND = RawAnimation.begin().thenLoop("animation");
-    public static final RawAnimation SHOOT = RawAnimation.begin().thenLoop("shoot");
+    public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState shootAnimationState = new AnimationState();
 
+    private int idleAnimationTimeout = 0;
     // 可调参数
     private static final float BEAM_LENGTH = 10.0F;
     private static final float BEAM_RADIUS = 1.25F;
@@ -177,18 +169,23 @@ public class FumeShroomEntity extends EntityPlantShooterBase implements GeoEntit
 
         this.setXRot(0.0F);
         this.xRotO = 0.0F;
+        if (this.level().isClientSide()) {
+            setupAnimationStates();
+        }
     }
 
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private void setupAnimationStates() {
+        if (this.idleAnimationTimeout <= 0) {
+            this.idleAnimationTimeout = 50;
+            this.idleAnimationState.start(this.tickCount);
+        } else {
+            --this.idleAnimationTimeout;
+        }
 
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "Found/NotFound", 5,
-                state -> state.setAndContinue(this.isShooting() ? SHOOT : STAND)));
+        if (this.isShooting()) {
+            this.shootAnimationState.startIfStopped(this.tickCount);
+        } else {
+            this.shootAnimationState.stop();
+        }
     }
 }

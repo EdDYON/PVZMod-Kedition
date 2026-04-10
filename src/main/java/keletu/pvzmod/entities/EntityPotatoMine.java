@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -19,24 +20,18 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class EntityPotatoMine extends EntityPlantBase implements GeoEntity {
+public class EntityPotatoMine extends EntityPlantBase {
+
+    public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState idleAnimationState2 = new AnimationState();
+    public final AnimationState growAnimation = new AnimationState();
+    public final AnimationState boomAnimation = new AnimationState();
     private final int waitTime = 315;
     private final int growTime = 20;
     private static final EntityDataAccessor<Integer> GROW_TIME = SynchedEntityData.defineId(EntityPotatoMine.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> BOOM_TIME = SynchedEntityData.defineId(EntityPotatoMine.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> START_BOOM = SynchedEntityData.defineId(EntityPotatoMine.class, EntityDataSerializers.BOOLEAN);
-
-    public static final RawAnimation WAIT = RawAnimation.begin().thenLoop("wait");
-    public static final RawAnimation GROW = RawAnimation.begin().thenPlay("chutu");
-    public static final RawAnimation WAIT_GROWN = RawAnimation.begin().thenPlay("wait1");
-    public static final RawAnimation BOOM = RawAnimation.begin().thenPlay("boom");
 
     public EntityPotatoMine(EntityType<? extends EntityPotatoMine> entityType, Level par1World) {
         super(entityType, par1World, new ItemStack(PVZItems.POTATO_MINE_CARD.get()));
@@ -89,7 +84,6 @@ public class EntityPotatoMine extends EntityPlantBase implements GeoEntity {
         pCompound.putInt("GrowTime", this.getGrowTime());
         pCompound.putInt("BoomTime", this.getBoomTime());
         pCompound.putBoolean("isStart", this.startBoom());
-        //this.addPersistentAngerSaveData(pCompound);
     }
 
     @Override
@@ -98,7 +92,6 @@ public class EntityPotatoMine extends EntityPlantBase implements GeoEntity {
         this.setGrowTime(pCompound.getInt("GrowTime"));
         this.setBoomTime(pCompound.getInt("BoomTime"));
         this.setStartBoom(pCompound.getBoolean("isStart"));
-        //this.readPersistentAngerSaveData(this.level(), pCompound);
     }
 
     @Override
@@ -123,9 +116,13 @@ public class EntityPotatoMine extends EntityPlantBase implements GeoEntity {
             this.setBoomTime(this.getBoomTime() + 1);
         }
 
-        if (this.getBoomTime() == growTime) {
+        if (this.getBoomTime() == 15) {
             explodeAndDamage();
             this.remove(RemovalReason.DISCARDED);
+        }
+
+        if (this.level().isClientSide()) {
+            setupAnimationStates();
         }
     }
 
@@ -199,15 +196,34 @@ public class EntityPotatoMine extends EntityPlantBase implements GeoEntity {
         return super.isInvulnerable() || this.startBoom();
     }
 
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
+    private void stopAllAnimationStates() {
+        this.idleAnimationState.stop();
+        this.idleAnimationState2.stop();
+        this.growAnimation.stop();
+        this.boomAnimation.stop();
     }
 
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "mine", 5, state -> state.setAndContinue(this.getBoomTime() > 0 ? BOOM : this.getGrowTime() < waitTime - growTime ? WAIT : this.getGrowTime() >= waitTime - growTime && this.getGrowTime() < waitTime ? GROW : WAIT_GROWN)));
+    private void setupAnimationStates() {
+        if (this.getBoomTime() > 0) {
+            this.idleAnimationState.stop();
+            this.idleAnimationState2.stop();
+            this.growAnimation.stop();
+            this.boomAnimation.startIfStopped(this.tickCount);
+        } else if (this.getGrowTime() < waitTime - growTime) {
+            this.idleAnimationState2.stop();
+            this.growAnimation.stop();
+            this.boomAnimation.stop();
+            this.idleAnimationState.startIfStopped(this.tickCount);
+        } else if (this.getGrowTime() < waitTime) {
+            this.idleAnimationState.stop();
+            this.idleAnimationState2.stop();
+            this.boomAnimation.stop();
+            this.growAnimation.startIfStopped(this.tickCount);
+        } else {
+            this.idleAnimationState.stop();
+            this.growAnimation.stop();
+            this.boomAnimation.stop();
+            this.idleAnimationState2.startIfStopped(this.tickCount);
+        }
     }
 }

@@ -110,11 +110,11 @@ public class PVZEntities {
         event.registerEntityRenderer(WALNUT.get(), WalnutRender::new);
         event.registerEntityRenderer(TALL_NUT.get(), TallnutRender::new);
 
-        event.registerEntityRenderer(POTATO_MINE.get(), ((EntityRendererProvider.Context context) -> new GeoEntityRenderer<>(context, new PotatoMineModel())));
+        event.registerEntityRenderer(POTATO_MINE.get(), PotatoMineRenderer::new);
 
         event.registerEntityRenderer(PUFF_SHROOM.get(), ((EntityRendererProvider.Context context) -> new GeoEntityRenderer<>(context, new PuffShroomModel())));
         event.registerEntityRenderer(SPORE_PROJECTILE.get(), ThrownItemRenderer::new);
 
-        event.registerEntityRenderer(FUME_SHROOM.get(), ((EntityRendererProvider.Context context) -> new GeoEntityRenderer<>(context, new FumeShroomModel())));
+        event.registerEntityRenderer(FUME_SHROOM.get(), FumeShroomRenderer::new);
     }
 }
