@@ -1,25 +1,21 @@
 package keletu.pvzmod.entities;
 
 import keletu.pvzmod.init.PVZItems;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class EntityWalnut extends EntityPlantBase implements GeoEntity {
+public class EntityWalnut extends EntityPlantBase {
+
+    public final AnimationState idleAnimation0 = new AnimationState();
+    public final AnimationState idleAnimation1 = new AnimationState();
+    public final AnimationState idleAnimation2 = new AnimationState();
     private final double protectRadio;
     private static final int RETARGET_INTERVAL = 10;
     public static final RawAnimation STAND = RawAnimation.begin().thenLoop("animation");
@@ -66,6 +62,10 @@ public class EntityWalnut extends EntityPlantBase implements GeoEntity {
         if (entity instanceof Mob) {
             entity.push(this);
         }
+
+        if (this.level().isClientSide()) {
+            setupAnimationStates();
+        }
     }
 
     @Override
@@ -73,15 +73,19 @@ public class EntityWalnut extends EntityPlantBase implements GeoEntity {
         return true;
     }
 
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "Generic", 5, state -> state.setAndContinue(STAND)));
+    private void setupAnimationStates() {
+        if (this.getHealth() > this.getMaxHealth() * 2 / 3) {
+            this.idleAnimation1.stop();
+            this.idleAnimation2.stop();
+            this.idleAnimation0.startIfStopped(this.tickCount);
+        } else if (this.getHealth() > this.getMaxHealth() * 1 / 3 && this.getHealth() <= this.getMaxHealth() * 2 / 3) {
+            this.idleAnimation0.stop();
+            this.idleAnimation2.stop();
+            this.idleAnimation1.startIfStopped(this.tickCount);
+        } else {
+            this.idleAnimation0.stop();
+            this.idleAnimation1.stop();
+            this.idleAnimation2.startIfStopped(this.tickCount);
+        }
     }
 }

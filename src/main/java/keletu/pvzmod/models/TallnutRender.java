@@ -1,11 +1,54 @@
 package keletu.pvzmod.models;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import keletu.pvzmod.PVZMod;
 import keletu.pvzmod.entities.EntityTallnut;
+import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
 
-public class TallnutRender extends GeoEntityRenderer<EntityTallnut> {
-    public TallnutRender(EntityRendererProvider.Context context) {
-        super(context, new TallnutModel());
+public class TallnutRender extends MobRenderer<EntityTallnut, HierarchicalModel<EntityTallnut>> {
+
+    private final TallNutModel0 modelHealthy;
+    private final TallNutModel1 modelDamaged;
+    private final TallNutModel2 modelCritical;
+
+    public TallnutRender(EntityRendererProvider.Context pContext) {
+        super(pContext, new TallNutModel0(pContext.bakeLayer(TallNutModel0.LAYER_LOCATION)), 0.0F);
+
+        this.modelHealthy = new TallNutModel0(pContext.bakeLayer(TallNutModel0.LAYER_LOCATION));
+        this.modelDamaged = new TallNutModel1(pContext.bakeLayer(TallNutModel1.LAYER_LOCATION));
+        this.modelCritical = new TallNutModel2(pContext.bakeLayer(TallNutModel2.LAYER_LOCATION));
+    }
+
+    @Override
+    public void render(EntityTallnut entity, float entityYaw, float partialTick, PoseStack poseStack,
+                       MultiBufferSource buffer, int packedLight) {
+        float percent = entity.getHealth() / entity.getMaxHealth();
+
+        if (percent > 2.0F / 3.0F) {
+            this.model = this.modelHealthy;
+        } else if (percent >= 1.0F / 3.0F) {
+            this.model = this.modelDamaged;
+        } else {
+            this.model = this.modelCritical;
+        }
+
+        super.render(entity, entityYaw, partialTick, poseStack, buffer, packedLight);
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(EntityTallnut entity) {
+        float percent = entity.getHealth() / entity.getMaxHealth();
+
+        if (percent > 2.0F / 3.0F) {
+            return new ResourceLocation(PVZMod.MODID, "textures/entity/plant/tallnut_new.png");
+        } else if (percent > 1.0F / 3.0F) {
+            return new ResourceLocation(PVZMod.MODID, "textures/entity/plant/tallnut_new_1.png");
+        } else {
+            return new ResourceLocation(PVZMod.MODID, "textures/entity/plant/tallnut_new_2.png");
+        }
     }
 }
