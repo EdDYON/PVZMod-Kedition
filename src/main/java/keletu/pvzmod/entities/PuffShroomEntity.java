@@ -80,7 +80,12 @@ public class PuffShroomEntity extends EntityPlantShooterBase implements GeoEntit
                 .add(Attributes.MAX_HEALTH, 10.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
-                .add(Attributes.FOLLOW_RANGE, 10.0F);
+                .add(Attributes.FOLLOW_RANGE, 16.0F);
+    }
+
+    @Override
+    public boolean canAttack(LivingEntity target) {
+        return super.canAttack(target) && target.distanceTo(this) <= 8.0F;
     }
 
     @Override
