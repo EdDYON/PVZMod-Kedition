@@ -67,6 +67,8 @@ public class ClientEvents {
         event.registerLayerDefinition(FumeShroomModelVanilla.LAYER_LOCATION, FumeShroomModelVanilla::createBodyLayer);
         event.registerLayerDefinition(PotatoMineModel.LAYER_LOCATION, PotatoMineModel::createBodyLayer);
 
+        event.registerLayerDefinition(PeaShooterModel.LAYER_LOCATION, PeaShooterModel::createBodyLayer);
+
         event.registerLayerDefinition(TallNutModel0.LAYER_LOCATION, TallNutModel0::createBodyLayer);
         event.registerLayerDefinition(TallNutModel1.LAYER_LOCATION, TallNutModel1::createBodyLayer);
         event.registerLayerDefinition(TallNutModel2.LAYER_LOCATION, TallNutModel2::createBodyLayer);

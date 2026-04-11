@@ -88,7 +88,7 @@ public class PVZEntities {
 
     @OnlyIn(Dist.CLIENT)
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(PEA_SHOOTER.get(), ((EntityRendererProvider.Context context) -> new GeoEntityRenderer<>(context, new PeaShooterModel())));
+        event.registerEntityRenderer(PEA_SHOOTER.get(), PeaShooterRender::new);
         event.registerEntityRenderer(PEA_PROJECTILE.get(), ThrownItemRenderer::new);
 
         event.registerEntityRenderer(SNOW_PEA.get(), RenderSnowPea::new);
