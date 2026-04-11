@@ -6,26 +6,20 @@ import keletu.pvzmod.init.PVZItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class EntitySuperGatlingPea extends EntityPlantShooterBase implements GeoEntity {
+public class EntitySuperGatlingPea extends EntityPlantShooterBase {
     public static final int SUPER_RAPID_FIRE_DURATION = 100;
     public static final int SUPER_RAPID_FIRE_COOLDOWN = 300;
     public static final float SUPER_RAPID_FIRE_CHANCE = 0.02F;
-    public static final RawAnimation STAND = RawAnimation.begin().thenLoop("stand");
-    public static final RawAnimation SHOOT = RawAnimation.begin().thenLoop("shoot");
-
+    public final AnimationState idleAnimation = new AnimationState();
+    public final AnimationState shootAnimation = new AnimationState();
     private static final EntityDataAccessor<Integer> SUPER_TICK =
             SynchedEntityData.defineId(EntitySuperGatlingPea.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> SUPER_COOLDOWN =
@@ -117,6 +111,10 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase implements Geo
                 this.setSuperTick(this.getSuperTick() - 1);
             }
         }
+
+        if (this.level().isClientSide()) {
+            setupAnimationStates();
+        }
     }
 
     private void fireSuperShot(LivingEntity target) {
@@ -172,15 +170,15 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase implements Geo
         this.level().addFreshEntity(pea);
     }
 
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
+    public void setupAnimationStates() {
+        if (this.isShooting() || this.isSuperFiring()) {
+            this.idleAnimation.stop();
+            this.shootAnimation.startIfStopped(this.tickCount);
+        } else {
+            this.shootAnimation.stop();
+            this.idleAnimation.startIfStopped(this.tickCount);
+        }
     }
 
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "Found/NotFound", 5, state -> state.setAndContinue((this.isShooting() || this.isSuperFiring()) ? SHOOT : STAND)));
-    }
 }

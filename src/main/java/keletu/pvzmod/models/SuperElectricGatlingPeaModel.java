@@ -1,4 +1,4 @@
-package keletu.pvzmod.models;
+/*package keletu.pvzmod.models;
 
 import keletu.pvzmod.PVZMod;
 import keletu.pvzmod.entities.EntitySuperElectricGatlingPea;
@@ -40,4 +40,4 @@ public class SuperElectricGatlingPeaModel extends GeoModel<EntitySuperElectricGa
     public Optional<GeoBone> getBone(String boneName) {
         return super.getBone(boneName);
     }
-}
+}*/

@@ -1,4 +1,4 @@
-package keletu.pvzmod.models;
+/*package keletu.pvzmod.models;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -49,3 +49,4 @@ public class RenderSuperElectricGatlingPea extends GeoEntityRenderer<EntitySuper
         }
     }
 }
+*/
