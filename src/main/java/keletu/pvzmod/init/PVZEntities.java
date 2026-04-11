@@ -91,10 +91,10 @@ public class PVZEntities {
         event.registerEntityRenderer(PEA_SHOOTER.get(), PeaShooterRender::new);
         event.registerEntityRenderer(PEA_PROJECTILE.get(), ThrownItemRenderer::new);
 
-        event.registerEntityRenderer(SNOW_PEA.get(), RenderSnowPea::new);
+        event.registerEntityRenderer(SNOW_PEA.get(), SnowPeaRender::new);
         event.registerEntityRenderer(ICE_PEA_PROJECTILE.get(), ThrownItemRenderer::new);
 
-        event.registerEntityRenderer(REPEATER.get(), RenderRepeater::new);
+        event.registerEntityRenderer(REPEATER.get(), RepeaterRender::new);
         event.registerEntityRenderer(GATLING_PEA.get(), GatlingPeaRender::new);
 
         event.registerEntityRenderer(PRIMAL_PEASHOOTER.get(), RenderPrimalPeashooter::new);
