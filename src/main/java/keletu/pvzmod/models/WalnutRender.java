@@ -21,6 +21,7 @@ public class WalnutRender extends MobRenderer<EntityWalnut, HierarchicalModel<En
         this.modelHealthy = new WalnutModel0(pContext.bakeLayer(WalnutModel0.LAYER_LOCATION));
         this.modelDamaged = new WalnutModel1(pContext.bakeLayer(WalnutModel1.LAYER_LOCATION));
         this.modelCritical = new WalnutModel2(pContext.bakeLayer(WalnutModel2.LAYER_LOCATION));
+        this.addLayer(new PlantStuckArrowLayer<>(pContext, this));
     }
 
     @Override

@@ -25,6 +25,11 @@ public class EntityTallnut extends EntityWalnut {
     }
 
     @Override
+    protected float getStuckArrowModelHeight() {
+        return 29.0F;
+    }
+
+    @Override
     public void setupAnimationStates() {
         if (this.getHealth() > this.getMaxHealth() * 2 / 3) {
             this.idleAnimation1.stop();

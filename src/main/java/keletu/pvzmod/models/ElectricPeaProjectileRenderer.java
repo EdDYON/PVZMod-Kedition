@@ -2,6 +2,7 @@ package keletu.pvzmod.models;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import keletu.pvzmod.entities.projectile.ElectricPeaProjectile;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -37,10 +38,10 @@ public class ElectricPeaProjectileRenderer extends ThrownItemRenderer {
                     0.25F,
                     new Vector4f(0.1F, 0.6F, 1.0F, 0.7F),
                     1.0F
-            );
+    );
 
     public ElectricPeaProjectileRenderer(EntityRendererProvider.Context context) {
-        super(context, 1.0F, false);
+        super(context, 1.0F, true);
     }
 
     @Override
@@ -53,7 +54,7 @@ public class ElectricPeaProjectileRenderer extends ThrownItemRenderer {
 
     @Override
     public void render(Entity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int light) {
-        super.render(entity, entityYaw, partialTicks, poseStack, buffer, light);
+        super.render(entity, entityYaw, partialTicks, poseStack, buffer, LightTexture.FULL_BRIGHT);
 
         if (!(entity instanceof ElectricPeaProjectile pea)) {
             return;

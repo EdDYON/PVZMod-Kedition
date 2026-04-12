@@ -101,7 +101,7 @@ public class TrueRangedAttackGoal extends Goal {
         this.mob.faceTarget(this.target);
 
         double living = this.mob.distanceToSqr(this.target.getX(), this.target.getY(), this.target.getZ());
-        boolean hasSight = this.mob.getSensing().hasLineOfSight(this.target);
+        boolean hasSight = this.mob.hasAttackLineOfSight(this.target);
 
         if (hasSight) {
             ++this.seeTime;
@@ -133,7 +133,7 @@ public class TrueRangedAttackGoal extends Goal {
             }
         }
 
-        if (attackTime == 23 && this.mob instanceof FumeShroomEntity) {
+        if (attackTime == 25 && this.mob instanceof FumeShroomEntity) {
             this.mob.playSound(
                     PVZSounds.FUME_SHROOM_SHOOT.get(),
                     1.0F,

@@ -3,12 +3,14 @@ package keletu.pvzmod.entities.projectile;
 import keletu.pvzmod.entities.EntityPlantBase;
 import keletu.pvzmod.init.PVZDamageTypes;
 import keletu.pvzmod.init.PVZEntities;
+import keletu.pvzmod.init.PVZEffects;
 import keletu.pvzmod.init.PVZItems;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -36,6 +38,7 @@ public class ElectricPeaProjectile extends ThrowableItemProjectile {
     private float shockDamage = 1.0F;
     private EntityPlantBase shooter;
     private final Set<UUID> shockedEntities = new HashSet<>();
+    private static final int PARALYSIS_DURATION = 60;
 
     public ElectricPeaProjectile(EntityType<? extends ElectricPeaProjectile> type, Level level) {
         super(type, level);
@@ -73,6 +76,9 @@ public class ElectricPeaProjectile extends ThrowableItemProjectile {
         if (!this.level().isClientSide) {
             result.getEntity().hurt(PVZDamageTypes.causeElectricPeaProjectileDamage(this.level(), this, this.getOwner()), damage);
             result.getEntity().invulnerableTime = 0;
+            if (result.getEntity() instanceof LivingEntity living) {
+                living.addEffect(new MobEffectInstance(PVZEffects.STUN.get(), PARALYSIS_DURATION, 0));
+            }
 
             this.shockNearbyEntities();
         }
@@ -183,6 +189,7 @@ public class ElectricPeaProjectile extends ThrowableItemProjectile {
                     shockDamage
             );
             living.invulnerableTime = 0;
+            living.addEffect(new MobEffectInstance(PVZEffects.STUN.get(), PARALYSIS_DURATION, 0));
 
             shockedEntities.add(living.getUUID());
         }
