@@ -51,6 +51,10 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
         return new TrueRangedAttackGoal(this, 0.0F, this.range, 1, 0, 30);
     }
 
+    public boolean hasAttackLineOfSight(LivingEntity target) {
+        return this.getSensing().hasLineOfSight(target);
+    }
+
     @Override
     public void performRangedAttack(LivingEntity target, float distanceFactor) {
         if (!this.level().isClientSide) {

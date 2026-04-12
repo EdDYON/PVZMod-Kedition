@@ -34,13 +34,33 @@ public class ItemPlantCard extends Item {
         this.entityTypeSupplier = entityTypeSupplier;
     }
 
+    private EntityType<? extends EntityPlantShooterBase> getSuperGatlingFusionType() {
+        if (this == PVZItems.SNOWPEA_CARD.get()) {
+            return PVZEntities.SUPER_SNOW_GATLING_PEA.get();
+        }
+
+        if (this == PVZItems.PRIMAL_PEASHOOTER_CARD.get()) {
+            return PVZEntities.SUPER_PRIMAL_GATLING_PEA.get();
+        }
+
+        return null;
+    }
+
+    private static void applyPlantYaw(Entity entity, float yaw) {
+        entity.setYRot(yaw);
+        entity.setYBodyRot(yaw);
+        entity.setYHeadRot(yaw);
+    }
+
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
-        if (entity instanceof EntitySuperGatlingPea target && target.getType() == PVZEntities.SUPER_GATLING_PEA.get()) {
+        EntityType<? extends EntityPlantShooterBase> fusionType = getSuperGatlingFusionType();
+
+        if (entity instanceof EntitySuperGatlingPea target && fusionType != null) {
             if (entity.level().isClientSide) {
                 return InteractionResult.SUCCESS;
             } else {
-                if (this != PVZItems.SNOWPEA_CARD.get() && this != PVZItems.PRIMAL_PEASHOOTER_CARD.get()) {
+                if (target.getType() == fusionType) {
                     return InteractionResult.FAIL;
                 }
 
@@ -59,7 +79,7 @@ public class ItemPlantCard extends Item {
                             0.15D);
 
 
-                    EntityPlantShooterBase newOne = entityTypeSupplier.get().create(player.level()) instanceof EntitySnowPea ? PVZEntities.SUPER_SNOW_GATLING_PEA.get().create(player.level()) : PVZEntities.SUPER_PRIMAL_GATLING_PEA.get().create(player.level());
+                    EntityPlantShooterBase newOne = fusionType.create(player.level());
 
                     if (newOne == null)
                         return InteractionResult.FAIL;
@@ -67,12 +87,10 @@ public class ItemPlantCard extends Item {
                     double spawnX = target.getX();
                     double spawnY = target.getY();
                     double spawnZ = target.getZ();
-                    float yaw = (float) (Math.atan2(player.getZ() - spawnZ, player.getX() - spawnX) * (180F / Math.PI)) - 90.0F;
+                    float yaw = player.getYRot();
 
                     newOne.moveTo(spawnX, spawnY, spawnZ, yaw, 0.0F);
-                    newOne.setYRot(yaw);
-                    newOne.setYBodyRot(yaw);
-                    newOne.setYHeadRot(yaw);
+                    applyPlantYaw(newOne, yaw);
 
                     player.level().addFreshEntity(newOne);
 
@@ -146,12 +164,10 @@ public class ItemPlantCard extends Item {
                         spawnZ = clickedPos.getZ() + 0.5D;
                     }
 
-                    float yaw = (float) (Math.atan2(player.getZ() - spawnZ, player.getX() - spawnX) * (180F / Math.PI)) - 90.0F;
+                    float yaw = player.getYRot();
 
                     entity.moveTo(spawnX, spawnY, spawnZ, yaw, 0.0F);
-                    entity.setYRot(yaw);
-                    entity.setYBodyRot(yaw);
-                    entity.setYHeadRot(yaw);
+                    applyPlantYaw(entity, yaw);
 
                     level.addFreshEntity(entity);
 

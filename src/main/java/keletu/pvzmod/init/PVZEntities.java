@@ -54,7 +54,7 @@ public class PVZEntities {
                     .build("primal_pea_projectile"));
     public static final RegistryObject<EntityType<ElectricPeaProjectile>> ELECTRIC_PEA_PROJECTILE = PVZEntities.ENTITIES.register("electric_pea_projectile",
             () -> EntityType.Builder.<ElectricPeaProjectile>of(ElectricPeaProjectile::new, MobCategory.MISC)
-                    .sized(0.35F, 0.35F)
+                    .sized(0.25F, 0.25F)
                     .clientTrackingRange(4)
                     .updateInterval(10)
                     .build("electric_pea_projectile"));

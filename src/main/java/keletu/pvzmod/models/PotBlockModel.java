@@ -18,6 +18,6 @@ public class PotBlockModel extends GeoModel {
 
     @Override
     public ResourceLocation getAnimationResource(GeoAnimatable t) {
-        return null;
+        return new ResourceLocation(PVZMod.MODID, "animations/pot.animation.json");
     }
 }

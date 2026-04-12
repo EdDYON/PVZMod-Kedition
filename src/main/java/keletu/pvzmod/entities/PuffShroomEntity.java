@@ -15,7 +15,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -86,6 +89,18 @@ public class PuffShroomEntity extends EntityPlantShooterBase implements GeoEntit
     @Override
     public boolean canAttack(LivingEntity target) {
         return super.canAttack(target) && target.distanceTo(this) <= 8.0F;
+    }
+
+    @Override
+    public boolean hasAttackLineOfSight(LivingEntity target) {
+        if (super.hasAttackLineOfSight(target)) {
+            return true;
+        }
+
+        Vec3 from = new Vec3(this.getX(), this.getEyeY() - 0.6D, this.getZ());
+        Vec3 to = new Vec3(target.getX(), target.getY() + Math.min(target.getBbHeight() * 0.45D, 0.8D), target.getZ());
+        HitResult hitResult = this.level().clip(new ClipContext(from, to, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
+        return hitResult.getType() == HitResult.Type.MISS;
     }
 
     @Override

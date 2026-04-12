@@ -1,18 +1,30 @@
 package keletu.pvzmod.entities;
 
 import keletu.pvzmod.init.PVZItems;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.core.animation.RawAnimation;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class EntityWalnut extends EntityPlantBase {
 
+    private static final EntityDataAccessor<String> DATA_STUCK_ARROW_RECORDS = SynchedEntityData.defineId(EntityWalnut.class, EntityDataSerializers.STRING);
+    private static final int MAX_STUCK_ARROW_RECORDS = 12;
     public final AnimationState idleAnimation0 = new AnimationState();
     public final AnimationState idleAnimation1 = new AnimationState();
     public final AnimationState idleAnimation2 = new AnimationState();
@@ -23,6 +35,12 @@ public class EntityWalnut extends EntityPlantBase {
     public EntityWalnut(EntityType<? extends EntityPlantBase> type, Level par1World, float protectRadio) {
         super(type, par1World, new ItemStack(PVZItems.WALNUT_CARD.get(), 1));
         this.protectRadio = protectRadio;
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_STUCK_ARROW_RECORDS, "");
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -40,6 +58,8 @@ public class EntityWalnut extends EntityPlantBase {
 
         if (this.level().isClientSide()) {
             setupAnimationStates();
+        } else {
+            trimStuckArrowRecords();
         }
 
         if (this.level().isClientSide || this.tickCount % RETARGET_INTERVAL != 0) {
@@ -59,6 +79,27 @@ public class EntityWalnut extends EntityPlantBase {
                 mob.setTarget(this);
             }
         }
+    }
+
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
+        boolean hurt = super.hurt(source, amount);
+        if (hurt && !this.level().isClientSide && source.getDirectEntity() instanceof AbstractArrow arrow) {
+            recordStuckArrow(arrow);
+        }
+        return hurt;
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag pCompound) {
+        super.addAdditionalSaveData(pCompound);
+        pCompound.putString("StuckArrowRecords", this.entityData.get(DATA_STUCK_ARROW_RECORDS));
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag pCompound) {
+        super.readAdditionalSaveData(pCompound);
+        this.entityData.set(DATA_STUCK_ARROW_RECORDS, pCompound.getString("StuckArrowRecords"));
     }
 
     @Override
@@ -86,6 +127,144 @@ public class EntityWalnut extends EntityPlantBase {
             this.idleAnimation0.stop();
             this.idleAnimation1.stop();
             this.idleAnimation2.startIfStopped(this.tickCount);
+        }
+    }
+
+    public List<StuckArrowRecord> getStuckArrowRecords() {
+        String records = this.entityData.get(DATA_STUCK_ARROW_RECORDS);
+        if (records.isEmpty()) {
+            return List.of();
+        }
+
+        List<StuckArrowRecord> result = new ArrayList<>();
+        for (String record : records.split(";")) {
+            String[] parts = record.split(",");
+            if (parts.length != 6) {
+                continue;
+            }
+
+            try {
+                result.add(new StuckArrowRecord(
+                        Float.parseFloat(parts[0]),
+                        Float.parseFloat(parts[1]),
+                        Float.parseFloat(parts[2]),
+                        Float.parseFloat(parts[3]),
+                        Float.parseFloat(parts[4]),
+                        Float.parseFloat(parts[5])
+                ));
+            } catch (NumberFormatException ignored) {
+            }
+        }
+
+        return result;
+    }
+
+    protected float getStuckArrowModelHeight() {
+        return 20.0F;
+    }
+
+    protected float getStuckArrowModelHalfWidth() {
+        return 7.0F;
+    }
+
+    protected float getStuckArrowModelHalfDepth() {
+        return 6.0F;
+    }
+
+    private void recordStuckArrow(AbstractArrow arrow) {
+        List<StuckArrowRecord> records = new ArrayList<>(getStuckArrowRecords());
+        records.add(createStuckArrowRecord(arrow));
+
+        while (records.size() > MAX_STUCK_ARROW_RECORDS) {
+            records.remove(0);
+        }
+
+        setStuckArrowRecords(records);
+    }
+
+    private StuckArrowRecord createStuckArrowRecord(AbstractArrow arrow) {
+        Vec3 localHit = worldToLocal(arrow.position().subtract(this.position()));
+        Vec3 motion = arrow.getDeltaMovement();
+        Vec3 localMotion = motion.lengthSqr() > 1.0E-6D ? worldToLocalDirection(motion.normalize()) : localHit.normalize();
+
+        float x = (float) Mth.clamp(localHit.x / (this.getBbWidth() * 0.5D) * getStuckArrowModelHalfWidth(), -getStuckArrowModelHalfWidth(), getStuckArrowModelHalfWidth());
+        float y = (float) Mth.clamp(-(localHit.y / this.getBbHeight()) * getStuckArrowModelHeight(), -getStuckArrowModelHeight(), 0.0D);
+        float z = (float) Mth.clamp(localHit.z / (this.getBbWidth() * 0.5D) * getStuckArrowModelHalfDepth(), -getStuckArrowModelHalfDepth(), getStuckArrowModelHalfDepth());
+
+        return new StuckArrowRecord(
+                x,
+                y,
+                z,
+                (float) localMotion.x,
+                (float) -localMotion.y,
+                (float) localMotion.z
+        );
+    }
+
+    private Vec3 worldToLocal(Vec3 vector) {
+        return worldToLocalDirection(vector);
+    }
+
+    private Vec3 worldToLocalDirection(Vec3 vector) {
+        float yaw = (this.getYRot() - 180.0F) * Mth.DEG_TO_RAD;
+        double cos = Mth.cos(yaw);
+        double sin = Mth.sin(yaw);
+        double x = vector.x * cos - vector.z * sin;
+        double z = vector.x * sin + vector.z * cos;
+        return new Vec3(x, vector.y, z);
+    }
+
+    private void trimStuckArrowRecords() {
+        List<StuckArrowRecord> records = new ArrayList<>(getStuckArrowRecords());
+        int arrowCount = this.getArrowCount();
+        if (records.size() <= arrowCount) {
+            return;
+        }
+
+        while (records.size() > arrowCount) {
+            records.remove(0);
+        }
+
+        setStuckArrowRecords(records);
+    }
+
+    private void setStuckArrowRecords(List<StuckArrowRecord> records) {
+        StringBuilder builder = new StringBuilder();
+        for (StuckArrowRecord record : records) {
+            if (!builder.isEmpty()) {
+                builder.append(';');
+            }
+
+            builder.append(format(record.x)).append(',')
+                    .append(format(record.y)).append(',')
+                    .append(format(record.z)).append(',')
+                    .append(format(record.dirX)).append(',')
+                    .append(format(record.dirY)).append(',')
+                    .append(format(record.dirZ));
+        }
+
+        this.entityData.set(DATA_STUCK_ARROW_RECORDS, builder.toString());
+    }
+
+    private static String format(float value) {
+        return String.format(Locale.ROOT, "%.3f", value);
+    }
+
+    public static class StuckArrowRecord {
+        public final float x;
+        public final float y;
+        public final float z;
+        public final float dirX;
+        public final float dirY;
+        public final float dirZ;
+
+        public StuckArrowRecord(float x, float y, float z, float dirX, float dirY, float dirZ) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            this.dirX = dirX;
+            this.dirY = dirY;
+            this.dirZ = dirZ;
         }
     }
 }
