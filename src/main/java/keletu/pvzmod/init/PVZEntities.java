@@ -97,7 +97,7 @@ public class PVZEntities {
         event.registerEntityRenderer(REPEATER.get(), RepeaterRender::new);
         event.registerEntityRenderer(GATLING_PEA.get(), GatlingPeaRender::new);
 
-        event.registerEntityRenderer(PRIMAL_PEASHOOTER.get(), RenderPrimalPeashooter::new);
+        event.registerEntityRenderer(PRIMAL_PEASHOOTER.get(), PrimalPeashooterRender::new);
         event.registerEntityRenderer(PRIMAL_PEA_PROJECTILE.get(), RenderPrimalPea::new);
 
         event.registerEntityRenderer(SUPER_GATLING_PEA.get(), SGPShooterRender::new);

@@ -46,6 +46,7 @@ public class EntityRepeater extends EntityPlantShooterBase {
 
         this.setXRot(0.0F);
         this.xRotO = 0.0F;
+
         if (this.level().isClientSide()) {
             setupAnimationStates();
         }
