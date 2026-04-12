@@ -26,7 +26,7 @@ public class EntityRepeater extends EntityPlantShooterBase {
 
     @Override
     protected TrueRangedAttackGoal createRangedAttackGoal() {
-        return new TrueRangedAttackGoal(this, 0.0F, this.range, 2, 2, 20);
+        return new TrueRangedAttackGoal(this, 0.0F, this.range, 2, 2, 30, 25);
     }
 
     @Override

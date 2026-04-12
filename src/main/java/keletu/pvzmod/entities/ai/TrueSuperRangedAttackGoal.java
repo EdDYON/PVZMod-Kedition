@@ -12,8 +12,6 @@ public class TrueSuperRangedAttackGoal extends Goal {
     private LivingEntity target;
     private final double speedModifier;
     private int attackTime = -1;
-    private final int attackIntervalMin;
-    private final float attackIntervalMax;
     private final float attackRadius;
     private final float attackRadiusSqr;
     private int seeTime;
@@ -21,20 +19,22 @@ public class TrueSuperRangedAttackGoal extends Goal {
     private final int burstDelay;
     private int remainingShots;
     private int burstTimer;
+    private int cooldown;
+    private int cooldown_first;
 
-    public TrueSuperRangedAttackGoal(EntitySuperGatlingPea attacker, double speedModifier, int attackIntervalMin, float attackIntervalMax, float attackRadius) {
-        this(attacker, speedModifier, attackIntervalMin, attackIntervalMax, attackRadius, 1, 0);
+    public TrueSuperRangedAttackGoal(EntitySuperGatlingPea attacker, double speedModifier, float attackRadius) {
+        this(attacker, speedModifier, attackRadius, 1, 0, 30, 25);
     }
 
-    public TrueSuperRangedAttackGoal(EntitySuperGatlingPea attacker, double speedModifier, int attackIntervalMin, float attackIntervalMax, float attackRadius, int burstCount, int burstDelay) {
+    public TrueSuperRangedAttackGoal(EntitySuperGatlingPea attacker, double speedModifier, float attackRadius, int burstCount, int burstDelay, int cooldown, int cooldown_first) {
         if (attacker == null) {
             throw new IllegalArgumentException("ArrowAttackGoal requires Mob implements RangedAttackMob");
         }
 
+        this.cooldown = cooldown;
+        this.cooldown_first = cooldown_first;
         this.mob = attacker;
         this.speedModifier = speedModifier;
-        this.attackIntervalMin = attackIntervalMin;
-        this.attackIntervalMax = attackIntervalMax;
         this.attackRadius = attackRadius;
         this.attackRadiusSqr = attackRadius * attackRadius;
         this.burstCount = Math.max(1, burstCount);
@@ -110,9 +110,6 @@ public class TrueSuperRangedAttackGoal extends Goal {
 
         this.mob.getLookControl().setLookAt(this.target, 30.0F, 30.0F);
 
-        double distanceSqr = Math.sqrt(living);
-        int cooldown = Mth.floor(Mth.lerp(distanceSqr / this.attackRadius, this.attackIntervalMin, this.attackIntervalMax));
-
         if (this.remainingShots > 0) {
             --this.burstTimer;
             if (this.burstTimer <= 0) {
@@ -148,7 +145,7 @@ public class TrueSuperRangedAttackGoal extends Goal {
 
             this.attackTime = cooldown;
         } else if (this.attackTime < 0) {
-            this.attackTime = cooldown;
+            this.attackTime = cooldown_first;
         }
     }
 

@@ -48,7 +48,7 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
     }
 
     protected Goal createRangedAttackGoal() {
-        return new TrueRangedAttackGoal(this, 0.0F, this.range, 1, 0, 30);
+        return new TrueRangedAttackGoal(this, 0.0F, this.range, 1, 0, 30, 25);
     }
 
     public boolean hasAttackLineOfSight(LivingEntity target) {

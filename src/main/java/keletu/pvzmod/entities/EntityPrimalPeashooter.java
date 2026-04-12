@@ -26,7 +26,7 @@ public class EntityPrimalPeashooter extends EntityPlantShooterBase {
 
     @Override
     protected TrueRangedAttackGoal createRangedAttackGoal() {
-        return new TrueRangedAttackGoal(this, 0.0F, this.range, 1, 2, 50, 25);
+        return new TrueRangedAttackGoal(this, 0.0F, this.range, 1, 2, 55, 25);
     }
 
     @Override

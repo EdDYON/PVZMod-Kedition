@@ -32,7 +32,7 @@ public class EntityGatlingPea extends EntityPlantShooterBase {
 
     @Override
     protected TrueRangedAttackGoal createRangedAttackGoal() {
-        return new TrueRangedAttackGoal(this, 0.0F, this.range, 4, 1, 20);
+        return new TrueRangedAttackGoal(this, 0.0F, this.range, 4, 1, 20, 15);
     }
 
     @Override

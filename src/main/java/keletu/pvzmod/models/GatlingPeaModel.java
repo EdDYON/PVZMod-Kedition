@@ -67,7 +67,7 @@ public class GatlingPeaModel extends HierarchicalModel<EntityGatlingPea> {
 
         PartDefinition all = partdefinition.addOrReplaceChild("all", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, 1.5708F, 0.0F));
 
-        PartDefinition head = all.addOrReplaceChild("head", CubeListBuilder.create().texOffs(91, 0).mirror().addBox(-4.0F, -4.0F, -4.0F, 9.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)).mirror(false)
+        PartDefinition head = all.addOrReplaceChild("head", CubeListBuilder.create().texOffs(91, 0).addBox(-4.0F, -4.0F, -4.0F, 9.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
                 .texOffs(72, 17).addBox(0.0141F, 0.2667F, -4.0009F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(72, 17).addBox(0.0141F, 0.2667F, 4.0241F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0.0001F)), PartPose.offset(-1.0F, -14.0F, 0.0F));
 
@@ -99,20 +99,20 @@ public class GatlingPeaModel extends HierarchicalModel<EntityGatlingPea> {
 
         PartDefinition cube_r5 = hat.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(84, 67).addBox(-0.75F, -1.5F, -5.0F, 8.0F, 1.0F, 10.0F, new CubeDeformation(0.0F))
                 .texOffs(80, 8).addBox(2.4F, -5.75F, 1.5F, 3.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
-                .texOffs(29, 69).mirror().addBox(1.4F, -5.75F, -1.5F, 2.0F, 2.0F, 3.0F, new CubeDeformation(0.002F)).mirror(false)
+                .texOffs(29, 69).addBox(1.4F, -5.75F, -1.5F, 2.0F, 2.0F, 3.0F, new CubeDeformation(0.002F))
                 .texOffs(39, 86).addBox(3.4F, -3.25F, 2.65F, 2.0F, 1.0F, 2.0F, new CubeDeformation(-0.125F))
                 .texOffs(39, 89).addBox(3.4F, -3.25F, -4.775F, 2.0F, 1.0F, 2.0F, new CubeDeformation(-0.125F))
                 .texOffs(80, 8).addBox(4.5F, -3.25F, -2.5F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
                 .texOffs(80, 8).addBox(4.5F, -3.25F, 1.5F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
                 .texOffs(38, 80).addBox(4.5F, -4.25F, -2.5F, 1.0F, 1.0F, 5.0F, new CubeDeformation(0.001F))
-                .texOffs(0, 80).mirror().addBox(-3.25F, -3.5F, -5.0F, 5.0F, 2.0F, 10.0F, new CubeDeformation(-0.25F)).mirror(false)
+                .texOffs(0, 78).addBox(-3.375F, -3.5842F, -5.0F, 5.0F, 3.0F, 10.0F, new CubeDeformation(-0.25F))
                 .texOffs(58, 64).addBox(-7.75F, 0.5F, -5.5F, 2.0F, 3.0F, 11.0F, new CubeDeformation(0.0F))
                 .texOffs(51, 78).mirror().addBox(-5.75F, -1.5F, -5.5F, 5.0F, 5.0F, 11.0F, new CubeDeformation(0.0F)).mirror(false)
                 .texOffs(44, 94).addBox(-5.5F, -1.25F, 4.35F, 5.0F, 5.0F, 1.0F, new CubeDeformation(-0.25F))
                 .texOffs(50, 100).addBox(-5.75F, -1.5F, -5.5F, 5.0F, 5.0F, 1.0F, new CubeDeformation(-0.25F))
                 .texOffs(85, 36).addBox(-6.75F, -5.5F, -4.5F, 12.0F, 9.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.0873F));
 
-        PartDefinition cube_r6 = hat.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(0, 98).addBox(-2.25F, -6.875F, -5.0F, 3.0F, 3.0F, 10.0F, new CubeDeformation(-0.28F)), PartPose.offsetAndRotation(0.0F, 1.0F, 0.0F, 0.0F, 0.0F, -0.0873F));
+        PartDefinition cube_r6 = hat.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(0, 98).mirror().addBox(-2.25F, -6.875F, -5.0F, 3.0F, 5.0F, 10.0F, new CubeDeformation(-0.2501F)).mirror(false), PartPose.offsetAndRotation(0.0F, 1.0F, 0.0F, 0.0F, 0.0F, -0.0873F));
 
         PartDefinition cube_r7 = hat.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(80, 8).addBox(-1.0F, -1.0F, -0.5F, 2.25F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.6654F, -5.0888F, 2.6242F, 0.0F, 0.4363F, -0.0873F));
 
