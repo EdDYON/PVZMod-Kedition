@@ -6,10 +6,7 @@ import keletu.pvzmod.init.PVZItems;
 import keletu.pvzmod.init.PVZSounds;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -19,17 +16,11 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class PuffShroomEntity extends EntityPlantShooterBase implements GeoEntity {
+public class PuffShroomEntity extends EntityPlantShooterBase {
 
-    public static final RawAnimation STAND = RawAnimation.begin().thenLoop("stand");
-    public static final RawAnimation SHOOT = RawAnimation.begin().thenLoop("shoot");
+    public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState shootAnimationState = new AnimationState();
 
     public PuffShroomEntity(EntityType<? extends EntityPlantShooterBase> entityType, Level par1World) {
         super(entityType, par1World, new ItemStack(PVZItems.PUFF_SHROOM_CARD.get()));
@@ -52,7 +43,7 @@ public class PuffShroomEntity extends EntityPlantShooterBase implements GeoEntit
 
     @Override
     protected TrueRangedAttackGoal createRangedAttackGoal() {
-        return new TrueRangedAttackGoal(this, 0.0F, this.range, 1, 0, 30, 20);
+        return new TrueRangedAttackGoal(this, 0.0F, this.range, 1, 0, 30, 15);
     }
 
     @Override
@@ -109,17 +100,20 @@ public class PuffShroomEntity extends EntityPlantShooterBase implements GeoEntit
 
         this.setXRot(0.0F);
         this.xRotO = 0.0F;
+
+        if (this.level().isClientSide()) {
+            setupAnimationStates();
+        }
     }
 
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
+    public void setupAnimationStates() {
+        if (this.isShooting()) {
+            this.idleAnimationState.stop();
+            this.shootAnimationState.startIfStopped(this.tickCount);
+        } else {
+            this.shootAnimationState.stop();
+            this.idleAnimationState.startIfStopped(this.tickCount);
+        }
     }
 
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "Found/NotFound", 5, state -> state.setAndContinue(this.isShooting() ? SHOOT : STAND)));
-    }
 }

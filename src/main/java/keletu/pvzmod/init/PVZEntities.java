@@ -4,7 +4,6 @@ import keletu.pvzmod.PVZMod;
 import keletu.pvzmod.entities.*;
 import keletu.pvzmod.entities.projectile.*;
 import keletu.pvzmod.models.*;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -16,7 +15,6 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class PVZEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, PVZMod.MODID);
@@ -112,7 +110,7 @@ public class PVZEntities {
 
         event.registerEntityRenderer(POTATO_MINE.get(), PotatoMineRenderer::new);
 
-        event.registerEntityRenderer(PUFF_SHROOM.get(), ((EntityRendererProvider.Context context) -> new GeoEntityRenderer<>(context, new PuffShroomModel())));
+        event.registerEntityRenderer(PUFF_SHROOM.get(), PuffShroomRender::new);
         event.registerEntityRenderer(SPORE_PROJECTILE.get(), ThrownItemRenderer::new);
 
         event.registerEntityRenderer(FUME_SHROOM.get(), FumeShroomRenderer::new);

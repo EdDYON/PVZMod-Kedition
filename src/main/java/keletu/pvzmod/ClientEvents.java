@@ -64,7 +64,9 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerParticleFactories(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(PuffShroomModel.LAYER_LOCATION, PuffShroomModel::createBodyLayer);
         event.registerLayerDefinition(FumeShroomModelVanilla.LAYER_LOCATION, FumeShroomModelVanilla::createBodyLayer);
+
         event.registerLayerDefinition(PotatoMineModel.LAYER_LOCATION, PotatoMineModel::createBodyLayer);
 
         event.registerLayerDefinition(PeaShooterModel.LAYER_LOCATION, PeaShooterModel::createBodyLayer);
