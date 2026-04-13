@@ -73,7 +73,7 @@ public class ElectricPeashooterModel extends HierarchicalModel<ElectricPeashoote
 
         PartDefinition dian = head.addOrReplaceChild("dian", CubeListBuilder.create(), PartPose.offset(-3.6848F, -0.6572F, 0.0F));
 
-        PartDefinition cube_r1 = dian.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(69, 44).addBox(-1.9827F, -0.5F, -0.0951F, 0.7028F, 1.0F, 0.1851F, new CubeDeformation(0F))
+        PartDefinition cube_r1 = dian.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(69, 44).addBox(-1.9827F, -0.5F, -0.0951F, 0.7028F, 1.0F, 0.1851F, new CubeDeformation(-0.0001F))
                 .texOffs(53, 15).mirror().addBox(-2.5828F, -1.0F, -0.6F, 2.0F, 2.0F, 1.0F, new CubeDeformation(0.0F).extend(-1.8F, -1.9F, -0.89F)).mirror(false)
                 .texOffs(68, 41).mirror().addBox(-1.6799F, -0.5F, -0.0951F, 0.4F, 1.0F, 1.0F, new CubeDeformation(0F)).mirror(false), PartPose.offsetAndRotation(-2.4021F, -2.2878F, 0.0F, 1.5708F, 0.0F, -0.7854F));
 

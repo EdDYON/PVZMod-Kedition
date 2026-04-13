@@ -15,11 +15,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class EntitySuperGatlingPea extends EntityPlantShooterBase {
-    public static final int SUPER_RAPID_FIRE_DURATION = 100;
+    public static final int SUPER_RAPID_FIRE_DURATION = 40;
     public static final int SUPER_RAPID_FIRE_COOLDOWN = 300;
     public static final float SUPER_RAPID_FIRE_CHANCE = 0.02F;
     public final AnimationState idleAnimation = new AnimationState();
     public final AnimationState shootAnimation = new AnimationState();
+    public final AnimationState superAnimation = new AnimationState();
     private static final EntityDataAccessor<Integer> SUPER_TICK =
             SynchedEntityData.defineId(EntitySuperGatlingPea.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> SUPER_COOLDOWN =
@@ -32,6 +33,8 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase {
 
     @Override
     protected TrueSuperRangedAttackGoal createRangedAttackGoal() {
+        if (this.isSuperFiring())
+            return new TrueSuperRangedAttackGoal(this, 0.0D, 15.0F, 4, 2, 40, 10);
         return new TrueSuperRangedAttackGoal(this, 0.0D, 15.0F, 4, 2, 30, 25);
     }
 
@@ -172,11 +175,17 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase {
 
 
     public void setupAnimationStates() {
-        if (this.isShooting() || this.isSuperFiring()) {
+        if (this.isSuperFiring()) {
             this.idleAnimation.stop();
+            this.shootAnimation.stop();
+            this.superAnimation.startIfStopped(this.tickCount);
+        } else if (this.isShooting()) {
+            this.idleAnimation.stop();
+            this.superAnimation.stop();
             this.shootAnimation.startIfStopped(this.tickCount);
         } else {
             this.shootAnimation.stop();
+            this.superAnimation.stop();
             this.idleAnimation.startIfStopped(this.tickCount);
         }
     }
