@@ -31,9 +31,9 @@
 	function getAxisInflate(cube) {
 		const base = num(cube.inflate, 0);
 		return {
-			x: typeof cube.inflate_x === 'number' ? cube.inflate_x : base,
-			y: typeof cube.inflate_y === 'number' ? cube.inflate_y : base,
-			z: typeof cube.inflate_z === 'number' ? cube.inflate_z : base,
+			x: base + num(cube.inflate_x, 0),
+			y: base + num(cube.inflate_y, 0),
+			z: base + num(cube.inflate_z, 0),
 		};
 	}
 

@@ -32,6 +32,7 @@ public class PVZEntities {
     public static final RegistryObject<EntityType<EntityPotatoMine>> POTATO_MINE = PVZEntities.ENTITIES.register("potato_mine", () -> EntityType.Builder.of(EntityPotatoMine::new, MobCategory.MISC).sized(1.0F, 0.5F).clientTrackingRange(8).build(PVZMod.MODID + ".potato_mine"));
     public static final RegistryObject<EntityType<PuffShroomEntity>> PUFF_SHROOM = PVZEntities.ENTITIES.register("puff_shroom", () -> EntityType.Builder.of(PuffShroomEntity::new, MobCategory.MISC).sized(1.0F, 0.75F).clientTrackingRange(8).build(PVZMod.MODID + ".puff_shroom"));
     public static final RegistryObject<EntityType<FumeShroomEntity>> FUME_SHROOM = PVZEntities.ENTITIES.register("fume_shroom", () -> EntityType.Builder.of(FumeShroomEntity::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".fume_shroom"));
+    public static final RegistryObject<EntityType<ElectricPeashooterEntity>> ELECTRIC_PEASHOOTER = PVZEntities.ENTITIES.register("electric_peashooter", () -> EntityType.Builder.of(ElectricPeashooterEntity::new, MobCategory.MISC).sized(1.0F, 1.2f).clientTrackingRange(8).build(PVZMod.MODID + ".electric_peashooter"));
     public static final RegistryObject<EntityType<PeaProjectile>> PEA_PROJECTILE = PVZEntities.ENTITIES.register("pea_projectile",
             () -> EntityType.Builder.<PeaProjectile>of(PeaProjectile::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F)
@@ -69,6 +70,7 @@ public class PVZEntities {
         event.put(REPEATER.get(), EntityRepeater.createAttributes().build());
         event.put(GATLING_PEA.get(), EntityGatlingPea.createAttributes().build());
         event.put(PRIMAL_PEASHOOTER.get(), EntityPrimalPeashooter.createAttributes().build());
+        event.put(ELECTRIC_PEASHOOTER.get(), ElectricPeashooterEntity.createAttributes().build());
 
         event.put(WALNUT.get(), EntityWalnut.createAttributes().build());
         event.put(TALL_NUT.get(), EntityTallnut.createAttributes().build());
@@ -103,6 +105,7 @@ public class PVZEntities {
         event.registerEntityRenderer(SUPER_PRIMAL_GATLING_PEA.get(), SGPShooterRender::new);
         event.registerEntityRenderer(SUPER_ELECTRIC_GATLING_PEA.get(), SGPShooterRender::new);
 
+        event.registerEntityRenderer(ELECTRIC_PEASHOOTER.get(), ElectricPeashooterRender::new);
         event.registerEntityRenderer(ELECTRIC_PEA_PROJECTILE.get(), ElectricPeaProjectileRenderer::new);
 
         event.registerEntityRenderer(WALNUT.get(), WalnutRender::new);

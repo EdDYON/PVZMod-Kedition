@@ -72,7 +72,7 @@ public class SnowPeaModel extends HierarchicalModel<EntitySnowPea> {
 
         PartDefinition cube_r4 = group.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(45, 30).addBox(-1.0607F, -0.3536F, -1.05F, 1.4142F, 1.4142F, 2.0F, new CubeDeformation(0.0F).extend(0F, 0F, 0.001F)), PartPose.offsetAndRotation(-0.1047F, 3.5872F, 3.2491F, -0.0117F, 0.2615F, -0.0452F));
 
-        PartDefinition cube_r5 = group.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(45, 38).addBox(-1.0607F, -0.3536F, -1.05F, 1.4142F, 1.4142F, 2.0F, new CubeDeformation(0.0F).extend(0F, 0F, 0.001F)), PartPose.offsetAndRotation(-0.1047F, 3.5872F, -1.2509F, 0.0138F, -0.3051F, -0.0457F));
+        PartDefinition cube_r5 = group.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(45, 38).addBox(-1.0607F, -0.3536F, -1.05F, 1.4142F, 1.4142F, 2.0F, new CubeDeformation(0.0F).extend(0.001F, 0.001F, 0.002F)), PartPose.offsetAndRotation(-0.1047F, 3.5872F, -1.2509F, 0.0138F, -0.3051F, -0.0457F));
 
         PartDefinition cube_r6 = group.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(45, 34).addBox(-0.5F, -1.0F, -1.05F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-0.1047F, 3.5872F, -1.2509F, 0.2284F, -0.2046F, -0.8526F));
 
@@ -92,7 +92,7 @@ public class SnowPeaModel extends HierarchicalModel<EntitySnowPea> {
 
         PartDefinition cube_r14 = group.addOrReplaceChild("cube_r14", CubeListBuilder.create().texOffs(45, 42).addBox(-1.9732F, -1.8634F, -1.579F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(0.06F, 0.06F, 0.001F)), PartPose.offsetAndRotation(-2.6758F, -2.5532F, -0.0215F, 0.0692F, -0.2527F, -0.2706F));
 
-        PartDefinition cube_r15 = group.addOrReplaceChild("cube_r15", CubeListBuilder.create().texOffs(45, 47).addBox(-1.9732F, -1.8634F, -0.4204F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(0.06F, 0.06F, 0.001F)), PartPose.offsetAndRotation(-2.6762F, -2.5532F, 2.0182F, -0.0692F, 0.2527F, -0.2706F));
+        PartDefinition cube_r15 = group.addOrReplaceChild("cube_r15", CubeListBuilder.create().texOffs(46, 47).addBox(-1.9732F, -1.8634F, -0.4204F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(0.06F, 0.06F, 0.001F)), PartPose.offsetAndRotation(-2.6762F, -2.5532F, 2.0182F, -0.0692F, 0.2527F, -0.2706F));
 
         PartDefinition cube_r16 = group.addOrReplaceChild("cube_r16", CubeListBuilder.create().texOffs(34, 16).addBox(-1.3845F, -1.4224F, -0.4204F, 5.0F, 3.0F, 2.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-2.6049F, -2.5095F, 1.9991F, 0.1332F, 0.2261F, 0.5387F));
 
@@ -103,11 +103,11 @@ public class SnowPeaModel extends HierarchicalModel<EntitySnowPea> {
 
         PartDefinition mouth = head.addOrReplaceChild("mouth", CubeListBuilder.create().texOffs(0, 28).mirror().addBox(-2.6167F, -2.0F, -2.0F, 2.0F, 4.0F, 4.0F, new CubeDeformation(0F)).mirror(false), PartPose.offset(7.6167F, 0.0F, 0.0F));
 
-        PartDefinition mouth1 = mouth.addOrReplaceChild("mouth1", CubeListBuilder.create().texOffs(0, 16).addBox(-0.325F, -3.0F, -3.0F, 2.0F, 6.0F, 6.0F, new CubeDeformation(0F))
+        PartDefinition mouth1 = mouth.addOrReplaceChild("mouth1", CubeListBuilder.create().texOffs(0, 16).addBox(-0.325F, -3.0F, -3.0F, 2.0F, 6.0F, 6.0F, new CubeDeformation(0.1F))
                 .texOffs(16, 10).addBox(1.325F, -3.0F, -3.0F, 0.0F, 6.0F, 6.0F, new CubeDeformation(0F)), PartPose.offset(-0.1917F, 0.0F, 0.0F));
 
-        PartDefinition face = head.addOrReplaceChild("face", CubeListBuilder.create().texOffs(35, 23).addBox(-1.5F, -1.5F, 2.0F, 3.0F, 3.0F, 2.0F, new CubeDeformation(0F))
-                .texOffs(35, 28).addBox(-1.5F, -1.5F, -4.0F, 3.0F, 3.0F, 2.0F, new CubeDeformation(0F)), PartPose.offset(3.5F, 1.5F, 0.0F));
+        PartDefinition face = head.addOrReplaceChild("face", CubeListBuilder.create().texOffs(35, 23).addBox(-1.5F, -1.5F, 2.0F, 3.0F, 3.0F, 2.0F, new CubeDeformation(-0.001F))
+                .texOffs(35, 28).addBox(-1.5F, -1.5F, -4.0F, 3.0F, 3.0F, 2.0F, new CubeDeformation(-0.001F)), PartPose.offset(3.5F, 1.5F, 0.0F));
 
         PartDefinition jin = all.addOrReplaceChild("jin", CubeListBuilder.create(), PartPose.offset(-0.2455F, -0.8291F, -0.0501F));
 
@@ -115,9 +115,9 @@ public class SnowPeaModel extends HierarchicalModel<EntitySnowPea> {
 
         PartDefinition jin1 = jin.addOrReplaceChild("jin1", CubeListBuilder.create().texOffs(0, 37).addBox(-2.0045F, -8.6709F, -0.9499F, 2.0F, 3.0F, 2.0F, new CubeDeformation(0F)), PartPose.offset(0.25F, 0.5F, 0.0F));
 
-        PartDefinition cube_r17 = jin1.addOrReplaceChild("cube_r17", CubeListBuilder.create().texOffs(0, 42).addBox(-1.4371F, 2.3655F, -0.9499F, 2.0F, 6.0F, 2.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-1.0F, -8.25F, 0.0F, 0.0F, 0.0F, -0.1745F));
+        PartDefinition cube_r17 = jin1.addOrReplaceChild("cube_r17", CubeListBuilder.create().texOffs(0, 42).addBox(-1.4371F, 2.3655F, -0.9499F, 2.0F, 6.0F, 2.0F, new CubeDeformation(0.001F)), PartPose.offsetAndRotation(-1.0F, -8.25F, 0.0F, 0.0F, 0.0F, -0.1745F));
 
-        PartDefinition bone2 = jin1.addOrReplaceChild("bone2", CubeListBuilder.create().texOffs(35, 33).addBox(-0.9331F, -0.3885F, -0.9901F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0F)), PartPose.offset(-1.0714F, -7.2824F, 0.0402F));
+        PartDefinition bone2 = jin1.addOrReplaceChild("bone2", CubeListBuilder.create().texOffs(35, 33).addBox(-0.9331F, -0.3885F, -0.9901F, 2.0F, 2.0F, 2.0F, new CubeDeformation(-0.001F)), PartPose.offset(-1.0714F, -7.2824F, 0.0402F));
 
         PartDefinition leave5 = all.addOrReplaceChild("leave5", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.2943F, -0.0783F, 0.4009F, 0.0F, 0.7854F, 0.0F));
 

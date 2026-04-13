@@ -1,23 +1,25 @@
 package keletu.pvzmod.entities;
 
-import keletu.pvzmod.entities.projectile.PeaProjectile;
+import keletu.pvzmod.entities.ai.TrueRangedAttackGoal;
+import keletu.pvzmod.entities.projectile.ElectricPeaProjectile;
 import keletu.pvzmod.init.PVZItems;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class EntityPeaShooter extends EntityPlantShooterBase {
+public class ElectricPeashooterEntity extends EntityPlantShooterBase {
 
     public final AnimationState idleAnimation = new AnimationState();
     public final AnimationState shootAnimation = new AnimationState();
 
-    public EntityPeaShooter(EntityType<? extends EntityPlantShooterBase> entityType, Level par1World) {
-        super(entityType, par1World, new ItemStack(PVZItems.ELECTRIC_PEASHOOTER_CARD.get()));
+    public ElectricPeashooterEntity(EntityType<? extends EntityPlantShooterBase> entityType, Level par1World) {
+        super(entityType, par1World, new ItemStack(PVZItems.PEASHOOTER_CARD.get()));
     }
 
     // protected Item getDropItem() {
@@ -31,8 +33,13 @@ public class EntityPeaShooter extends EntityPlantShooterBase {
 
     @Override
     public ThrowableProjectile entitySelect(Level world) {
-        PeaProjectile ent = new PeaProjectile(world, this, 3);
+        ElectricPeaProjectile ent = new ElectricPeaProjectile(world, this, 3);
         return ent;
+    }
+
+    @Override
+    protected Goal createRangedAttackGoal() {
+        return new TrueRangedAttackGoal(this, 0.0F, this.range, 1, 0, 45, 20);
     }
 
     @Override
