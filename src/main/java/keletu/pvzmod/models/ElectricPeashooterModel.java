@@ -81,20 +81,20 @@ public class ElectricPeashooterModel extends HierarchicalModel<ElectricPeashoote
                 .texOffs(53, 8).mirror().addBox(0.5338F, -1.0001F, -0.2352F, 4.0F, 2.0F, 1.0F, new CubeDeformation(0.0F).extend(-4.015F, -1.9F, -0.856F)).mirror(false), PartPose.offsetAndRotation(-2.8264F, -1.8636F, 0.0F, 1.5708F, 0.0F, 0.9599F));
 
         PartDefinition cube_r3 = dian.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(77, 16).addBox(0.0951F, -0.5F, -0.0299F, 4.0F, 1.0F, 2.0F, new CubeDeformation(0.0F).extend(0.0001F, 0.0001F, -0.2499F))
-                .texOffs(52, 0).addBox(0.5451F, -1.0001F, -0.0299F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(-4.05F, -1.9F, -2.15F)), PartPose.offsetAndRotation(-2.8264F, -1.8636F, 0.0F, 1.5708F, 0.0F, 0.7854F));
+                .texOffs(52, 0).addBox(0.5451F, -1.0001F, -0.0299F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(-4.0498F, -1.8998F, -2.1498F)), PartPose.offsetAndRotation(-2.8264F, -1.8636F, 0.0F, 1.5708F, 0.0F, 0.7854F));
 
-        PartDefinition cube_outline_r1 = dian.addOrReplaceChild("cube_outline_r1", CubeListBuilder.create().texOffs(53, 11).addBox(-0.7799F, -1.0001F, -0.5951F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(-1.69F, -1.89F, -1.89F))
+        PartDefinition cube_outline_r1 = dian.addOrReplaceChild("cube_outline_r1", CubeListBuilder.create().texOffs(53, 11).addBox(-0.7799F, -1.0001F, -0.5951F, 2.0F, 2.0F, 2.0F, new CubeDeformation(-1.8999F))
                 .texOffs(68, 37).addBox(-0.1799F, -0.5F, -0.0951F, 1.9F, 1.0F, 1.0F, new CubeDeformation(0F))
                 .texOffs(68, 41).addBox(-0.6799F, -0.5F, 0.9049F, 0.5F, 1.0F, 1.4F, new CubeDeformation(0F))
                 .texOffs(68, 42).addBox(-0.8799F, -0.5F, -0.0951F, 0.7F, 1.0F, 1.0F, new CubeDeformation(0F))
                 .texOffs(66, 36).addBox(-0.1799F, -0.5F, 0.9049F, 0.5F, 1.0F, 3.0F, new CubeDeformation(0.0001F))
                 .texOffs(53, 4).addBox(0.4201F, -1.0001F, -0.5951F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(-1.7F, -1.9F, -1.9F)), PartPose.offsetAndRotation(-2.8264F, -1.8636F, 0.0F, 1.5708F, 0.0F, -0.7854F));
 
-        PartDefinition cube_outline_r2 = dian.addOrReplaceChild("cube_outline_r2", CubeListBuilder.create().texOffs(33, 34).addBox(-10.2742F, -1.0F, 7.6705F, 1.0F, 2.0F, 4.0F, new CubeDeformation(0.0F).extend(-1.0756F, -1.89F, -4.1F)), PartPose.offsetAndRotation(8.3882F, 1.1146F, 0.0F, 1.5708F, 0.0F, -0.48F));
+        PartDefinition cube_outline_r2 = dian.addOrReplaceChild("cube_outline_r2", CubeListBuilder.create().texOffs(33, 34).addBox(-10.2742F, -1.0F, 7.6705F, 1.0F, 2.0F, 4.0F, new CubeDeformation(0.0F).extend(-1.0756F, -1.89F, -4.1F)), PartPose.offsetAndRotation(8.384F, 1.1281F, -0.01F, 1.5708F, 0.0F, -0.48F));
 
-        PartDefinition cube_r4 = dian.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(66, 40).mirror().addBox(-1.918F, -0.5F, -0.5103F, 0.5F, 1.0F, 4.0F, new CubeDeformation(0F)).mirror(false), PartPose.offsetAndRotation(-2.4021F, -2.2878F, 0.0F, 1.5708F, 0.0F, -0.48F));
+        PartDefinition cube_r4 = dian.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(66, 40).mirror().addBox(-1.918F, -0.5F, -0.5103F, 0.5F, 1.0F, 4.0F, new CubeDeformation(0.001F)).mirror(false), PartPose.offsetAndRotation(-2.4021F, -2.2878F, 0.0F, 1.5708F, 0.0F, -0.48F));
 
-        PartDefinition cube_outline_r3 = dian.addOrReplaceChild("cube_outline_r3", CubeListBuilder.create().texOffs(35, 40).addBox(-0.4124F, -1.0019F, 1.3201F, 1.0F, 2.0F, 3.0F, new CubeDeformation(0.0F).extend(-1.118F, -1.9F, -3.0053F)), PartPose.offsetAndRotation(-2.8094F, -1.8617F, -0.01F, 1.5708F, 0.0F, -0.7854F));
+        PartDefinition cube_outline_r3 = dian.addOrReplaceChild("cube_outline_r3", CubeListBuilder.create().texOffs(35, 40).addBox(-0.4124F, -1.0019F, 1.3201F, 1.0F, 2.0F, 3.0F, new CubeDeformation(0.0F).extend(-1.118F, -1.9F, -3.0053F)), PartPose.offsetAndRotation(-2.7935F, -1.8635F, -0.0081F, 1.5708F, 0.0F, -0.7854F));
 
         PartDefinition mouth = head.addOrReplaceChild("mouth", CubeListBuilder.create().texOffs(38, 34).addBox(-2.5667F, -2.5F, -2.5F, 2.0F, 5.0F, 5.0F, new CubeDeformation(0.0F).extend(-1.65F, -4.8F, -4.8F))
                 .texOffs(77, 22).addBox(-2.6167F, -2.0F, -2.0F, 2.0F, 4.0F, 4.0F, new CubeDeformation(0F)), PartPose.offset(7.6167F, 0.0F, 0.0F));
