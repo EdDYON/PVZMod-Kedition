@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class PrimalPeashooterModel extends HierarchicalModel<EntityPrimalPeashooter> {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(PVZMod.MODID, "textures/entity/plant/primal_peashooter_new.png"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(PVZMod.MODID, "textures/entity/plant/primal_peashooter.png"), "main");
 
     private final ModelPart root;
     private final ModelPart all;
@@ -70,7 +70,7 @@ public class PrimalPeashooterModel extends HierarchicalModel<EntityPrimalPeashoo
 
         PartDefinition head = all.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.offset(-1.0F, -14.0F, 0.0F));
 
-        PartDefinition cube_r1 = head.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(67, 63).mirror().addBox(0.0F, -1.5F, -3.0F, 0.0F, 3.0F, 6.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-4.6F, 3.275F, 0.0F, 0.0F, 0.0F, 0.4363F));
+        PartDefinition cube_r1 = head.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(61, 63).mirror().addBox(0.0F, -1.5F, -3.0F, 0.0F, 3.0F, 6.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-4.6F, 3.275F, 0.0F, 0.0F, 0.0F, 0.4363F));
 
         PartDefinition group = head.addOrReplaceChild("group", CubeListBuilder.create().texOffs(67, 0).addBox(-3.4861F, 0.6816F, -4.0F, 9.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.5139F, -4.6816F, 0.0F));
 
@@ -79,11 +79,11 @@ public class PrimalPeashooterModel extends HierarchicalModel<EntityPrimalPeashoo
         PartDefinition cube_r3 = group.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(67, 40).mirror().addBox(-3.5F, -2.5F, -4.0F, 7.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)).mirror(false)
                 .texOffs(67, 28).addBox(-3.5F, -2.0F, -6.4F, 7.0F, 4.0F, 8.0F, new CubeDeformation(0.3F)), PartPose.offsetAndRotation(1.9499F, 0.1496F, 2.4F, 0.0F, 0.0F, -0.1745F));
 
-        PartDefinition cube_r4 = group.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(67, 23).addBox(-1.5F, -2.0F, 0.0F, 3.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.9154F, 6.2816F, 4.2595F, 0.0F, 0.1745F, -0.3491F));
+        PartDefinition cube_r4 = group.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(73, 23).addBox(-1.5F, -2.0F, 0.0F, 3.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.9154F, 6.2816F, 4.2595F, 0.0F, 0.1745F, -0.3491F));
 
         PartDefinition cube_r5 = group.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(67, 23).addBox(-1.5F, -2.5F, 0.0F, 3.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.6512F, 6.7816F, -4.256F, 0.0F, -0.1745F, -0.3491F));
 
-        PartDefinition cube_r6 = group.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(67, 19).addBox(-1.5F, -2.0F, 0.0F, 3.0F, 4.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.9604F, 5.1816F, 4.3416F, 0.0F, 0.2618F, -0.1745F));
+        PartDefinition cube_r6 = group.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(73, 19).addBox(-1.5F, -2.0F, 0.0F, 3.0F, 4.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.9604F, 5.1816F, 4.3416F, 0.0F, 0.2618F, -0.1745F));
 
         PartDefinition cube_r7 = group.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(67, 19).addBox(-1.5F, -2.0F, 0.0F, 3.0F, 4.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.9604F, 5.1816F, -4.3416F, 0.0F, -0.2618F, -0.1745F));
 
@@ -126,7 +126,7 @@ public class PrimalPeashooterModel extends HierarchicalModel<EntityPrimalPeashoo
         PartDefinition mouth1 = mouth.addOrReplaceChild("mouth1", CubeListBuilder.create().texOffs(0, 24).mirror().addBox(-0.325F, -3.0F, -3.0F, 2.0F, 6.0F, 6.0F, new CubeDeformation(0.1F)).mirror(false)
                 .texOffs(13, -6).addBox(1.325F, -3.0F, -3.0F, 0.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.1917F, 0.0F, 0.0F));
 
-        PartDefinition cube_r17 = mouth1.addOrReplaceChild("cube_r17", CubeListBuilder.create().texOffs(-1, 36).addBox(-1.0F, 0.0F, -2.5F, 2.0F, 0.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.575F, 3.4F, 0.0F, 0.0F, 0.0F, 0.3054F));
+        PartDefinition cube_r17 = mouth1.addOrReplaceChild("cube_r17", CubeListBuilder.create().texOffs(-3, 36).addBox(-1.0F, 0.0F, -2.5F, 2.0F, 0.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.575F, 3.4F, 0.0F, 0.0F, 0.0F, 0.3054F));
 
         PartDefinition cube_r18 = mouth1.addOrReplaceChild("cube_r18", CubeListBuilder.create().texOffs(-5, 36).addBox(-1.0F, 0.0F, -2.5F, 2.0F, 0.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.475F, -3.35F, 0.0F, 0.0F, 0.0F, -0.3054F));
 
