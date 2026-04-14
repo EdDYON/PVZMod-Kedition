@@ -349,7 +349,7 @@
 
 		const first = cubes[0];
 		const inf = getAxisInflate(first);
-		const base = num(cube.inflate, 0);
+		const base = num(first.inflate, 0);
 
 		new Dialog({
 			id: 'kodded_entity_inflate_xyz',
