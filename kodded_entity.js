@@ -349,14 +349,15 @@
 
 		const first = cubes[0];
 		const inf = getAxisInflate(first);
+		const base = num(cube.inflate, 0);
 
 		new Dialog({
 			id: 'kodded_entity_inflate_xyz',
 			title: 'Edit XYZ Inflate',
 			form: {
-				inflate_x: { label: 'Inflate X', type: 'number', value: inf.x, step: 0.1 },
-				inflate_y: { label: 'Inflate Y', type: 'number', value: inf.y, step: 0.1 },
-				inflate_z: { label: 'Inflate Z', type: 'number', value: inf.z, step: 0.1 },
+				inflate_x: { label: 'Inflate X', type: 'number', value: inf.x - base, step: 0.1 },
+				inflate_y: { label: 'Inflate Y', type: 'number', value: inf.y - base, step: 0.1 },
+				inflate_z: { label: 'Inflate Z', type: 'number', value: inf.z - base, step: 0.1 },
 				sync_base: { label: 'Also set cube.inflate', type: 'checkbox', value: false }
 			},
 			onConfirm(result) {

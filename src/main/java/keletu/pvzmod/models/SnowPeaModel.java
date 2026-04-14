@@ -64,7 +64,7 @@ public class SnowPeaModel extends HierarchicalModel<EntitySnowPea> {
 
         PartDefinition group = head.addOrReplaceChild("group", CubeListBuilder.create(), PartPose.offset(-4.0F, 0.0F, -1.0F));
 
-        PartDefinition cube_r1 = group.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(45, 47).addBox(-1.5858F, -1.5858F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(-0.293F, -0.293F, 0.0001F)), PartPose.offsetAndRotation(-2.2159F, 3.702F, 0.9991F, 0.0F, 0.0F, 0.3927F));
+        PartDefinition cube_r1 = group.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(57, 41).addBox(-0.5F, -0.5F, -1.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F).extend(0.2081F, 0.2081F, 0.001F)), PartPose.offsetAndRotation(-2.5328F, 2.9368F, 0.9991F, 0.0F, 0.0F, 0.3927F));
 
         PartDefinition cube_r2 = group.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(34, 16).addBox(-3.0F, -1.5F, -1.0F, 5.0F, 2.0F, 2.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(0.4301F, 2.2507F, 0.9991F, 0.0F, 0.0F, -0.3927F));
 
@@ -74,25 +74,25 @@ public class SnowPeaModel extends HierarchicalModel<EntitySnowPea> {
 
         PartDefinition cube_r5 = group.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(45, 38).addBox(-1.0607F, -0.3536F, -1.05F, 1.4142F, 1.4142F, 2.0F, new CubeDeformation(0.0F).extend(0.001F, 0.001F, 0.002F)), PartPose.offsetAndRotation(-0.1047F, 3.5872F, -1.2509F, 0.0138F, -0.3051F, -0.0457F));
 
-        PartDefinition cube_r6 = group.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(45, 34).addBox(-0.5F, -1.0F, -1.05F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-0.1047F, 3.5872F, -1.2509F, 0.2284F, -0.2046F, -0.8526F));
+        PartDefinition cube_r6 = group.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(53, 34).addBox(-0.5F, -1.0F, -1.05F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-0.1047F, 3.5872F, -1.2509F, 0.2284F, -0.2046F, -0.8526F));
 
         PartDefinition cube_r7 = group.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(54, 15).addBox(-1.2374F, -1.2374F, -0.5F, 1.4142F, 1.4142F, 1.0F, new CubeDeformation(0.0F).extend(0F, 0F, 0.001F)), PartPose.offsetAndRotation(-0.9787F, -3.5614F, 0.9991F, 0.0F, 0.0F, 0.2618F));
 
         PartDefinition cube_r8 = group.addOrReplaceChild("cube_r8", CubeListBuilder.create().texOffs(45, 27).addBox(-0.75F, -1.0F, -0.5F, 3.0F, 2.0F, 1.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-0.9787F, -3.5614F, 0.9991F, 0.0F, 0.0F, 1.0472F));
 
-        PartDefinition cube_r9 = group.addOrReplaceChild("cube_r9", CubeListBuilder.create().texOffs(45, 47).addBox(-1.8232F, -1.8232F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(0.06F, 0.06F, 0.001F)), PartPose.offsetAndRotation(-2.8651F, 0.5013F, 4.0278F, -0.2978F, 0.1848F, -1.0314F));
+        PartDefinition cube_r9 = group.addOrReplaceChild("cube_r9", CubeListBuilder.create().texOffs(56, 45).addBox(-1.8232F, -1.8232F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(0.06F, 0.06F, 0.001F)), PartPose.offsetAndRotation(-2.8651F, 0.5013F, 4.0278F, -0.2978F, 0.1848F, -1.0314F));
 
         PartDefinition cube_r10 = group.addOrReplaceChild("cube_r10", CubeListBuilder.create().texOffs(34, 16).addBox(-1.25F, -1.5F, -1.0F, 5.0F, 3.0F, 2.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-2.7862F, 0.4837F, 3.9991F, -0.0786F, 0.3405F, -0.2317F));
 
         PartDefinition cube_r11 = group.addOrReplaceChild("cube_r11", CubeListBuilder.create().texOffs(45, 42).addBox(-1.8232F, -1.8232F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(0.06F, 0.06F, 0.001F)), PartPose.offsetAndRotation(-2.8638F, 0.5013F, -2.033F, 0.3361F, -0.2071F, -1.0388F));
 
-        PartDefinition cube_r12 = group.addOrReplaceChild("cube_r12", CubeListBuilder.create().texOffs(34, 16).addBox(-1.25F, -1.5F, -1.0F, 5.0F, 3.0F, 2.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-2.7862F, 0.4837F, -2.0009F, 0.0894F, -0.3829F, -0.2355F));
+        PartDefinition cube_r12 = group.addOrReplaceChild("cube_r12", CubeListBuilder.create().texOffs(42, 59).addBox(-1.25F, -1.5F, -1.0F, 5.0F, 3.0F, 2.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-2.7862F, 0.4837F, -2.0009F, 0.0894F, -0.3829F, -0.2355F));
 
-        PartDefinition cube_r13 = group.addOrReplaceChild("cube_r13", CubeListBuilder.create().texOffs(34, 16).addBox(-1.3845F, -1.4224F, -1.58F, 5.0F, 3.0F, 2.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-2.6049F, -2.5095F, -0.0009F, -0.1332F, -0.2261F, 0.5387F));
+        PartDefinition cube_r13 = group.addOrReplaceChild("cube_r13", CubeListBuilder.create().texOffs(42, 53).addBox(-1.3845F, -1.4224F, -1.58F, 5.0F, 3.0F, 2.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-2.6049F, -2.5095F, -0.0009F, -0.1332F, -0.2261F, 0.5387F));
 
         PartDefinition cube_r14 = group.addOrReplaceChild("cube_r14", CubeListBuilder.create().texOffs(45, 42).addBox(-1.9732F, -1.8634F, -1.579F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(0.06F, 0.06F, 0.001F)), PartPose.offsetAndRotation(-2.6758F, -2.5532F, -0.0215F, 0.0692F, -0.2527F, -0.2706F));
 
-        PartDefinition cube_r15 = group.addOrReplaceChild("cube_r15", CubeListBuilder.create().texOffs(46, 47).addBox(-1.9732F, -1.8634F, -0.4204F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(0.06F, 0.06F, 0.001F)), PartPose.offsetAndRotation(-2.6762F, -2.5532F, 2.0182F, -0.0692F, 0.2527F, -0.2706F));
+        PartDefinition cube_r15 = group.addOrReplaceChild("cube_r15", CubeListBuilder.create().texOffs(45, 47).addBox(-1.9732F, -1.8634F, -0.4204F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(0.06F, 0.06F, 0.001F)), PartPose.offsetAndRotation(-2.6762F, -2.5532F, 2.0182F, -0.0692F, 0.2527F, -0.2706F));
 
         PartDefinition cube_r16 = group.addOrReplaceChild("cube_r16", CubeListBuilder.create().texOffs(34, 16).addBox(-1.3845F, -1.4224F, -0.4204F, 5.0F, 3.0F, 2.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-2.6049F, -2.5095F, 1.9991F, 0.1332F, 0.2261F, 0.5387F));
 

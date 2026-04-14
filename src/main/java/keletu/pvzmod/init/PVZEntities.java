@@ -101,7 +101,7 @@ public class PVZEntities {
         event.registerEntityRenderer(PRIMAL_PEA_PROJECTILE.get(), RenderPrimalPea::new);
 
         event.registerEntityRenderer(SUPER_GATLING_PEA.get(), SGPShooterRender::new);
-        event.registerEntityRenderer(SUPER_SNOW_GATLING_PEA.get(), SGPShooterRender::new);
+        event.registerEntityRenderer(SUPER_SNOW_GATLING_PEA.get(), SuperSnowGatlingPeaRender::new);
         event.registerEntityRenderer(SUPER_PRIMAL_GATLING_PEA.get(), SGPShooterRender::new);
         event.registerEntityRenderer(SUPER_ELECTRIC_GATLING_PEA.get(), SGPShooterRender::new);
 

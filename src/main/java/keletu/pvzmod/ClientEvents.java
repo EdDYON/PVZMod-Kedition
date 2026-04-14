@@ -76,8 +76,8 @@ public class ClientEvents {
         event.registerLayerDefinition(PrimalPeashooterModel.LAYER_LOCATION, PrimalPeashooterModel::createBodyLayer);
         event.registerLayerDefinition(ElectricPeashooterModel.LAYER_LOCATION, ElectricPeashooterModel::createBodyLayer);
 
-
         event.registerLayerDefinition(SuperGatlingPeaModel.LAYER_LOCATION, SuperGatlingPeaModel::createBodyLayer);
+        event.registerLayerDefinition(SnowySuperGatlingPeaModel.LAYER_LOCATION, SnowySuperGatlingPeaModel::createBodyLayer);
 
         event.registerLayerDefinition(TallNutModel0.LAYER_LOCATION, TallNutModel0::createBodyLayer);
         event.registerLayerDefinition(TallNutModel1.LAYER_LOCATION, TallNutModel1::createBodyLayer);
