@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class PuffShroomRender<T extends PuffShroomEntity> extends MobRenderer<PuffShroomEntity, PuffShroomModel> {
     public PuffShroomRender(EntityRendererProvider.Context pContext) {
-        super(pContext, new PuffShroomModel(pContext.bakeLayer(PuffShroomModel.LAYER_LOCATION)), 0.0F);
+        super(pContext, new PuffShroomModel(pContext.bakeLayer(PuffShroomModel.LAYER_LOCATION)), 0.5F);
     }
 
     @Override

@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class PeaShooterRender<T extends EntityPeaShooter> extends MobRenderer<EntityPeaShooter, PeaShooterModel> {
     public PeaShooterRender(EntityRendererProvider.Context pContext) {
-        super(pContext, new PeaShooterModel(pContext.bakeLayer(PeaShooterModel.LAYER_LOCATION)), 0.0F);
+        super(pContext, new PeaShooterModel(pContext.bakeLayer(PeaShooterModel.LAYER_LOCATION)), 0.5F);
     }
 
     @Override

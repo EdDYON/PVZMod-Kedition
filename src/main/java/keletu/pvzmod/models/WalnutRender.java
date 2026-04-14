@@ -16,7 +16,7 @@ public class WalnutRender extends MobRenderer<EntityWalnut, HierarchicalModel<En
     private final WalnutModel2 modelCritical;
 
     public WalnutRender(EntityRendererProvider.Context pContext) {
-        super(pContext, new WalnutModel0(pContext.bakeLayer(WalnutModel0.LAYER_LOCATION)), 0.0F);
+        super(pContext, new WalnutModel0(pContext.bakeLayer(WalnutModel0.LAYER_LOCATION)), 0.5F);
 
         this.modelHealthy = new WalnutModel0(pContext.bakeLayer(WalnutModel0.LAYER_LOCATION));
         this.modelDamaged = new WalnutModel1(pContext.bakeLayer(WalnutModel1.LAYER_LOCATION));

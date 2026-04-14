@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class GatlingPeaRender<T extends EntityGatlingPea> extends MobRenderer<EntityGatlingPea, GatlingPeaModel> {
     public GatlingPeaRender(EntityRendererProvider.Context pContext) {
-        super(pContext, new GatlingPeaModel(pContext.bakeLayer(GatlingPeaModel.LAYER_LOCATION)), 0.0F);
+        super(pContext, new GatlingPeaModel(pContext.bakeLayer(GatlingPeaModel.LAYER_LOCATION)), 0.5F);
     }
 
     @Override

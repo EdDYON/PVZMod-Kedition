@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class RepeaterRender<T extends EntityRepeater> extends MobRenderer<EntityRepeater, RepeaterModel> {
     public RepeaterRender(EntityRendererProvider.Context pContext) {
-        super(pContext, new RepeaterModel(pContext.bakeLayer(RepeaterModel.LAYER_LOCATION)), 0.0F);
+        super(pContext, new RepeaterModel(pContext.bakeLayer(RepeaterModel.LAYER_LOCATION)), 0.5F);
     }
 
     @Override

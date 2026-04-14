@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class PotatoMineRenderer<T extends EntityPotatoMine> extends MobRenderer<EntityPotatoMine, PotatoMineModel> {
     public PotatoMineRenderer(EntityRendererProvider.Context pContext) {
-        super(pContext, new PotatoMineModel(pContext.bakeLayer(PotatoMineModel.LAYER_LOCATION)), 0.0F);
+        super(pContext, new PotatoMineModel(pContext.bakeLayer(PotatoMineModel.LAYER_LOCATION)), 0.5F);
     }
 
     @Override

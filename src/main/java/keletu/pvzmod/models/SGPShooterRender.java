@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class SGPShooterRender<T extends EntitySuperGatlingPea> extends MobRenderer<EntitySuperGatlingPea, SuperGatlingPeaModel> {
     public SGPShooterRender(EntityRendererProvider.Context pContext) {
-        super(pContext, new SuperGatlingPeaModel(pContext.bakeLayer(SuperGatlingPeaModel.LAYER_LOCATION)), 0.0F);
+        super(pContext, new SuperGatlingPeaModel(pContext.bakeLayer(SuperGatlingPeaModel.LAYER_LOCATION)), 0.5F);
     }
 
     @Override

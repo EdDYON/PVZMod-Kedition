@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class PrimalPeashooterRender<T extends EntityPrimalPeashooter> extends MobRenderer<EntityPrimalPeashooter, PrimalPeashooterModel> {
     public PrimalPeashooterRender(EntityRendererProvider.Context pContext) {
-        super(pContext, new PrimalPeashooterModel(pContext.bakeLayer(PrimalPeashooterModel.LAYER_LOCATION)), 0.0F);
+        super(pContext, new PrimalPeashooterModel(pContext.bakeLayer(PrimalPeashooterModel.LAYER_LOCATION)), 0.5F);
     }
 
     @Override

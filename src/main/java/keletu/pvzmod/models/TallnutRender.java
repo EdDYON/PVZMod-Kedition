@@ -16,7 +16,7 @@ public class TallnutRender extends MobRenderer<EntityTallnut, HierarchicalModel<
     private final TallNutModel2 modelCritical;
 
     public TallnutRender(EntityRendererProvider.Context pContext) {
-        super(pContext, new TallNutModel0(pContext.bakeLayer(TallNutModel0.LAYER_LOCATION)), 0.0F);
+        super(pContext, new TallNutModel0(pContext.bakeLayer(TallNutModel0.LAYER_LOCATION)), 0.5F);
 
         this.modelHealthy = new TallNutModel0(pContext.bakeLayer(TallNutModel0.LAYER_LOCATION));
         this.modelDamaged = new TallNutModel1(pContext.bakeLayer(TallNutModel1.LAYER_LOCATION));

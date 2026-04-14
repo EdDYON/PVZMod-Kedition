@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class SnowPeaRender<T extends EntitySnowPea> extends MobRenderer<EntitySnowPea, SnowPeaModel> {
     public SnowPeaRender(EntityRendererProvider.Context pContext) {
-        super(pContext, new SnowPeaModel(pContext.bakeLayer(SnowPeaModel.LAYER_LOCATION)), 0.0F);
+        super(pContext, new SnowPeaModel(pContext.bakeLayer(SnowPeaModel.LAYER_LOCATION)), 0.5F);
     }
 
     @Override

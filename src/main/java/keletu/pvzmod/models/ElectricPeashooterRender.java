@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ElectricPeashooterRender<T extends ElectricPeashooterEntity> extends MobRenderer<ElectricPeashooterEntity, ElectricPeashooterModel> {
     public ElectricPeashooterRender(EntityRendererProvider.Context pContext) {
-        super(pContext, new ElectricPeashooterModel(pContext.bakeLayer(ElectricPeashooterModel.LAYER_LOCATION)), 0.0F);
+        super(pContext, new ElectricPeashooterModel(pContext.bakeLayer(ElectricPeashooterModel.LAYER_LOCATION)), 0.5F);
         this.addLayer(new ElectricPeashooterLayer(this));
     }
 

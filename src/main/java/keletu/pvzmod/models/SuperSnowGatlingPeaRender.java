@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class SuperSnowGatlingPeaRender<T extends EntitySuperSnowGatlingPea> extends MobRenderer<EntitySuperSnowGatlingPea, SnowySuperGatlingPeaModel> {
     public SuperSnowGatlingPeaRender(EntityRendererProvider.Context pContext) {
-        super(pContext, new SnowySuperGatlingPeaModel(pContext.bakeLayer(SnowySuperGatlingPeaModel.LAYER_LOCATION)), 0.0F);
+        super(pContext, new SnowySuperGatlingPeaModel(pContext.bakeLayer(SnowySuperGatlingPeaModel.LAYER_LOCATION)), 0.5F);
     }
 
     @Override
