@@ -88,7 +88,7 @@ public class PrimalSuperGatlingPeaModel extends HierarchicalModel<EntitySuperPri
                 .texOffs(26, 67).addBox(0.0141F, 0.2667F, -4.0009F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0F))
                 .texOffs(26, 67).addBox(0.0141F, 0.2667F, 4.0241F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0F))
                 .texOffs(26, 67).addBox(0.0141F, 1.4167F, 4.0241F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0F))
-                .texOffs(0, 18).mirror().addBox(-4.0F, -4.0F, -4.0F, 9.0F, 8.0F, 8.0F, new CubeDeformation(0F)).mirror(false), PartPose.offset(-1.0F, -14.0F, 0.0F));
+                .texOffs(0, 18).addBox(-4.0F, -4.0F, -4.0F, 9.0F, 8.0F, 8.0F, new CubeDeformation(0F)), PartPose.offset(-1.0F, -14.0F, 0.0F));
 
         PartDefinition cube_r1 = head.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(10, 116).addBox(0.0F, -1.5F, -3.0F, 0.0F, 3.0F, 6.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-4.6F, 3.275F, 0.0F, 0.0F, 0.0F, 0.4363F));
 
@@ -171,7 +171,7 @@ public class PrimalSuperGatlingPeaModel extends HierarchicalModel<EntitySuperPri
                 .texOffs(85, 75).addBox(-7.7824F, 3.6226F, -5.5919F, 5.0F, 1.0F, 12.0F, new CubeDeformation(0.0F).extend(0.125F, 0.1F, -0.15F)), PartPose.offsetAndRotation(-0.0583F, -3.0754F, -0.409F, 0.0F, 0.0F, -0.1745F));
 
         PartDefinition cube_r24 = hat.addOrReplaceChild("cube_r24", CubeListBuilder.create().texOffs(90, 101).addBox(-3.8959F, -1.0759F, -3.6828F, 6.0F, 1.0F, 12.0F, new CubeDeformation(0.0F).extend(-0.0628F, 0.1222F, -0.16F))
-                .texOffs(35, 33).addBox(-3.9129F, -1.0944F, -3.1828F, 6.0F, 1.0F, 11.0F, new CubeDeformation(0.0F).extend(-0.0758F, 0.0093F, 0F)), PartPose.offsetAndRotation(-0.1025F, 1.851F, -1.9091F, 0.0F, 0.0F, -0.829F));
+                .texOffs(35, 33).addBox(-3.9129F, -1.0944F, -3.1828F, 6.0F, 1.0F, 11.0F, new CubeDeformation(0.0F).extend(-0.0759F, 0.0094F, 0F)), PartPose.offsetAndRotation(-0.1025F, 1.851F, -1.9091F, 0.0F, 0.0F, -0.829F));
 
         PartDefinition cube_r25 = hat.addOrReplaceChild("cube_r25", CubeListBuilder.create().texOffs(74, 30).addBox(-2.9503F, 1.8971F, -2.9328F, 3.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(-0.25F, 0F, -0.25F))
                 .texOffs(38, 74).addBox(-2.9503F, 5.9471F, -0.6828F, 3.0F, 2.0F, 6.0F, new CubeDeformation(-0.25F))
