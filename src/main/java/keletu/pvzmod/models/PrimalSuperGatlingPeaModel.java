@@ -465,19 +465,19 @@ public class PrimalSuperGatlingPeaModel extends HierarchicalModel<EntitySuperPri
 
         PartDefinition bone2 = jin1.addOrReplaceChild("bone2", CubeListBuilder.create(), PartPose.offset(-0.5443F, 0.015F, -0.0934F));
 
-        PartDefinition cube_r131 = bone2.addOrReplaceChild("cube_r131", CubeListBuilder.create().texOffs(69, 70).addBox(-1.872F, 4.6993F, -1.4499F, 3.0F, 3.0F, 3.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(-0.7602F, -6.7572F, 0.041F, 0.0F, 0.0F, -0.1745F));
+        PartDefinition cube_r131 = bone2.addOrReplaceChild("cube_r131", CubeListBuilder.create().texOffs(41, 82).addBox(-1.872F, 4.6993F, -1.4499F, 3.0F, 3.0F, 3.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(-0.7602F, -6.7572F, 0.041F, 0.0F, 0.0F, -0.1745F));
 
         PartDefinition bone3 = jin1.addOrReplaceChild("bone3", CubeListBuilder.create(), PartPose.offset(-0.5443F, 0.015F, -0.0934F));
 
-        PartDefinition cube_r132 = bone3.addOrReplaceChild("cube_r132", CubeListBuilder.create().texOffs(69, 70).addBox(-1.872F, 4.6993F, -1.4499F, 3.0F, 3.0F, 3.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(-0.7602F, -6.7572F, 0.041F, 0.0F, 0.0F, -0.1745F));
+        PartDefinition cube_r132 = bone3.addOrReplaceChild("cube_r132", CubeListBuilder.create().texOffs(41, 82).addBox(-1.872F, 4.6993F, -1.4499F, 3.0F, 3.0F, 3.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(-0.7602F, -6.7572F, 0.041F, 0.0F, 0.0F, -0.1745F));
 
         PartDefinition bone4 = jin1.addOrReplaceChild("bone4", CubeListBuilder.create(), PartPose.offset(-0.5443F, 0.015F, -0.0934F));
 
-        PartDefinition cube_r133 = bone4.addOrReplaceChild("cube_r133", CubeListBuilder.create().texOffs(69, 70).addBox(-1.872F, 4.6993F, -1.4499F, 3.0F, 3.0F, 3.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(-0.7602F, -6.7572F, 0.041F, 0.0F, 0.0F, -0.1745F));
+        PartDefinition cube_r133 = bone4.addOrReplaceChild("cube_r133", CubeListBuilder.create().texOffs(41, 82).addBox(-1.872F, 4.6993F, -1.4499F, 3.0F, 3.0F, 3.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(-0.7602F, -6.7572F, 0.041F, 0.0F, 0.0F, -0.1745F));
 
         PartDefinition bone5 = jin1.addOrReplaceChild("bone5", CubeListBuilder.create(), PartPose.offset(-0.5443F, 0.015F, -0.0934F));
 
-        PartDefinition cube_r134 = bone5.addOrReplaceChild("cube_r134", CubeListBuilder.create().texOffs(69, 70).addBox(-1.872F, 4.6993F, -1.4499F, 3.0F, 3.0F, 3.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(-0.7602F, -6.7572F, 0.041F, 0.0F, 0.0F, -0.1745F));
+        PartDefinition cube_r134 = bone5.addOrReplaceChild("cube_r134", CubeListBuilder.create().texOffs(76, 67).addBox(-1.872F, 4.6993F, -1.4499F, 3.0F, 3.0F, 3.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(-0.7602F, -6.7572F, 0.041F, 0.0F, 0.0F, -0.1745F));
 
         PartDefinition bone = jin.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(90, 114).addBox(-3.5F, -1.5F, -3.0F, 6.0F, 2.0F, 6.0F, new CubeDeformation(0F)), PartPose.offset(-0.2545F, -8.1709F, 0.0501F));
 
