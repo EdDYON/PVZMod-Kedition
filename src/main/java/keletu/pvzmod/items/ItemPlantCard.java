@@ -43,6 +43,10 @@ public class ItemPlantCard extends Item {
             return PVZEntities.SUPER_PRIMAL_GATLING_PEA.get();
         }
 
+        if (this == PVZItems.ELECTRIC_PEASHOOTER_CARD.get()) {
+            return PVZEntities.SUPER_ELECTRIC_GATLING_PEA.get();
+        }
+
         return null;
     }
 

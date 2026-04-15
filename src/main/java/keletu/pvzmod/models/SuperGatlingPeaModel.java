@@ -82,19 +82,19 @@ public class SuperGatlingPeaModel extends HierarchicalModel<EntitySuperGatlingPe
 
         PartDefinition all = partdefinition.addOrReplaceChild("all", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, 1.5708F, 0.0F));
 
-        PartDefinition head = all.addOrReplaceChild("head", CubeListBuilder.create().texOffs(26, 67).addBox(0.0141F, 1.4167F, 4.0241F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0F))
+        PartDefinition head = all.addOrReplaceChild("head", CubeListBuilder.create().texOffs(26, 72).addBox(0.0141F, 1.4167F, 4.0241F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0F))
                 .texOffs(0, 18).addBox(-4.0F, -4.0F, -4.0F, 9.0F, 8.0F, 8.0F, new CubeDeformation(0F))
                 .texOffs(26, 67).addBox(0.0141F, 0.2667F, -4.0009F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0F))
                 .texOffs(26, 67).addBox(0.0141F, 1.4167F, -4.0009F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0F))
-                .texOffs(26, 69).addBox(0.0141F, 0.2667F, 4.0241F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0F)), PartPose.offset(-1.0F, -14.0F, 0.0F));
+                .texOffs(26, 72).addBox(0.0141F, 0.2667F, 4.0241F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0F)), PartPose.offset(-1.0F, -14.0F, 0.0F));
 
         PartDefinition face = head.addOrReplaceChild("face", CubeListBuilder.create().texOffs(24, 46).mirror().addBox(-1.5F, -1.5F, 2.0F, 3.0F, 3.0F, 2.0F, new CubeDeformation(-0.001F)).mirror(false)
                 .texOffs(98, 0).mirror().addBox(-1.5F, -1.5F, -4.0F, 3.0F, 3.0F, 2.0F, new CubeDeformation(-0.001F)).mirror(false), PartPose.offset(3.5F, 1.5F, 0.0F));
 
         PartDefinition eye = head.addOrReplaceChild("eye", CubeListBuilder.create().texOffs(26, 67).addBox(-1.75F, -1.25F, -4.0438F, 3.0F, 3.0F, 0.0F, new CubeDeformation(0F))
                 .texOffs(34, 33).addBox(-0.25F, -0.75F, -4.0688F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0F))
-                .texOffs(34, 33).addBox(-0.25F, -0.75F, 4.0812F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0F))
-                .texOffs(26, 67).addBox(-1.75F, -1.25F, 4.0313F, 3.0F, 3.0F, 0.0F, new CubeDeformation(0F)), PartPose.offset(1.75F, -1.75F, -0.0063F));
+                .texOffs(34, 34).addBox(-0.25F, -0.75F, 4.0812F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0F))
+                .texOffs(26, 73).addBox(-1.75F, -1.25F, 4.0313F, 3.0F, 3.0F, 0.0F, new CubeDeformation(0F)), PartPose.offset(1.75F, -1.75F, -0.0063F));
 
         PartDefinition ye = head.addOrReplaceChild("ye", CubeListBuilder.create().texOffs(86, 30).addBox(-8.9064F, -1.6715F, -0.0079F, 9.0F, 8.0F, 0.0F, new CubeDeformation(0F))
                 .texOffs(94, 49).addBox(-7.9064F, 3.8285F, -1.5079F, 3.0F, 0.0F, 3.0F, new CubeDeformation(0F))
@@ -441,7 +441,7 @@ public class SuperGatlingPeaModel extends HierarchicalModel<EntitySuperGatlingPe
 
         PartDefinition cube_r117 = bone5.addOrReplaceChild("cube_r117", CubeListBuilder.create().texOffs(66, 12).mirror().addBox(-1.4371F, 4.3655F, -0.9499F, 2.0F, 2.0F, 2.0F, new CubeDeformation(-0.001F)).mirror(false), PartPose.offsetAndRotation(-0.4557F, -5.3673F, 0.042F, 0.0F, 0.0F, -0.1745F));
 
-        PartDefinition bone = jin.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(4, 60).mirror().addBox(-2.5F, -1.5F, -2.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0F)).mirror(false), PartPose.offset(-0.2545F, -8.1709F, 0.0501F));
+        PartDefinition bone = jin.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(15, 77).mirror().addBox(-2.5F, -1.5F, -2.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0F)).mirror(false), PartPose.offset(-0.2545F, -8.1709F, 0.0501F));
 
         PartDefinition leave5 = all.addOrReplaceChild("leave5", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.2943F, -0.0783F, 0.4009F, 0.0F, 0.7854F, 0.0F));
 

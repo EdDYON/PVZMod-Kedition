@@ -2,8 +2,8 @@ package keletu.pvzmod.entities.projectile;
 
 import keletu.pvzmod.entities.EntityPlantBase;
 import keletu.pvzmod.init.PVZDamageTypes;
-import keletu.pvzmod.init.PVZEntities;
 import keletu.pvzmod.init.PVZEffects;
+import keletu.pvzmod.init.PVZEntities;
 import keletu.pvzmod.init.PVZItems;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -38,7 +38,7 @@ public class ElectricPeaProjectile extends ThrowableItemProjectile {
     private float shockDamage = 1.0F;
     private EntityPlantBase shooter;
     private final Set<UUID> shockedEntities = new HashSet<>();
-    private static final int PARALYSIS_DURATION = 60;
+    private static final int PARALYSIS_DURATION = 20;
 
     public ElectricPeaProjectile(EntityType<? extends ElectricPeaProjectile> type, Level level) {
         super(type, level);
@@ -189,7 +189,9 @@ public class ElectricPeaProjectile extends ThrowableItemProjectile {
                     shockDamage
             );
             living.invulnerableTime = 0;
-            living.addEffect(new MobEffectInstance(PVZEffects.STUN.get(), PARALYSIS_DURATION, 0));
+            if (this.random.nextInt(10) < 2) {
+                living.addEffect(new MobEffectInstance(PVZEffects.STUN.get(), PARALYSIS_DURATION, 0));
+            }
 
             shockedEntities.add(living.getUUID());
         }
