@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import keletu.pvzmod.PVZMod;
 import keletu.pvzmod.entities.EntitySuperPrimalGatlingPea;
+import keletu.pvzmod.models.anim.PSGPModelAnimation;
 import keletu.pvzmod.models.anim.SGPAnimation;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -86,8 +87,8 @@ public class PrimalSuperGatlingPeaModel extends HierarchicalModel<EntitySuperPri
 
         PartDefinition head = all.addOrReplaceChild("head", CubeListBuilder.create().texOffs(26, 67).addBox(0.0141F, 1.4167F, -4.0009F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0F))
                 .texOffs(26, 67).addBox(0.0141F, 0.2667F, -4.0009F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0F))
-                .texOffs(26, 67).addBox(0.0141F, 0.2667F, 4.0241F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0F))
-                .texOffs(26, 67).addBox(0.0141F, 1.4167F, 4.0241F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0F))
+                .texOffs(36, 56).addBox(0.0141F, 0.2667F, 4.0241F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0F))
+                .texOffs(36, 56).addBox(0.0141F, 1.4167F, 4.0241F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0F))
                 .texOffs(0, 18).addBox(-4.0F, -4.0F, -4.0F, 9.0F, 8.0F, 8.0F, new CubeDeformation(0F)), PartPose.offset(-1.0F, -14.0F, 0.0F));
 
         PartDefinition cube_r1 = head.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(10, 116).addBox(0.0F, -1.5F, -3.0F, 0.0F, 3.0F, 6.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-4.6F, 3.275F, 0.0F, 0.0F, 0.0F, 0.4363F));
@@ -102,15 +103,15 @@ public class PrimalSuperGatlingPeaModel extends HierarchicalModel<EntitySuperPri
 
         PartDefinition cube_r6 = head.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(0, 117).addBox(-2.5F, -1.5F, 0.0F, 5.0F, 3.0F, 0.0F, new CubeDeformation(0.0001F)), PartPose.offsetAndRotation(0.5F, 4.3599F, 4.233F, 0.1745F, 0.0F, 0.0F));
 
-        PartDefinition cube_r7 = head.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(0, 117).addBox(-2.5F, -1.5F, 0.0F, 5.0F, 3.0F, 0.0F, new CubeDeformation(0.0001F)), PartPose.offsetAndRotation(0.5F, 4.3595F, -4.2339F, -0.1745F, 0.0F, 0.0F));
+        PartDefinition cube_r7 = head.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(6, 114).addBox(-2.5F, -1.5F, 0.0F, 5.0F, 3.0F, 0.0F, new CubeDeformation(0.0001F)), PartPose.offsetAndRotation(0.5F, 4.3595F, -4.2339F, -0.1745F, 0.0F, 0.0F));
 
         PartDefinition face = head.addOrReplaceChild("face", CubeListBuilder.create().texOffs(24, 46).addBox(-1.5F, -1.5F, 2.0F, 3.0F, 3.0F, 2.0F, new CubeDeformation(-0.001F))
                 .texOffs(98, 0).addBox(-1.5F, -1.5F, -4.0F, 3.0F, 3.0F, 2.0F, new CubeDeformation(-0.001F)), PartPose.offset(3.5F, 1.5F, 0.0F));
 
         PartDefinition eye = head.addOrReplaceChild("eye", CubeListBuilder.create().texOffs(26, 67).addBox(-1.75F, -1.25F, -4.0438F, 3.0F, 3.0F, 0.0F, new CubeDeformation(0F))
                 .texOffs(34, 33).addBox(-0.75F, -0.75F, -4.0688F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0F))
-                .texOffs(34, 33).addBox(-0.75F, -0.75F, 4.0812F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0F))
-                .texOffs(26, 67).addBox(-1.75F, -1.25F, 4.0313F, 3.0F, 3.0F, 0.0F, new CubeDeformation(0F)), PartPose.offset(1.75F, -1.75F, -0.0063F));
+                .texOffs(34, 34).addBox(-0.75F, -0.75F, 4.0812F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0F))
+                .texOffs(36, 57).addBox(-1.75F, -1.25F, 4.0313F, 3.0F, 3.0F, 0.0F, new CubeDeformation(0F)), PartPose.offset(1.75F, -1.75F, -0.0063F));
 
         PartDefinition bone6 = head.addOrReplaceChild("bone6", CubeListBuilder.create(), PartPose.offset(1.436F, -4.5319F, 0.0F));
 
@@ -154,12 +155,12 @@ public class PrimalSuperGatlingPeaModel extends HierarchicalModel<EntitySuperPri
 
         PartDefinition cube_r20 = qiang.addOrReplaceChild("cube_r20", CubeListBuilder.create().texOffs(9, 101).addBox(-2.0F, -1.0F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(0F, -0.25F, -0.25F)), PartPose.offsetAndRotation(0.0F, 0.0F, -1.3536F, -1.5708F, 0.1309F, 0.0F));
 
-        PartDefinition cube_r21 = qiang.addOrReplaceChild("cube_r21", CubeListBuilder.create().texOffs(9, 101).addBox(-2.0F, -1.0F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(0F, -0.25F, -0.25F)), PartPose.offsetAndRotation(0.0F, 0.0F, 1.3536F, -1.5708F, -0.1309F, 0.0F));
+        PartDefinition cube_r21 = qiang.addOrReplaceChild("cube_r21", CubeListBuilder.create().texOffs(9, 105).addBox(-2.0F, -1.0F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F).extend(0F, -0.25F, -0.25F)), PartPose.offsetAndRotation(0.0F, 0.0F, 1.3536F, -1.5708F, -0.1309F, 0.0F));
 
         PartDefinition mouth1 = mouth.addOrReplaceChild("mouth1", CubeListBuilder.create().texOffs(0, 53).addBox(-0.325F, -3.0F, -3.0F, 2.0F, 6.0F, 6.0F, new CubeDeformation(0.1F))
                 .texOffs(58, 45).mirror().addBox(1.325F, -3.0F, -3.0F, 0.0F, 6.0F, 6.0F, new CubeDeformation(0.0001F)).mirror(false), PartPose.offset(-0.1917F, 0.0F, 0.0F));
 
-        PartDefinition cube_r22 = mouth1.addOrReplaceChild("cube_r22", CubeListBuilder.create().texOffs(-1, 112).addBox(-1.0F, 0.0F, -2.5F, 2.0F, 0.0F, 5.0F, new CubeDeformation(0.0001F)), PartPose.offsetAndRotation(1.575F, 3.4F, 0.0F, 0.0F, 0.0F, 0.3054F));
+        PartDefinition cube_r22 = mouth1.addOrReplaceChild("cube_r22", CubeListBuilder.create().texOffs(-3, 112).addBox(-1.0F, 0.0F, -2.5F, 2.0F, 0.0F, 5.0F, new CubeDeformation(0.0001F)), PartPose.offsetAndRotation(1.575F, 3.4F, 0.0F, 0.0F, 0.0F, 0.3054F));
 
         PartDefinition cube_r23 = mouth1.addOrReplaceChild("cube_r23", CubeListBuilder.create().texOffs(-5, 112).addBox(-1.0F, 0.0F, -2.5F, 2.0F, 0.0F, 5.0F, new CubeDeformation(0.0001F)), PartPose.offsetAndRotation(1.475F, -3.35F, 0.0F, 0.0F, 0.0F, -0.3054F));
 
@@ -477,7 +478,7 @@ public class PrimalSuperGatlingPeaModel extends HierarchicalModel<EntitySuperPri
 
         PartDefinition bone5 = jin1.addOrReplaceChild("bone5", CubeListBuilder.create(), PartPose.offset(-0.5443F, 0.015F, -0.0934F));
 
-        PartDefinition cube_r134 = bone5.addOrReplaceChild("cube_r134", CubeListBuilder.create().texOffs(76, 67).addBox(-1.872F, 4.6993F, -1.4499F, 3.0F, 3.0F, 3.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(-0.7602F, -6.7572F, 0.041F, 0.0F, 0.0F, -0.1745F));
+        PartDefinition cube_r134 = bone5.addOrReplaceChild("cube_r134", CubeListBuilder.create().texOffs(41, 82).addBox(-1.872F, 4.6993F, -1.4499F, 3.0F, 3.0F, 3.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(-0.7602F, -6.7572F, 0.041F, 0.0F, 0.0F, -0.1745F));
 
         PartDefinition bone = jin.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(90, 114).addBox(-3.5F, -1.5F, -3.0F, 6.0F, 2.0F, 6.0F, new CubeDeformation(0F)), PartPose.offset(-0.2545F, -8.1709F, 0.0501F));
 
@@ -485,7 +486,7 @@ public class PrimalSuperGatlingPeaModel extends HierarchicalModel<EntitySuperPri
 
         PartDefinition cube_r136 = bone.addOrReplaceChild("cube_r136", CubeListBuilder.create().texOffs(64, 61).addBox(-3.0F, -1.0F, 0.0F, 6.0F, 2.0F, 0.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-0.5F, 0.0F, 3.2F, 0.3927F, 0.0F, 0.0F));
 
-        PartDefinition cube_r137 = bone.addOrReplaceChild("cube_r137", CubeListBuilder.create().texOffs(64, 51).addBox(0.0F, -1.0F, -3.0F, 0.0F, 2.0F, 6.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-3.7F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3927F));
+        PartDefinition cube_r137 = bone.addOrReplaceChild("cube_r137", CubeListBuilder.create().texOffs(70, 51).addBox(0.0F, -1.0F, -3.0F, 0.0F, 2.0F, 6.0F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-3.7F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3927F));
 
         PartDefinition leave5 = all.addOrReplaceChild("leave5", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.2943F, -0.0783F, 0.2009F, 0.0F, 0.7854F, 0.0F));
 
@@ -524,8 +525,8 @@ public class PrimalSuperGatlingPeaModel extends HierarchicalModel<EntitySuperPri
     public void setupAnim(EntitySuperPrimalGatlingPea entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
 
-        this.animate(entity.idleAnimation, SGPAnimation.stand2, ageInTicks, 1.0F);
-        this.animate(entity.shootAnimation, SGPAnimation.shoot, ageInTicks, 1.0F);
+        this.animate(entity.idleAnimation, PSGPModelAnimation.stand2, ageInTicks, 1.0F);
+        this.animate(entity.shootAnimation, PSGPModelAnimation.shoot, ageInTicks, 1.0F);
         this.animate(entity.superAnimation, SGPAnimation.power2, ageInTicks, 1.0F);
 
         this.head.yRot = netHeadYaw * ((float) Math.PI / 180F);
