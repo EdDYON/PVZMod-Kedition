@@ -4,7 +4,6 @@ import keletu.pvzmod.entities.EntityPlantBase;
 import keletu.pvzmod.init.PVZBlocks;
 import keletu.pvzmod.init.PVZSounds;
 import keletu.pvzmod.models.GardenShovelRenderer;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
@@ -25,15 +24,10 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
-import javax.annotation.Nonnull;
 import java.util.function.Consumer;
 
-public class ItemGardenShovel extends ShovelItem implements GeoItem {
+public class ItemGardenShovel extends ShovelItem {
 
     public ItemGardenShovel(Properties properties) {
         super(Tiers.IRON, 3.0F, -2.4F, properties);
@@ -86,35 +80,15 @@ public class ItemGardenShovel extends ShovelItem implements GeoItem {
         }
     }
 
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-
-    }
-
-    @Override
-    public void initializeClient(@Nonnull Consumer<IClientItemExtensions> consumer) {
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
-            private GardenShovelRenderer renderer;
+            private final GardenShovelRenderer renderer = new GardenShovelRenderer();
 
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                if (renderer == null) {
-                    this.renderer = new GardenShovelRenderer();
-                }
                 return renderer;
             }
-
-            @Override
-            public HumanoidModel.ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
-                return HumanoidModel.ArmPose.ITEM;
-            }
         });
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
     }
 }

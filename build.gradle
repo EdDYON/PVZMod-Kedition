@@ -52,7 +52,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             property 'forge.enabledGameTestNamespaces', 'pvz_kedit'
-           // arg "-mixin.config=pvz_kedit.mixins.json"
+            // arg "-mixin.config=pvz_kedit.mixins.json"
 
             mods {
                 pvz_kedit {
@@ -71,7 +71,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             property 'forge.enabledGameTestNamespaces', 'pvz_kedit'
-           // arg "-mixin.config=pvz_kedit.mixins.json"
+            // arg "-mixin.config=pvz_kedit.mixins.json"
 
             mods {
                 pvz_kedit {
@@ -144,7 +144,7 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    implementation fg.deobf("curse.maven:geckolib-388172:7553267")
+    //implementation fg.deobf("curse.maven:geckolib-388172:7553267")
 }
 
 jar {

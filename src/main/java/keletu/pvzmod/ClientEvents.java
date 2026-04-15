@@ -90,6 +90,7 @@ public class ClientEvents {
         event.registerLayerDefinition(WalnutModel2.LAYER_LOCATION, WalnutModel2::createBodyLayer);
 
         event.registerLayerDefinition(PotBlockModel.LAYER_LOCATION, PotBlockModel::createBodyLayer);
+        event.registerLayerDefinition(GardenShovelModel.LAYER_LOCATION, GardenShovelModel::createBodyLayer);
     }
 
     @SubscribeEvent
