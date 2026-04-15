@@ -78,6 +78,7 @@ public class ClientEvents {
 
         event.registerLayerDefinition(SuperGatlingPeaModel.LAYER_LOCATION, SuperGatlingPeaModel::createBodyLayer);
         event.registerLayerDefinition(SnowySuperGatlingPeaModel.LAYER_LOCATION, SnowySuperGatlingPeaModel::createBodyLayer);
+        event.registerLayerDefinition(PrimalSuperGatlingPeaModel.LAYER_LOCATION, PrimalSuperGatlingPeaModel::createBodyLayer);
 
         event.registerLayerDefinition(TallNutModel0.LAYER_LOCATION, TallNutModel0::createBodyLayer);
         event.registerLayerDefinition(TallNutModel1.LAYER_LOCATION, TallNutModel1::createBodyLayer);
