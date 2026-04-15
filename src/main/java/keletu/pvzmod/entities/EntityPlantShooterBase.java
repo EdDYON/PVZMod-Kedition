@@ -61,7 +61,7 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
             this.faceTarget(target);
 
             ThrowableProjectile projectile = entitySelect(this.level());
-            projectile.setPos(this.getX(), this.getEyeY() - 0.1D, this.getZ());
+            projectile.setPos(this.getX(), this.getEyeY() - 0.2D, this.getZ());
 
             double toX = target.getX() - this.getX();
             float percentToMouth = 0.5F;

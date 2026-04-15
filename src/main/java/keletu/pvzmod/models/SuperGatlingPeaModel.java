@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import keletu.pvzmod.PVZMod;
 import keletu.pvzmod.entities.EntitySuperGatlingPea;
-import keletu.pvzmod.models.anim.SGatlingPeaModelNewAnimation;
+import keletu.pvzmod.models.anim.SGPAnimation;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -476,9 +476,9 @@ public class SuperGatlingPeaModel extends HierarchicalModel<EntitySuperGatlingPe
     public void setupAnim(EntitySuperGatlingPea entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
 
-        this.animate(entity.idleAnimation, SGatlingPeaModelNewAnimation.stand2, ageInTicks, 1.0F);
-        this.animate(entity.shootAnimation, SGatlingPeaModelNewAnimation.shoot, ageInTicks, 1.0F);
-        this.animate(entity.superAnimation, SGatlingPeaModelNewAnimation.power, ageInTicks, 1.0F);
+        this.animate(entity.idleAnimation, SGPAnimation.stand2, ageInTicks, 1.0F);
+        this.animate(entity.shootAnimation, SGPAnimation.shoot, ageInTicks, 1.0F);
+        this.animate(entity.superAnimation, SGPAnimation.power2, ageInTicks, 1.0F);
 
         this.head.yRot = netHeadYaw * ((float) Math.PI / 180F);
         this.head.xRot = headPitch * ((float) Math.PI / 180F);

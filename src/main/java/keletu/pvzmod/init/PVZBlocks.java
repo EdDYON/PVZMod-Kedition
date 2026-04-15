@@ -3,8 +3,7 @@ package keletu.pvzmod.init;
 import keletu.pvzmod.PVZMod;
 import keletu.pvzmod.blocks.Pot;
 import keletu.pvzmod.blocks.PotBlockEntity;
-import keletu.pvzmod.models.PotBlockModel;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import keletu.pvzmod.models.PotBlockRenderer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -16,7 +15,6 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import software.bernie.geckolib.renderer.GeoBlockRenderer;
 
 public class PVZBlocks {
 
@@ -39,6 +37,6 @@ public class PVZBlocks {
 
     @OnlyIn(Dist.CLIENT)
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer(POT_BLOCK_ENTITY.get(), ((BlockEntityRendererProvider.Context context) -> new GeoBlockRenderer<>(new PotBlockModel())));
+        event.registerBlockEntityRenderer(POT_BLOCK_ENTITY.get(), PotBlockRenderer::new);
     }
 }

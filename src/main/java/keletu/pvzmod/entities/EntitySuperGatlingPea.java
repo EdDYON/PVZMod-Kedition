@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class EntitySuperGatlingPea extends EntityPlantShooterBase {
-    public static final int SUPER_RAPID_FIRE_DURATION = 40;
+    public static final int SUPER_RAPID_FIRE_DURATION = 60;
     public static final int SUPER_RAPID_FIRE_COOLDOWN = 300;
     public static final float SUPER_RAPID_FIRE_CHANCE = 0.02F;
     public final AnimationState idleAnimation = new AnimationState();
@@ -34,7 +34,7 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase {
     @Override
     protected TrueSuperRangedAttackGoal createRangedAttackGoal() {
         if (this.isSuperFiring())
-            return new TrueSuperRangedAttackGoal(this, 0.0D, 15.0F, 4, 2, 40, 10);
+            return new TrueSuperRangedAttackGoal(this, 0.0D, 15.0F, 4, 2, 60, 0);
         return new TrueSuperRangedAttackGoal(this, 0.0D, 15.0F, 4, 2, 30, 25);
     }
 

@@ -88,6 +88,8 @@ public class ClientEvents {
         event.registerLayerDefinition(WalnutModel0.LAYER_LOCATION, WalnutModel0::createBodyLayer);
         event.registerLayerDefinition(WalnutModel1.LAYER_LOCATION, WalnutModel1::createBodyLayer);
         event.registerLayerDefinition(WalnutModel2.LAYER_LOCATION, WalnutModel2::createBodyLayer);
+
+        event.registerLayerDefinition(PotBlockModel.LAYER_LOCATION, PotBlockModel::createBodyLayer);
     }
 
     @SubscribeEvent
