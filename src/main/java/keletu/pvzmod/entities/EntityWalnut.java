@@ -15,7 +15,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import software.bernie.geckolib.core.animation.RawAnimation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,6 @@ public class EntityWalnut extends EntityPlantBase {
     public final AnimationState idleAnimation2 = new AnimationState();
     private final double protectRadio;
     private static final int RETARGET_INTERVAL = 10;
-    public static final RawAnimation STAND = RawAnimation.begin().thenLoop("animation");
 
     public EntityWalnut(EntityType<? extends EntityPlantBase> type, Level par1World, float protectRadio) {
         super(type, par1World, new ItemStack(PVZItems.WALNUT_CARD.get(), 1));
