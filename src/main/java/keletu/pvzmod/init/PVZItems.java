@@ -75,6 +75,8 @@ public class PVZItems {
             () -> new ItemPlantCard(new Item.Properties(), PVZEntities.FUME_SHROOM));
     public static final RegistryObject<Item> ELECTRIC_PEASHOOTER_CARD = ITEMS.register("electric_peashooter_card",
             () -> new ItemPlantCard(new Item.Properties(), PVZEntities.ELECTRIC_PEASHOOTER));
+    public static final RegistryObject<Item> SCAREDY_SHROOM_CARD = ITEMS.register("scaredy_shroom_card",
+            () -> new ItemPlantCard(new Item.Properties(), PVZEntities.SCAREDY_SHROOM));
     public static final RegistryObject<Item> GARDEN_SHOVEL = ITEMS.register("garden_shovel", () -> new ItemGardenShovel(new Item.Properties()
             .durability(999)));
 }

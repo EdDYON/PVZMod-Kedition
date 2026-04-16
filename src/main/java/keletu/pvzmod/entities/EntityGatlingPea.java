@@ -21,10 +21,6 @@ public class EntityGatlingPea extends EntityPlantShooterBase {
         super(entityType, par1World, new ItemStack(PVZItems.GATLING_PEA_CARD.get()));
     }
 
-    // protected Item getDropItem() {
-    //     return PvZ.peaPod;
-    // }
-
     @Override
     public InteractionResult mobInteract(Player par1EntityPlayer, InteractionHand hand) {
         return InteractionResult.PASS;

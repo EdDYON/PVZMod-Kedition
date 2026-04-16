@@ -33,6 +33,7 @@ public class PVZEntities {
     public static final RegistryObject<EntityType<PuffShroomEntity>> PUFF_SHROOM = PVZEntities.ENTITIES.register("puff_shroom", () -> EntityType.Builder.of(PuffShroomEntity::new, MobCategory.MISC).sized(1.0F, 0.75F).clientTrackingRange(8).build(PVZMod.MODID + ".puff_shroom"));
     public static final RegistryObject<EntityType<FumeShroomEntity>> FUME_SHROOM = PVZEntities.ENTITIES.register("fume_shroom", () -> EntityType.Builder.of(FumeShroomEntity::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".fume_shroom"));
     public static final RegistryObject<EntityType<ElectricPeashooterEntity>> ELECTRIC_PEASHOOTER = PVZEntities.ENTITIES.register("electric_peashooter", () -> EntityType.Builder.of(ElectricPeashooterEntity::new, MobCategory.MISC).sized(1.0F, 1.2f).clientTrackingRange(8).build(PVZMod.MODID + ".electric_peashooter"));
+    public static final RegistryObject<EntityType<ScaredyShroomEntity>> SCAREDY_SHROOM = PVZEntities.ENTITIES.register("scaredy_shroom", () -> EntityType.Builder.of(ScaredyShroomEntity::new, MobCategory.MISC).sized(1.0F, 1.1f).clientTrackingRange(8).build(PVZMod.MODID + ".scaredy_shroom"));
     public static final RegistryObject<EntityType<PeaProjectile>> PEA_PROJECTILE = PVZEntities.ENTITIES.register("pea_projectile",
             () -> EntityType.Builder.<PeaProjectile>of(PeaProjectile::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F)
@@ -84,6 +85,7 @@ public class PVZEntities {
 
         event.put(PUFF_SHROOM.get(), PuffShroomEntity.createAttributes().build());
         event.put(FUME_SHROOM.get(), FumeShroomEntity.createAttributes().build());
+        event.put(SCAREDY_SHROOM.get(), ScaredyShroomEntity.createAttributes().build());
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -117,5 +119,6 @@ public class PVZEntities {
         event.registerEntityRenderer(SPORE_PROJECTILE.get(), ThrownItemRenderer::new);
 
         event.registerEntityRenderer(FUME_SHROOM.get(), FumeShroomRenderer::new);
+        event.registerEntityRenderer(SCAREDY_SHROOM.get(), ScaredyShroomRender::new);
     }
 }

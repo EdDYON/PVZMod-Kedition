@@ -20,10 +20,6 @@ public class EntityPeaShooter extends EntityPlantShooterBase {
         super(entityType, par1World, new ItemStack(PVZItems.ELECTRIC_PEASHOOTER_CARD.get()));
     }
 
-    // protected Item getDropItem() {
-    //     return PvZ.peaPod;
-    // }
-
     @Override
     public InteractionResult mobInteract(Player par1EntityPlayer, InteractionHand hand) {
         return InteractionResult.PASS;

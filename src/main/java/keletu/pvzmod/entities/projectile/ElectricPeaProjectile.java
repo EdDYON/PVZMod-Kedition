@@ -77,9 +77,10 @@ public class ElectricPeaProjectile extends ThrowableItemProjectile {
             result.getEntity().hurt(PVZDamageTypes.causeElectricPeaProjectileDamage(this.level(), this, this.getOwner()), damage);
             result.getEntity().invulnerableTime = 0;
             if (result.getEntity() instanceof LivingEntity living) {
-                living.addEffect(new MobEffectInstance(PVZEffects.STUN.get(), PARALYSIS_DURATION, 0));
+                if (this.random.nextInt(10) < 2) {
+                    living.addEffect(new MobEffectInstance(PVZEffects.STUN.get(), PARALYSIS_DURATION, 0));
+                }
             }
-
             this.shockNearbyEntities();
         }
     }

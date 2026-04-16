@@ -19,10 +19,6 @@ public class EntitySnowPea extends EntityPlantShooterBase {
         super(entityType, par1World, new ItemStack(PVZItems.SNOWPEA_CARD.get()));
     }
 
-    // protected Item getDropItem() {
-    //     return PvZ.peaPod;
-    // }
-
     @Override
     public InteractionResult mobInteract(Player par1EntityPlayer, InteractionHand hand) {
         return InteractionResult.PASS;

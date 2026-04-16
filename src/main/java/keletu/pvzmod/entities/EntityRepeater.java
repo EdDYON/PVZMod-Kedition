@@ -20,10 +20,6 @@ public class EntityRepeater extends EntityPlantShooterBase {
         super(entityType, par1World, new ItemStack(PVZItems.REPEATER_CARD.get()));
     }
 
-    // protected Item getDropItem() {
-    //     return PvZ.peaPod;
-    // }
-
     @Override
     protected TrueRangedAttackGoal createRangedAttackGoal() {
         return new TrueRangedAttackGoal(this, 0.0F, this.range, 2, 2, 30, 25);

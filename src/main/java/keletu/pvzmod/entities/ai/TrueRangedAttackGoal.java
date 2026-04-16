@@ -59,7 +59,7 @@ public class TrueRangedAttackGoal extends Goal {
 
     public boolean canUse() {
         LivingEntity living = this.mob.getTarget();
-        if (living != null && living.isAlive()) {
+        if (living != null && living.isAlive() && this.mob.canAttack(living)) {
             this.target = living;
             this.mob.setShooting(true);
             return true;

@@ -1,6 +1,9 @@
 package keletu.pvzmod.items;
 
-import keletu.pvzmod.entities.*;
+import keletu.pvzmod.entities.EntityPlantBase;
+import keletu.pvzmod.entities.EntityPlantShooterBase;
+import keletu.pvzmod.entities.EntityPotatoMine;
+import keletu.pvzmod.entities.EntitySuperGatlingPea;
 import keletu.pvzmod.init.PVZBlocks;
 import keletu.pvzmod.init.PVZEntities;
 import keletu.pvzmod.init.PVZItems;

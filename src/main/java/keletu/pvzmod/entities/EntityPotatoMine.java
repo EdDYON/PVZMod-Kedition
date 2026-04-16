@@ -37,10 +37,6 @@ public class EntityPotatoMine extends EntityPlantBase {
         super(entityType, par1World, new ItemStack(PVZItems.POTATO_MINE_CARD.get()));
     }
 
-    // protected Item getDropItem() {
-    //     return PvZ.peaPod;
-    // }
-
     @Override
     public InteractionResult mobInteract(Player par1EntityPlayer, InteractionHand hand) {
         return InteractionResult.PASS;
