@@ -3,6 +3,8 @@ package keletu.pvzmod.entities;
 import keletu.pvzmod.entities.ai.TrueRangedAttackGoal;
 import keletu.pvzmod.entities.projectile.ElectricPeaProjectile;
 import keletu.pvzmod.init.PVZItems;
+import keletu.pvzmod.init.PVZSounds;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.AnimationState;
@@ -36,6 +38,11 @@ public class ElectricPeashooterEntity extends EntityPlantShooterBase {
     @Override
     protected Goal createRangedAttackGoal() {
         return new TrueRangedAttackGoal(this, 0.0F, this.range, 1, 0, 45, 20);
+    }
+
+    @Override
+    public SoundEvent getShootSound() {
+        return PVZSounds.ELECTRICPEASHOOTER_SHOOT.get();
     }
 
     @Override

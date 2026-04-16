@@ -3,10 +3,10 @@ package keletu.pvzmod.entities.projectile;
 import keletu.pvzmod.entities.EntityPlantBase;
 import keletu.pvzmod.init.PVZEntities;
 import keletu.pvzmod.init.PVZItems;
+import keletu.pvzmod.init.PVZSounds;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -49,7 +49,7 @@ public class PeaProjectile extends ThrowableItemProjectile {
             result.getEntity().invulnerableTime = 0;
 
             this.spawnBreakParticles();
-            this.playSound(SoundEvents.GRASS_BREAK, 0.8F, 1.2F);
+            this.playSound(PVZSounds.PEA_BOOM.get(), 0.8F, 1.2F);
             this.discard();
         }
     }
@@ -69,7 +69,7 @@ public class PeaProjectile extends ThrowableItemProjectile {
 
         if (!this.level().isClientSide) {
             this.spawnBreakParticles();
-            this.playSound(SoundEvents.GRASS_BREAK, 0.8F, 1.2F);
+            this.playSound(PVZSounds.PEA_BOOM.get(), 0.8F, 1.2F);
             this.discard();
         }
     }

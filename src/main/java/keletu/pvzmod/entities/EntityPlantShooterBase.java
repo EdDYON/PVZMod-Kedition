@@ -3,12 +3,12 @@ package keletu.pvzmod.entities;
 import keletu.pvzmod.entities.ai.PlanterHurtByTargetGoal;
 import keletu.pvzmod.entities.ai.PlanterHurtTargetGoal;
 import keletu.pvzmod.entities.ai.TrueRangedAttackGoal;
+import keletu.pvzmod.init.PVZSounds;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
@@ -55,6 +55,10 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
         return this.getSensing().hasLineOfSight(target);
     }
 
+    public SoundEvent getShootSound() {
+        return PVZSounds.PEASHOOTER_SHOOT.get();
+    }
+
     @Override
     public void performRangedAttack(LivingEntity target, float distanceFactor) {
         if (!this.level().isClientSide) {
@@ -64,15 +68,11 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
             projectile.setPos(this.getX(), this.getEyeY() - 0.2D, this.getZ());
 
             double toX = target.getX() - this.getX();
-            float percentToMouth = 0.5F;
-            double toY = target.getY() + target.getEyeHeight() * percentToMouth - 1.0D - projectile.getY();
             double toZ = target.getZ() - this.getZ();
-
-            float horizontalDistance = Mth.sqrt((float) (toX * toX + toZ * toZ)) * 0.2F;
 
             projectile.shoot(toX, 0, toZ, 1.6F, 0.0F);
 
-            this.playSound(SoundEvents.ARROW_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+            this.playSound(getShootSound(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 
             this.level().addFreshEntity(projectile);
 

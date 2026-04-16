@@ -1,4 +1,60 @@
 {
+  "supergatlingpea_power": {
+    "sounds": [
+      {
+        "name": "pvz_kedit:supergatlingpea_power",
+        "stream": false
+      }
+    ]
+  },
+  "supergatlingpea_shoot": {
+    "sounds": [
+      {
+        "name": "pvz_kedit:supergatlingpea_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "electricpeashooter_shoot": {
+    "sounds": [
+      {
+        "name": "pvz_kedit:electricpeashooter_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "pea_boom": {
+    "sounds": [
+      {
+        "name": "pvz_kedit:pea_boom",
+        "stream": false
+      }
+    ]
+  },
+  "peashooter_shoot": {
+    "sounds": [
+      {
+        "name": "pvz_kedit:peashooter_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "primalpea_boom": {
+    "sounds": [
+      {
+        "name": "pvz_kedit:primalpea_boom",
+        "stream": false
+      }
+    ]
+  },
+  "primalpeashooter_shoot": {
+    "sounds": [
+      {
+        "name": "pvz_kedit:primalpeashooter_shoot",
+        "stream": false
+      }
+    ]
+  },
   "puff_shroom_shoot": {
     "sounds": [
       {

@@ -3,9 +3,11 @@ package keletu.pvzmod.entities;
 import keletu.pvzmod.entities.ai.TrueSuperRangedAttackGoal;
 import keletu.pvzmod.entities.projectile.PeaProjectile;
 import keletu.pvzmod.init.PVZItems;
+import keletu.pvzmod.init.PVZSounds;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -90,6 +92,11 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase {
     }
 
     @Override
+    public SoundEvent getShootSound() {
+        return PVZSounds.SUPERGATLINGPEA_SHOOT.get();
+    }
+
+    @Override
     public void tick() {
         super.tick();
 
@@ -149,7 +156,10 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase {
                 .xRot((float) Math.toRadians(spreadPitch))
                 .normalize();
 
+        this.playSound(PVZSounds.SUPERGATLINGPEA_POWER.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+
         pea.shoot(spreadDirection.x, 0, spreadDirection.z, 1.2F, 0.0F);
+
         this.level().addFreshEntity(pea);
     }
 

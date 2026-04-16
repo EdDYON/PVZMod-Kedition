@@ -5,13 +5,13 @@ import keletu.pvzmod.entities.EntityPlantBase;
 import keletu.pvzmod.init.PVZEffects;
 import keletu.pvzmod.init.PVZEntities;
 import keletu.pvzmod.init.PVZParticles;
+import keletu.pvzmod.init.PVZSounds;
 import keletu.pvzmod.particles.TextureParticleOption;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -67,7 +67,7 @@ public class PrimalPeaProjectile extends ThrowableProjectile {
             result.getEntity().invulnerableTime = 0;
 
             this.spawnBreakParticles();
-            this.playSound(SoundEvents.GRASS_BREAK, 0.8F, 1.2F);
+            this.playSound(PVZSounds.PRIMALPEA_BOOM.get(), 0.8F, 1.2F);
             this.discard();
         }
     }
@@ -87,7 +87,7 @@ public class PrimalPeaProjectile extends ThrowableProjectile {
 
         if (!this.level().isClientSide) {
             this.spawnBreakParticles();
-            this.playSound(SoundEvents.GRASS_BREAK, 0.8F, 1.2F);
+            this.playSound(PVZSounds.PRIMALPEA_BOOM.get(), 0.8F, 1.2F);
             this.discard();
         }
     }
