@@ -17,8 +17,8 @@ public class PVZSounds {
     public static final RegistryObject<SoundEvent> PLANT = SOUNDS.register("plant_plant", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(PVZMod.MODID, "plant_plant")));
     public static final RegistryObject<SoundEvent> REMOVE = SOUNDS.register("remove_plant", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(PVZMod.MODID, "remove_plant")));
     public static final RegistryObject<SoundEvent> FUME_SHROOM_SHOOT = SOUNDS.register("fume_shroom_shoot", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(PVZMod.MODID, "fume_shroom_shoot")));
-    public static final RegistryObject<SoundEvent> SUPERGATLINGPEA_POWER = SOUNDS.register("supergatlingpea_power", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(PVZMod.MODID, "fume_shroom_shoot")));
-    public static final RegistryObject<SoundEvent> SUPERGATLINGPEA_SHOOT = SOUNDS.register("supergatlingpea_shoot", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(PVZMod.MODID, "supergatlingpea_power")));
+    public static final RegistryObject<SoundEvent> SUPERGATLINGPEA_POWER = SOUNDS.register("supergatlingpea_power", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(PVZMod.MODID, "supergatlingpea_power")));
+    public static final RegistryObject<SoundEvent> SUPERGATLINGPEA_SHOOT = SOUNDS.register("supergatlingpea_shoot", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(PVZMod.MODID, "supergatlingpea_shoot")));
     public static final RegistryObject<SoundEvent> PRIMALPEASHOOTER_SHOOT = SOUNDS.register("primalpeashooter_shoot", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(PVZMod.MODID, "primalpeashooter_shoot")));
     public static final RegistryObject<SoundEvent> PRIMALPEA_BOOM = SOUNDS.register("primalpea_boom", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(PVZMod.MODID, "primalpea_boom")));
     public static final RegistryObject<SoundEvent> PEASHOOTER_SHOOT = SOUNDS.register("peashooter_shoot", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(PVZMod.MODID, "peashooter_shoot")));
