@@ -94,7 +94,7 @@ public class PVZEntities {
         event.registerEntityRenderer(PEA_PROJECTILE.get(), ThrownItemRenderer::new);
 
         event.registerEntityRenderer(SNOW_PEA.get(), SnowPeaRender::new);
-        event.registerEntityRenderer(ICE_PEA_PROJECTILE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ICE_PEA_PROJECTILE.get(), RenderIcePea::new);
 
         event.registerEntityRenderer(REPEATER.get(), RepeaterRender::new);
         event.registerEntityRenderer(GATLING_PEA.get(), GatlingPeaRender::new);
@@ -116,7 +116,7 @@ public class PVZEntities {
         event.registerEntityRenderer(POTATO_MINE.get(), PotatoMineRenderer::new);
 
         event.registerEntityRenderer(PUFF_SHROOM.get(), PuffShroomRender::new);
-        event.registerEntityRenderer(SPORE_PROJECTILE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(SPORE_PROJECTILE.get(), SporeRenderer::new);
 
         event.registerEntityRenderer(FUME_SHROOM.get(), FumeShroomRenderer::new);
         event.registerEntityRenderer(SCAREDY_SHROOM.get(), ScaredyShroomRender::new);

@@ -4,7 +4,6 @@ import keletu.pvzmod.entities.EntityPlantBase;
 import keletu.pvzmod.init.PVZDamageTypes;
 import keletu.pvzmod.init.PVZEffects;
 import keletu.pvzmod.init.PVZEntities;
-import keletu.pvzmod.init.PVZItems;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -14,8 +13,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
@@ -24,7 +22,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class ElectricPeaProjectile extends ThrowableItemProjectile {
+public class ElectricPeaProjectile extends ThrowableProjectile {
 
     private static final EntityDataAccessor<Integer> TARGET_ID_1 =
             SynchedEntityData.defineId(ElectricPeaProjectile.class, EntityDataSerializers.INT);
@@ -53,13 +51,7 @@ public class ElectricPeaProjectile extends ThrowableItemProjectile {
     }
 
     @Override
-    protected Item getDefaultItem() {
-        return PVZItems.ELECTRIC_PEA.get();
-    }
-
-    @Override
     protected void defineSynchedData() {
-        super.defineSynchedData();
         this.entityData.define(TARGET_ID_1, -1);
         this.entityData.define(TARGET_ID_2, -1);
         this.entityData.define(TARGET_ID_3, -1);

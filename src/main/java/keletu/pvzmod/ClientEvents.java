@@ -5,6 +5,7 @@ import keletu.pvzmod.init.PVZEntities;
 import keletu.pvzmod.init.PVZParticles;
 import keletu.pvzmod.models.*;
 import keletu.pvzmod.particles.SporeParticle;
+import keletu.pvzmod.particles.TextureBreakParticle;
 import keletu.pvzmod.potion.SlowBlueLayer;
 import keletu.pvzmod.potion.StunStarsLayer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -60,6 +61,7 @@ public class ClientEvents {
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(PVZParticles.SPORE.get(), SporeParticle.Provider::new);
+        event.registerSpecial(PVZParticles.TEXTURE_BREAK.get(), new TextureBreakParticle.Provider());
     }
 
     @SubscribeEvent
@@ -92,6 +94,10 @@ public class ClientEvents {
 
         event.registerLayerDefinition(PotBlockModel.LAYER_LOCATION, PotBlockModel::createBodyLayer);
         event.registerLayerDefinition(GardenShovelModel.LAYER_LOCATION, GardenShovelModel::createBodyLayer);
+
+        event.registerLayerDefinition(ModelPrimalPea.LAYER_LOCATION, ModelPrimalPea::createBodyLayer);
+        event.registerLayerDefinition(ModelIcePea.LAYER_LOCATION, ModelIcePea::createBodyLayer);
+        event.registerLayerDefinition(ElectricPeaProjectileModel.LAYER_LOCATION, ElectricPeaProjectileModel::createBodyLayer);
     }
 
     @SubscribeEvent

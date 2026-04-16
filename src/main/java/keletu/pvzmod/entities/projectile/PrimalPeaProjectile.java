@@ -1,28 +1,27 @@
 package keletu.pvzmod.entities.projectile;
 
+import keletu.pvzmod.PVZMod;
 import keletu.pvzmod.entities.EntityPlantBase;
 import keletu.pvzmod.init.PVZEffects;
 import keletu.pvzmod.init.PVZEntities;
-import keletu.pvzmod.init.PVZItems;
-import net.minecraft.core.particles.ItemParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
+import keletu.pvzmod.init.PVZParticles;
+import keletu.pvzmod.particles.TextureParticleOption;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class PrimalPeaProjectile extends ThrowableItemProjectile {
+public class PrimalPeaProjectile extends ThrowableProjectile {
 
     private static final EntityDataAccessor<Integer> DATA_TYPE = SynchedEntityData.defineId(PrimalPeaProjectile.class, EntityDataSerializers.INT);
     private float damage = 2.0F;
@@ -43,20 +42,11 @@ public class PrimalPeaProjectile extends ThrowableItemProjectile {
 
     @Override
     protected void defineSynchedData() {
-        super.defineSynchedData();
         this.entityData.define(DATA_TYPE, 0);
     }
 
     public int getProjectileType() {
         return this.entityData.get(DATA_TYPE);
-    }
-
-    @Override
-    protected Item getDefaultItem() {
-        if (this.getProjectileType() == 1) {
-            return PVZItems.SMALL_STONE.get();
-        }
-        return PVZItems.PRIMAL_PEA.get();
     }
 
     @Override
@@ -107,7 +97,7 @@ public class PrimalPeaProjectile extends ThrowableItemProjectile {
             int particleCount = 10 + this.random.nextInt(10);
 
             serverLevel.sendParticles(
-                    new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(getDefaultItem())),
+                    new TextureParticleOption(PVZParticles.TEXTURE_BREAK.get(), this.getProjectileType() == 1 ? new ResourceLocation(PVZMod.MODID, "item/small_stone") : new ResourceLocation(PVZMod.MODID, "item/primal_pea")),
                     this.getX(),
                     this.getY(),
                     this.getZ(),

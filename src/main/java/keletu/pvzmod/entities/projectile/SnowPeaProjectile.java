@@ -1,24 +1,23 @@
 package keletu.pvzmod.entities.projectile;
 
+import keletu.pvzmod.PVZMod;
 import keletu.pvzmod.entities.EntityPlantBase;
 import keletu.pvzmod.init.PVZEffects;
 import keletu.pvzmod.init.PVZEntities;
-import keletu.pvzmod.init.PVZItems;
-import net.minecraft.core.particles.ItemParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
+import keletu.pvzmod.init.PVZParticles;
+import keletu.pvzmod.particles.TextureParticleOption;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 
-public class SnowPeaProjectile extends ThrowableItemProjectile {
+public class SnowPeaProjectile extends ThrowableProjectile {
     private float damage = 2.0F;
     private EntityPlantBase shooter;
 
@@ -31,11 +30,6 @@ public class SnowPeaProjectile extends ThrowableItemProjectile {
         this.damage = damage;
         this.shooter = shooter;
         this.setNoGravity(true);
-    }
-
-    @Override
-    protected Item getDefaultItem() {
-        return PVZItems.ICE_PEA.get();
     }
 
     @Override
@@ -54,6 +48,11 @@ public class SnowPeaProjectile extends ThrowableItemProjectile {
             this.playSound(SoundEvents.GRASS_BREAK, 0.8F, 1.2F);
             this.discard();
         }
+    }
+
+    @Override
+    protected void defineSynchedData() {
+
     }
 
     @Override
@@ -81,7 +80,7 @@ public class SnowPeaProjectile extends ThrowableItemProjectile {
             int particleCount = 10 + this.random.nextInt(10);
 
             serverLevel.sendParticles(
-                    new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(PVZItems.ICE_PEA.get())),
+                    new TextureParticleOption(PVZParticles.TEXTURE_BREAK.get(), new ResourceLocation(PVZMod.MODID, "item/ice_pea")),
                     this.getX(),
                     this.getY(),
                     this.getZ(),

@@ -2,11 +2,13 @@ package keletu.pvzmod.models;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import keletu.pvzmod.entities.projectile.ElectricPeaProjectile;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.culling.Frustum;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -15,7 +17,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector4f;
 
-public class ElectricPeaProjectileRenderer extends ThrownItemRenderer {
+public class ElectricPeaProjectileRenderer extends EntityRenderer {
 
     private final LightningRender lightningRender = new LightningRender();
 
@@ -39,8 +41,11 @@ public class ElectricPeaProjectileRenderer extends ThrownItemRenderer {
                     1.0F
             );
 
+    EntityModel model;
+
     public ElectricPeaProjectileRenderer(EntityRendererProvider.Context context) {
-        super(context, 1.0F, false);
+        super(context);
+        this.model = new ElectricPeaProjectileModel<>(context.bakeLayer(ElectricPeaProjectileModel.LAYER_LOCATION));
     }
 
     @Override
@@ -54,6 +59,10 @@ public class ElectricPeaProjectileRenderer extends ThrownItemRenderer {
     @Override
     public void render(Entity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int light) {
         super.render(entity, entityYaw, partialTicks, poseStack, buffer, light);
+
+        poseStack.pushPose();
+        this.model.renderToBuffer(poseStack, buffer.getBuffer(RenderType.itemEntityTranslucentCull(getTextureLocation(entity))), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        poseStack.popPose();
 
         if (!(entity instanceof ElectricPeaProjectile pea)) {
             return;
@@ -133,6 +142,6 @@ public class ElectricPeaProjectileRenderer extends ThrownItemRenderer {
 
     @Override
     public ResourceLocation getTextureLocation(Entity entity) {
-        return TextureAtlas.LOCATION_BLOCKS;
+        return ElectricPeaProjectileModel.LAYER_LOCATION.getModel();
     }
 }
