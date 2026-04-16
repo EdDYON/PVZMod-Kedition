@@ -27,7 +27,7 @@ public class ElectricPeaProjectileRenderer extends EntityRenderer {
                     0.15F,
                     0.5F,
                     0.25F,
-                    new Vector4f(0.1F, 0.6F, 1.0F, 0.7F),
+                    new Vector4f(0.5F, 1.0F, 0.5F, 0.7F),
                     0.45F
             );
 
@@ -37,7 +37,7 @@ public class ElectricPeaProjectileRenderer extends EntityRenderer {
                     0.15F,
                     0.5F,
                     0.25F,
-                    new Vector4f(0.1F, 0.6F, 1.0F, 0.7F),
+                    new Vector4f(0.5F, 1.0F, 0.5F, 0.7F),
                     1.0F
             );
 
@@ -130,7 +130,7 @@ public class ElectricPeaProjectileRenderer extends EntityRenderer {
     private Vec3 findGroundPoint(Entity entity, Vec3 start) {
         BlockPos base = BlockPos.containing(start.x, start.y, start.z);
 
-        for (int i = 1; i <= 12; i++) {
+        for (int i = 1; i <= 3; i++) {
             BlockPos check = base.below(i);
             if (!entity.level().getBlockState(check).isAir()) {
                 return new Vec3(start.x, check.getY() + 1.0D, start.z);
