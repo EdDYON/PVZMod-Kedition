@@ -181,9 +181,9 @@ public class ScaredyShroomEntity extends EntityPlantShooterBase {
     }
 
     private boolean hasMonsterWithinFearRange() {
-        double halfSize = 5D;
+        double halfSize = 2.5D;
         AABB box = new AABB(
-                this.getX() - halfSize, this.getY() - halfSize, this.getZ() - halfSize,
+                this.getX() - halfSize, this.getY(), this.getZ() - halfSize,
                 this.getX() + halfSize, this.getY() + halfSize, this.getZ() + halfSize
         );
 
@@ -195,6 +195,10 @@ public class ScaredyShroomEntity extends EntityPlantShooterBase {
             this.idleAnimationState.stop();
             this.shootAnimationState.stop();
             return;
+        } else {
+            this.standAnimation.stop();
+            this.hiddenAnimation.stop();
+            this.hideAnimation.stop();
         }
 
         if (this.isShooting()) {

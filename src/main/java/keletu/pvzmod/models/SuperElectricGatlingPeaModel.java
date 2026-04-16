@@ -101,9 +101,9 @@ public class SuperElectricGatlingPeaModel extends HierarchicalModel<EntitySuperE
         PartDefinition cube_r1 = dian1.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 0).addBox(-1.9827F, -0.5F, -0.0951F, 0.7028F, 1.0F, 0.1851F, new CubeDeformation(-0.0001F))
                 .texOffs(36, 51).mirror().addBox(-1.6799F, -0.5F, -0.0951F, 0.4F, 1.0F, 1.0F, new CubeDeformation(0.003F)).mirror(false), PartPose.offsetAndRotation(0.6078F, -0.2997F, 0.01F, 1.5708F, 0.0F, -0.7854F));
 
-        PartDefinition cube_r2 = dian1.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(42, 17).addBox(0.0554F, -0.5F, 0.2333F, 3.9392F, 1.0F, 0.6946F, new CubeDeformation(0F)), PartPose.offsetAndRotation(0.1835F, 0.1246F, 0.01F, 1.5708F, 0.0F, 0.9599F));
+        PartDefinition cube_r2 = dian1.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 97).addBox(0.0554F, -0.5F, 0.2333F, 3.9392F, 1.0F, 0.6946F, new CubeDeformation(0F)), PartPose.offsetAndRotation(0.1835F, 0.1246F, 0.01F, 1.5708F, 0.0F, 0.9599F));
 
-        PartDefinition cube_r3 = dian1.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(56, 88).addBox(0.0951F, -0.5F, -0.0299F, 4.0F, 1.0F, 2.0F, new CubeDeformation(0.0F).extend(0.0001F, 0.0001F, -0.2499F)), PartPose.offsetAndRotation(0.1835F, 0.1246F, 0.01F, 1.5708F, 0.0F, 0.7854F));
+        PartDefinition cube_r3 = dian1.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(56, 88).addBox(0.0951F, -0.5F, -0.0299F, 4.0F, 1.0F, 2.0F, new CubeDeformation(0.0F).extend(0.001F, 0.001F, -0.249F)), PartPose.offsetAndRotation(0.1835F, 0.1246F, 0.01F, 1.5708F, 0.0F, 0.7854F));
 
         PartDefinition cube_outline_r1 = dian1.addOrReplaceChild("cube_outline_r1", CubeListBuilder.create().texOffs(16, 91).addBox(-0.5299F, -1.0F, -0.5951F, 2.0F, 2.0F, 2.0F, new CubeDeformation(-1.9F)), PartPose.offsetAndRotation(-0.1092F, 0.4193F, 0.0001F, 1.5708F, 0.0F, -0.7854F));
 
@@ -131,9 +131,9 @@ public class SuperElectricGatlingPeaModel extends HierarchicalModel<EntitySuperE
         PartDefinition cube_r6 = dian2.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(0, 0).addBox(-1.9827F, -0.5F, -0.0951F, 0.7028F, 1.0F, 0.1851F, new CubeDeformation(-0.0001F))
                 .texOffs(36, 51).mirror().addBox(-1.6799F, -0.5F, -0.0951F, 0.4F, 1.0F, 1.0F, new CubeDeformation(0.003F)).mirror(false), PartPose.offsetAndRotation(0.6078F, -0.2997F, 0.01F, 1.5708F, 0.0F, -0.7854F));
 
-        PartDefinition cube_r7 = dian2.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(42, 17).addBox(0.0554F, -0.5F, 0.2333F, 3.9392F, 1.0F, 0.6946F, new CubeDeformation(0F)), PartPose.offsetAndRotation(0.1835F, 0.1246F, 0.01F, 1.5708F, 0.0F, 0.9599F));
+        PartDefinition cube_r7 = dian2.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(0, 97).addBox(0.0554F, -0.5F, 0.2333F, 3.9392F, 1.0F, 0.6946F, new CubeDeformation(0F)), PartPose.offsetAndRotation(0.1835F, 0.1246F, 0.01F, 1.5708F, 0.0F, 0.9599F));
 
-        PartDefinition cube_r8 = dian2.addOrReplaceChild("cube_r8", CubeListBuilder.create().texOffs(56, 88).addBox(0.0951F, -0.5F, -0.0299F, 4.0F, 1.0F, 2.0F, new CubeDeformation(0.0F).extend(0.0001F, 0.0001F, -0.2499F)), PartPose.offsetAndRotation(0.1835F, 0.1246F, 0.01F, 1.5708F, 0.0F, 0.7854F));
+        PartDefinition cube_r8 = dian2.addOrReplaceChild("cube_r8", CubeListBuilder.create().texOffs(56, 88).addBox(0.0951F, -0.5F, -0.0299F, 4.0F, 1.0F, 2.0F, new CubeDeformation(0.0F).extend(0.001F, 0.001F, -0.249F)), PartPose.offsetAndRotation(0.1835F, 0.1246F, 0.01F, 1.5708F, 0.0F, 0.7854F));
 
         PartDefinition cube_outline_r8 = dian2.addOrReplaceChild("cube_outline_r8", CubeListBuilder.create().texOffs(16, 91).addBox(-0.5299F, -1.0F, -0.5951F, 2.0F, 2.0F, 2.0F, new CubeDeformation(-1.9F)), PartPose.offsetAndRotation(-0.1092F, 0.4193F, 0.0F, 1.5708F, 0.0F, -0.7854F));
 
@@ -161,9 +161,9 @@ public class SuperElectricGatlingPeaModel extends HierarchicalModel<EntitySuperE
         PartDefinition cube_r11 = dian3.addOrReplaceChild("cube_r11", CubeListBuilder.create().texOffs(0, 0).addBox(-1.9827F, -0.5F, -0.0951F, 0.7028F, 1.0F, 0.1851F, new CubeDeformation(-0.0001F))
                 .texOffs(36, 51).mirror().addBox(-1.6799F, -0.5F, -0.0951F, 0.4F, 1.0F, 1.0F, new CubeDeformation(0.003F)).mirror(false), PartPose.offsetAndRotation(0.6078F, -0.2998F, 0.01F, 1.5708F, 0.0F, -0.7854F));
 
-        PartDefinition cube_r12 = dian3.addOrReplaceChild("cube_r12", CubeListBuilder.create().texOffs(42, 17).addBox(0.0554F, -0.5F, 0.2333F, 3.9392F, 1.0F, 0.6946F, new CubeDeformation(0F)), PartPose.offsetAndRotation(0.1835F, 0.1245F, 0.01F, 1.5708F, 0.0F, 0.9599F));
+        PartDefinition cube_r12 = dian3.addOrReplaceChild("cube_r12", CubeListBuilder.create().texOffs(0, 97).addBox(0.0554F, -0.5F, 0.2333F, 3.9392F, 1.0F, 0.6946F, new CubeDeformation(0F)), PartPose.offsetAndRotation(0.1835F, 0.1245F, 0.01F, 1.5708F, 0.0F, 0.9599F));
 
-        PartDefinition cube_r13 = dian3.addOrReplaceChild("cube_r13", CubeListBuilder.create().texOffs(56, 88).addBox(0.0951F, -0.5F, -0.0299F, 4.0F, 1.0F, 2.0F, new CubeDeformation(0.0F).extend(0.0001F, 0.0001F, -0.2499F)), PartPose.offsetAndRotation(0.1835F, 0.1245F, 0.01F, 1.5708F, 0.0F, 0.7854F));
+        PartDefinition cube_r13 = dian3.addOrReplaceChild("cube_r13", CubeListBuilder.create().texOffs(56, 88).addBox(0.0951F, -0.5F, -0.0299F, 4.0F, 1.0F, 2.0F, new CubeDeformation(0.0F).extend(0.001F, 0.001F, -0.249F)), PartPose.offsetAndRotation(0.1835F, 0.1245F, 0.01F, 1.5708F, 0.0F, 0.7854F));
 
         PartDefinition cube_outline_r15 = dian3.addOrReplaceChild("cube_outline_r15", CubeListBuilder.create().texOffs(16, 91).addBox(-0.5299F, -1.0F, -0.5951F, 2.0F, 2.0F, 2.0F, new CubeDeformation(-1.9F)), PartPose.offsetAndRotation(-0.1092F, 0.4192F, 0.0F, 1.5708F, 0.0F, -0.7854F));
 
@@ -191,9 +191,9 @@ public class SuperElectricGatlingPeaModel extends HierarchicalModel<EntitySuperE
         PartDefinition cube_r16 = dian5.addOrReplaceChild("cube_r16", CubeListBuilder.create().texOffs(0, 0).addBox(-1.9827F, -0.5F, -0.0951F, 0.7028F, 1.0F, 0.1851F, new CubeDeformation(-0.0001F))
                 .texOffs(36, 51).mirror().addBox(-1.6799F, -0.5F, -0.0951F, 0.4F, 1.0F, 1.0F, new CubeDeformation(0.003F)).mirror(false), PartPose.offsetAndRotation(0.6078F, -0.2998F, 0.01F, 1.5708F, 0.0F, -0.7854F));
 
-        PartDefinition cube_r17 = dian5.addOrReplaceChild("cube_r17", CubeListBuilder.create().texOffs(42, 17).addBox(0.0554F, -0.5F, 0.2333F, 3.9392F, 1.0F, 0.6946F, new CubeDeformation(0F)), PartPose.offsetAndRotation(0.1835F, 0.1245F, 0.01F, 1.5708F, 0.0F, 0.9599F));
+        PartDefinition cube_r17 = dian5.addOrReplaceChild("cube_r17", CubeListBuilder.create().texOffs(0, 97).addBox(0.0554F, -0.5F, 0.2333F, 3.9392F, 1.0F, 0.6946F, new CubeDeformation(0F)), PartPose.offsetAndRotation(0.1835F, 0.1245F, 0.01F, 1.5708F, 0.0F, 0.9599F));
 
-        PartDefinition cube_r18 = dian5.addOrReplaceChild("cube_r18", CubeListBuilder.create().texOffs(56, 88).addBox(0.0951F, -0.5F, -0.0299F, 4.0F, 1.0F, 2.0F, new CubeDeformation(0.0F).extend(0.0001F, 0.0001F, -0.2499F)), PartPose.offsetAndRotation(0.1835F, 0.1245F, 0.01F, 1.5708F, 0.0F, 0.7854F));
+        PartDefinition cube_r18 = dian5.addOrReplaceChild("cube_r18", CubeListBuilder.create().texOffs(56, 88).addBox(0.0951F, -0.5F, -0.0299F, 4.0F, 1.0F, 2.0F, new CubeDeformation(0.0F).extend(0.001F, 0.001F, -0.249F)), PartPose.offsetAndRotation(0.1835F, 0.1245F, 0.01F, 1.5708F, 0.0F, 0.7854F));
 
         PartDefinition cube_outline_r22 = dian5.addOrReplaceChild("cube_outline_r22", CubeListBuilder.create().texOffs(16, 91).addBox(-0.5299F, -1.0F, -0.5951F, 2.0F, 2.0F, 2.0F, new CubeDeformation(-1.9F)), PartPose.offsetAndRotation(-0.1092F, 0.4192F, 0.0001F, 1.5708F, 0.0F, -0.7854F));
 
@@ -269,13 +269,13 @@ public class SuperElectricGatlingPeaModel extends HierarchicalModel<EntitySuperE
 
         PartDefinition cube_r33 = hat.addOrReplaceChild("cube_r33", CubeListBuilder.create().texOffs(62, 91).addBox(5.6132F, -3.3803F, 2.2645F, 0.0F, 1.0F, 3.25F, new CubeDeformation(0.0001F)), PartPose.offsetAndRotation(-0.1025F, 1.6747F, -2.3247F, 0.5847F, 0.0F, 0.0F));
 
-        PartDefinition star1 = hat.addOrReplaceChild("star1", CubeListBuilder.create().texOffs(48, 17).addBox(-0.537F, -0.7469F, 0.0F, 1.0F, 1.4F, 0.0F, new CubeDeformation(0.0001F))
+        PartDefinition star1 = hat.addOrReplaceChild("star1", CubeListBuilder.create().texOffs(0, 99).addBox(-0.537F, -0.7469F, 0.0F, 1.0F, 1.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.737F, 0.4531F, 0.0F, 0.4F, 0.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.937F, 0.7531F, 0.0F, 0.3F, 0.3F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.263F, 0.4531F, 0.0F, 0.4F, 0.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.563F, 0.7531F, 0.0F, 0.3F, 0.3F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.237F, -1.5469F, 0.0F, 0.4F, 0.8F, 0.0F, new CubeDeformation(0.0001F))
-                .texOffs(48, 17).addBox(-0.787F, -0.5219F, 0.0F, 1.5F, 1.0F, 0.0F, new CubeDeformation(0.0001F))
+                .texOffs(0, 99).addBox(-0.787F, -0.5219F, 0.0F, 1.5F, 1.0F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.713F, -0.5219F, 0.0F, 0.5F, 0.2F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-1.287F, -0.5219F, 0.0F, 0.5F, 0.2F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.713F, -0.3219F, 0.0F, 0.3F, 0.2F, 0.0F, new CubeDeformation(0.0001F))
@@ -311,13 +311,13 @@ public class SuperElectricGatlingPeaModel extends HierarchicalModel<EntitySuperE
 
         PartDefinition cube_r48 = star1.addOrReplaceChild("cube_r48", CubeListBuilder.create().texOffs(0, 0).addBox(-0.275F, -0.3724F, -1.0F, 0.1564F, 0.1564F, 0.0F, new CubeDeformation(0.0001F)), PartPose.offsetAndRotation(1.2834F, -0.606F, 1.0F, 0.0F, 0.0F, 2.0508F));
 
-        PartDefinition star2 = hat.addOrReplaceChild("star2", CubeListBuilder.create().texOffs(48, 17).addBox(-0.537F, -0.7469F, 0.0F, 1.0F, 1.4F, 0.0F, new CubeDeformation(0.0001F))
+        PartDefinition star2 = hat.addOrReplaceChild("star2", CubeListBuilder.create().texOffs(0, 99).addBox(-0.537F, -0.7469F, 0.0F, 1.0F, 1.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.737F, 0.4531F, 0.0F, 0.4F, 0.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.937F, 0.7531F, 0.0F, 0.3F, 0.3F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.263F, 0.4531F, 0.0F, 0.4F, 0.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.563F, 0.7531F, 0.0F, 0.3F, 0.3F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.237F, -1.5469F, 0.0F, 0.4F, 0.8F, 0.0F, new CubeDeformation(0.0001F))
-                .texOffs(48, 17).addBox(-0.787F, -0.5219F, 0.0F, 1.5F, 1.0F, 0.0F, new CubeDeformation(0.0001F))
+                .texOffs(0, 99).addBox(-0.787F, -0.5219F, 0.0F, 1.5F, 1.0F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.713F, -0.5219F, 0.0F, 0.5F, 0.2F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-1.287F, -0.5219F, 0.0F, 0.5F, 0.2F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.713F, -0.3219F, 0.0F, 0.3F, 0.2F, 0.0F, new CubeDeformation(0.0001F))
@@ -353,13 +353,13 @@ public class SuperElectricGatlingPeaModel extends HierarchicalModel<EntitySuperE
 
         PartDefinition cube_r63 = star2.addOrReplaceChild("cube_r63", CubeListBuilder.create().texOffs(0, 0).addBox(-0.275F, -0.3724F, -1.0F, 0.1565F, 0.1564F, 0.0F, new CubeDeformation(0.0001F)), PartPose.offsetAndRotation(1.2834F, -0.606F, 1.0F, 0.0F, 0.0F, 2.0508F));
 
-        PartDefinition star3 = hat.addOrReplaceChild("star3", CubeListBuilder.create().texOffs(48, 17).addBox(-0.537F, -0.7469F, 0.0F, 1.0F, 1.4F, 0.0F, new CubeDeformation(0.0001F))
+        PartDefinition star3 = hat.addOrReplaceChild("star3", CubeListBuilder.create().texOffs(0, 99).addBox(-0.537F, -0.7469F, 0.0F, 1.0F, 1.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.737F, 0.4531F, 0.0F, 0.4F, 0.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.937F, 0.7531F, 0.0F, 0.3F, 0.3F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.263F, 0.4531F, 0.0F, 0.4F, 0.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.563F, 0.7531F, 0.0F, 0.3F, 0.3F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.237F, -1.5469F, 0.0F, 0.4F, 0.8F, 0.0F, new CubeDeformation(0.0001F))
-                .texOffs(48, 17).addBox(-0.787F, -0.5219F, 0.0F, 1.5F, 1.0F, 0.0F, new CubeDeformation(0.0001F))
+                .texOffs(0, 99).addBox(-0.787F, -0.5219F, 0.0F, 1.5F, 1.0F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.713F, -0.5219F, 0.0F, 0.5F, 0.2F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-1.287F, -0.5219F, 0.0F, 0.5F, 0.2F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.713F, -0.3219F, 0.0F, 0.3F, 0.2F, 0.0F, new CubeDeformation(0.0001F))
@@ -395,13 +395,13 @@ public class SuperElectricGatlingPeaModel extends HierarchicalModel<EntitySuperE
 
         PartDefinition cube_r78 = star3.addOrReplaceChild("cube_r78", CubeListBuilder.create().texOffs(0, 0).addBox(-0.275F, -0.3724F, -1.0F, 0.1564F, 0.1564F, 0.0F, new CubeDeformation(0.0001F)), PartPose.offsetAndRotation(1.2834F, -0.606F, 1.0F, 0.0F, 0.0F, 2.0508F));
 
-        PartDefinition star4 = hat.addOrReplaceChild("star4", CubeListBuilder.create().texOffs(48, 17).addBox(-0.537F, -0.7469F, 0.0F, 1.0F, 1.4F, 0.0F, new CubeDeformation(0.0001F))
+        PartDefinition star4 = hat.addOrReplaceChild("star4", CubeListBuilder.create().texOffs(0, 99).addBox(-0.537F, -0.7469F, 0.0F, 1.0F, 1.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.737F, 0.4531F, 0.0F, 0.4F, 0.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.937F, 0.7531F, 0.0F, 0.3F, 0.3F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.263F, 0.4531F, 0.0F, 0.4F, 0.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.563F, 0.7531F, 0.0F, 0.3F, 0.3F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.237F, -1.5469F, 0.0F, 0.4F, 0.8F, 0.0F, new CubeDeformation(0.0001F))
-                .texOffs(48, 17).addBox(-0.787F, -0.5219F, 0.0F, 1.5F, 1.0F, 0.0F, new CubeDeformation(0.0001F))
+                .texOffs(0, 99).addBox(-0.787F, -0.5219F, 0.0F, 1.5F, 1.0F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.713F, -0.5219F, 0.0F, 0.5F, 0.2F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-1.287F, -0.5219F, 0.0F, 0.5F, 0.2F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.713F, -0.3219F, 0.0F, 0.3F, 0.2F, 0.0F, new CubeDeformation(0.0001F))
@@ -437,13 +437,13 @@ public class SuperElectricGatlingPeaModel extends HierarchicalModel<EntitySuperE
 
         PartDefinition cube_r93 = star4.addOrReplaceChild("cube_r93", CubeListBuilder.create().texOffs(0, 0).addBox(-0.275F, -0.3724F, -1.0F, 0.1564F, 0.1564F, 0.0F, new CubeDeformation(0.0001F)), PartPose.offsetAndRotation(1.2834F, -0.606F, 1.0F, 0.0F, 0.0F, 2.0508F));
 
-        PartDefinition star5 = hat.addOrReplaceChild("star5", CubeListBuilder.create().texOffs(48, 17).addBox(-0.537F, -0.7469F, 0.0F, 1.0F, 1.4F, 0.0F, new CubeDeformation(0.0001F))
+        PartDefinition star5 = hat.addOrReplaceChild("star5", CubeListBuilder.create().texOffs(0, 99).addBox(-0.537F, -0.7469F, 0.0F, 1.0F, 1.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.737F, 0.4531F, 0.0F, 0.4F, 0.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.937F, 0.7531F, 0.0F, 0.3F, 0.3F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.263F, 0.4531F, 0.0F, 0.4F, 0.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.563F, 0.7531F, 0.0F, 0.3F, 0.3F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.237F, -1.5469F, 0.0F, 0.4F, 0.8F, 0.0F, new CubeDeformation(0.0001F))
-                .texOffs(48, 17).addBox(-0.787F, -0.5219F, 0.0F, 1.5F, 1.0F, 0.0F, new CubeDeformation(0.0001F))
+                .texOffs(0, 99).addBox(-0.787F, -0.5219F, 0.0F, 1.5F, 1.0F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.713F, -0.5219F, 0.0F, 0.5F, 0.2F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-1.287F, -0.5219F, 0.0F, 0.5F, 0.2F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.713F, -0.3219F, 0.0F, 0.3F, 0.2F, 0.0F, new CubeDeformation(0.0001F))
@@ -479,13 +479,13 @@ public class SuperElectricGatlingPeaModel extends HierarchicalModel<EntitySuperE
 
         PartDefinition cube_r108 = star5.addOrReplaceChild("cube_r108", CubeListBuilder.create().texOffs(0, 0).addBox(-0.275F, -0.3724F, -1.0F, 0.1565F, 0.1564F, 0.0F, new CubeDeformation(0.0001F)), PartPose.offsetAndRotation(1.2834F, -0.606F, 1.0F, 0.0F, 0.0F, 2.0508F));
 
-        PartDefinition star6 = hat.addOrReplaceChild("star6", CubeListBuilder.create().texOffs(48, 17).addBox(-0.537F, -0.7469F, 0.0F, 1.0F, 1.4F, 0.0F, new CubeDeformation(0.0001F))
+        PartDefinition star6 = hat.addOrReplaceChild("star6", CubeListBuilder.create().texOffs(0, 99).addBox(-0.537F, -0.7469F, 0.0F, 1.0F, 1.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.737F, 0.4531F, 0.0F, 0.4F, 0.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.937F, 0.7531F, 0.0F, 0.3F, 0.3F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.263F, 0.4531F, 0.0F, 0.4F, 0.4F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.563F, 0.7531F, 0.0F, 0.3F, 0.3F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-0.237F, -1.5469F, 0.0F, 0.4F, 0.8F, 0.0F, new CubeDeformation(0.0001F))
-                .texOffs(48, 17).addBox(-0.787F, -0.5219F, 0.0F, 1.5F, 1.0F, 0.0F, new CubeDeformation(0.0001F))
+                .texOffs(2, 98).addBox(-0.787F, -0.5219F, 0.0F, 1.5F, 1.0F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.713F, -0.5219F, 0.0F, 0.5F, 0.2F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(-1.287F, -0.5219F, 0.0F, 0.5F, 0.2F, 0.0F, new CubeDeformation(0.0001F))
                 .texOffs(0, 0).addBox(0.713F, -0.3219F, 0.0F, 0.3F, 0.2F, 0.0F, new CubeDeformation(0.0001F))

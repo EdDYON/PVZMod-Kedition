@@ -78,7 +78,7 @@ public class ElectricPeashooterModel extends HierarchicalModel<ElectricPeashoote
 
         PartDefinition cube_r2 = dian.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(54, 39).addBox(0.0554F, -0.5F, 0.2333F, 3.9392F, 1.0F, 0.6946F, new CubeDeformation(0F)), PartPose.offsetAndRotation(-2.8264F, -1.8636F, 0.0F, 1.5708F, 0.0F, 0.9599F));
 
-        PartDefinition cube_r3 = dian.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(60, 47).addBox(0.0951F, -0.5F, -0.0299F, 4.0F, 1.0F, 2.0F, new CubeDeformation(0.0F).extend(0.0001F, 0.0001F, -0.2499F)), PartPose.offsetAndRotation(-2.8264F, -1.8636F, 0.0F, 1.5708F, 0.0F, 0.7854F));
+        PartDefinition cube_r3 = dian.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(60, 47).addBox(0.0951F, -0.5F, -0.0299F, 4.0F, 1.0F, 2.0F, new CubeDeformation(0.0F).extend(0.001F, 0.001F, -0.249F)), PartPose.offsetAndRotation(-2.8264F, -1.8636F, 0.0F, 1.5708F, 0.0F, 0.7854F));
 
         PartDefinition cube_outline_r1 = dian.addOrReplaceChild("cube_outline_r1", CubeListBuilder.create().texOffs(62, 22).addBox(-0.5299F, -1.0001F, -0.5951F, 2.0F, 2.0F, 2.0F, new CubeDeformation(-1.9F)), PartPose.offsetAndRotation(-3.1191F, -1.5688F, -0.0099F, 1.5708F, 0.0F, -0.7854F));
 

@@ -36,7 +36,7 @@ public class ElectricPeaProjectile extends ThrowableProjectile {
     private float shockDamage = 1.0F;
     private EntityPlantBase shooter;
     private final Set<UUID> shockedEntities = new HashSet<>();
-    private static final int PARALYSIS_DURATION = 20;
+    private static final int SHOCKED_DURATION = 20;
 
     public ElectricPeaProjectile(EntityType<? extends ElectricPeaProjectile> type, Level level) {
         super(type, level);
@@ -70,7 +70,7 @@ public class ElectricPeaProjectile extends ThrowableProjectile {
             result.getEntity().invulnerableTime = 0;
             if (result.getEntity() instanceof LivingEntity living) {
                 if (this.random.nextInt(10) < 2) {
-                    living.addEffect(new MobEffectInstance(PVZEffects.STUN.get(), PARALYSIS_DURATION, 0));
+                    living.addEffect(new MobEffectInstance(PVZEffects.SHOCKED.get(), SHOCKED_DURATION, 0));
                 }
             }
             this.shockNearbyEntities();
@@ -183,7 +183,7 @@ public class ElectricPeaProjectile extends ThrowableProjectile {
             );
             living.invulnerableTime = 0;
             if (this.random.nextInt(10) < 2) {
-                living.addEffect(new MobEffectInstance(PVZEffects.STUN.get(), PARALYSIS_DURATION, 0));
+                living.addEffect(new MobEffectInstance(PVZEffects.SHOCKED.get(), SHOCKED_DURATION, 0));
             }
 
             shockedEntities.add(living.getUUID());
