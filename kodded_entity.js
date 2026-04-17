@@ -385,7 +385,7 @@
 
 	Plugin.register(PLUGIN_ID, {
 		title: PLUGIN_TITLE,
-		author: 'OpenAI',
+		author: 'Keletu and OpenAI',
 		icon: PLUGIN_ICON,
 		description: 'Per-axis inflate preview + modded_entity export support',
 		version: '1.1.1',

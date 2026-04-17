@@ -133,7 +133,7 @@ public class TrueRangedAttackGoal extends Goal {
             }
         }
 
-        if (attackTime == 25 && this.mob instanceof FumeShroomEntity) {
+        if (attackTime == 30 && this.mob instanceof FumeShroomEntity) {
             this.mob.playSound(
                     PVZSounds.FUME_SHROOM_SHOOT.get(),
                     1.0F,

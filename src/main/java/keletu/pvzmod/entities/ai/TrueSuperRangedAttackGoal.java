@@ -1,6 +1,7 @@
 package keletu.pvzmod.entities.ai;
 
 import keletu.pvzmod.entities.EntitySuperGatlingPea;
+import keletu.pvzmod.init.PVZSounds;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -137,6 +138,7 @@ public class TrueSuperRangedAttackGoal extends Goal {
 
             this.tryTriggerSuperRapidFire();
             this.mob.performRangedAttack(this.target, f3);
+            this.mob.playSound(this.mob.getShootSound(), 1.0F, 1.0F / (this.mob.getRandom().nextFloat() * 0.4F + 0.8F));
 
             this.remainingShots = this.burstCount - 1;
             if (this.remainingShots > 0) {
@@ -152,6 +154,7 @@ public class TrueSuperRangedAttackGoal extends Goal {
     private void tryTriggerSuperRapidFire() {
         if (this.mob.canTriggerSuperRapidFire() && this.mob.getRandom().nextFloat() < EntitySuperGatlingPea.SUPER_RAPID_FIRE_CHANCE) {
             this.mob.triggerSuperRapidFire();
+            this.mob.playSound(PVZSounds.SUPERGATLINGPEA_POWER.get(), 1.0F, 1.0F / (this.mob.getRandom().nextFloat() * 0.4F + 0.8F));
         }
     }
 }

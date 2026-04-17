@@ -137,7 +137,7 @@ public class ElectricPeaProjectileRenderer extends EntityRenderer {
             }
         }
 
-        return null;
+        return new Vec3(start.x, start.y - 3.0F, start.z);
     }
 
     @Override

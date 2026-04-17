@@ -72,7 +72,8 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
 
             projectile.shoot(toX, 0, toZ, 1.6F, 0.0F);
 
-            this.playSound(getShootSound(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+            if (!(this instanceof EntitySuperGatlingPea))
+                this.playSound(getShootSound(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 
             this.level().addFreshEntity(projectile);
 

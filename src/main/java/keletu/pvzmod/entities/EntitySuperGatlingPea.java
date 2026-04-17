@@ -156,8 +156,6 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase {
                 .xRot((float) Math.toRadians(spreadPitch))
                 .normalize();
 
-        this.playSound(PVZSounds.SUPERGATLINGPEA_POWER.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-
         pea.shoot(spreadDirection.x, 0, spreadDirection.z, 1.2F, 0.0F);
 
         this.level().addFreshEntity(pea);
