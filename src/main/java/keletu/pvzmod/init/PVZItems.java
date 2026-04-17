@@ -3,6 +3,7 @@ package keletu.pvzmod.init;
 import keletu.pvzmod.PVZMod;
 import keletu.pvzmod.items.ItemGardenShovel;
 import keletu.pvzmod.items.ItemPlantCard;
+import keletu.pvzmod.items.ItemSun;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -21,6 +22,8 @@ public class PVZItems {
                     .saturationMod(0.25F)
                     .fast()
                     .build())
+            .stacksTo(64)));
+    public static final RegistryObject<Item> SUN = ITEMS.register("sun", () -> new ItemSun(new Item.Properties()
             .stacksTo(64)));
     public static final RegistryObject<Item> PEASHOOTER_CARD = ITEMS.register("peashooter_card",
             () -> new ItemPlantCard(new Item.Properties(), PVZEntities.PEA_SHOOTER));

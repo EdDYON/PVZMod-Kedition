@@ -94,6 +94,7 @@ public class ClientEvents {
 
         event.registerLayerDefinition(PotBlockModel.LAYER_LOCATION, PotBlockModel::createBodyLayer);
         event.registerLayerDefinition(GardenShovelModel.LAYER_LOCATION, GardenShovelModel::createBodyLayer);
+        event.registerLayerDefinition(SunItemModel.LAYER_LOCATION, SunItemModel::createBodyLayer);
 
         event.registerLayerDefinition(ModelPrimalPea.LAYER_LOCATION, ModelPrimalPea::createBodyLayer);
         event.registerLayerDefinition(ModelIcePea.LAYER_LOCATION, ModelIcePea::createBodyLayer);
