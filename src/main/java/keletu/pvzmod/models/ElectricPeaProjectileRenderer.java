@@ -33,12 +33,12 @@ public class ElectricPeaProjectileRenderer extends EntityRenderer {
 
     private final LightningBoltData.BoltRenderInfo groundLightningBoltData =
             new LightningBoltData.BoltRenderInfo(
-                    0.0F,
+                    0.3F,
                     0.15F,
                     0.5F,
                     0.25F,
                     new Vector4f(0.5F, 1.0F, 0.5F, 0.7F),
-                    1.0F
+                    0.8F
             );
 
     EntityModel model;
@@ -116,7 +116,7 @@ public class ElectricPeaProjectileRenderer extends EntityRenderer {
     }
 
     private void renderGroundBolt(Entity owner, Vec3 start, Vec3 end, float partialTicks, PoseStack poseStack, MultiBufferSource buffer) {
-        LightningBoltData bolt = new LightningBoltData(groundLightningBoltData, start, end, 1)
+        LightningBoltData bolt = new LightningBoltData(groundLightningBoltData, start, end, 2)
                 .count(1)
                 .size(0.08F)
                 .lifespan(1)
