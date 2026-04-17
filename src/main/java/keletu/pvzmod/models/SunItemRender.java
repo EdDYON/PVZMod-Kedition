@@ -7,7 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -38,8 +37,19 @@ public class SunItemRender extends BlockEntityWithoutLevelRenderer {
                              int packedLight, int packedOverlay) {
         poseStack.pushPose();
 
+        SunItemModel model = getModel();
+
+        float age = 0.0F;
+        if (Minecraft.getInstance().level != null) {
+            age = Minecraft.getInstance().level.getGameTime() + Minecraft.getInstance().getFrameTime();
+        } else {
+            age = Minecraft.getInstance().getFrameTime();
+        }
+
+        model.setupAnim(age);
+
         VertexConsumer consumer = buffer.getBuffer(RenderType.entityCutout(TEXTURE));
-        getModel().render(poseStack, consumer, packedLight, OverlayTexture.NO_OVERLAY);
+        model.render(poseStack, consumer, packedLight, packedOverlay);
 
         poseStack.popPose();
     }

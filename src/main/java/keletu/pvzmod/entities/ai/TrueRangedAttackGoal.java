@@ -169,6 +169,7 @@ public class TrueRangedAttackGoal extends Goal {
             float f2 = (float) Math.sqrt(living) / this.attackRadius;
             float f3 = Mth.clamp(f2, 0.1F, 1.0F);
 
+            this.mob.playSound(this.mob.getShootSound(), 1.0F, 1.0F / (this.mob.getRandom().nextFloat() * 0.4F + 0.8F));
             this.mob.performRangedAttack(this.target, f3);
 
             this.remainingShots = this.burstCount - 1;

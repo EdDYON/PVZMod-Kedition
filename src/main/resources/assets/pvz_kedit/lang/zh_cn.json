@@ -2,17 +2,9 @@
   "language": "Chinese",
   "language.code": "zh_cn",
   "language.region": "China",
-
   "block.pvz_kedit.pot": "花盆",
-
   "item.pvz_kedit.pea": "豌豆",
-  "item.pvz_kedit.ice_pea": "冷冻豌豆",
-  "item.pvz_kedit.primal_pea": "大豌豆",
-  "item.pvz_kedit.electric_pea": "电能豌豆",
-  "item.pvz_kedit.spore": "孢子",
-  "item.pvz_kedit.small_stone": "小块岩石",
   "item.pvz_kedit.garden_shovel": "花园铁锹",
-
   "item.pvz_kedit.peashooter_card": "豌豆射手",
   "item.pvz_kedit.snowpea_card": "寒冰射手",
   "item.pvz_kedit.repeater_card": "双发射手",
@@ -23,7 +15,6 @@
   "item.pvz_kedit.super_gatling_pea_card": "超级机枪射手",
   "item.pvz_kedit.potato_mine_card": "土豆地雷",
   "item.pvz_kedit.puff_shroom_card": "小喷菇",
-
   "entity.pvz_kedit.pea_shooter": "Pea Shooter",
   "entity.pvz_kedit.snow_pea": "Pea Shooter",
   "entity.pvz_kedit.repeater": "Repeater",
@@ -37,9 +28,7 @@
   "entity.pvz_kedit.super_electric_gatling_pea": "Super Gatling Pea (Electric)",
   "entity.pvz_kedit.potato_mine": "Potato Mine",
   "entity.pvz_kedit.puff_shroom": "Puff-Shroom",
-
   "effect.pvz_kedit.snow": "冰冻",
   "effect.pvz_kedit.stun": "眩晕",
-
   "creativetab.pvz_kedit": "植物大战僵尸"
 }

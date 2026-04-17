@@ -25,6 +25,8 @@ public class PVZItems {
             .stacksTo(64)));
     public static final RegistryObject<Item> SUN = ITEMS.register("sun", () -> new ItemSun(new Item.Properties()
             .stacksTo(64)));
+    public static final RegistryObject<Item> SUN_FLOWER_CARD = ITEMS.register("sun_flower_card",
+            () -> new ItemPlantCard(new Item.Properties(), PVZEntities.SUN_FLOWER));
     public static final RegistryObject<Item> PEASHOOTER_CARD = ITEMS.register("peashooter_card",
             () -> new ItemPlantCard(new Item.Properties(), PVZEntities.PEA_SHOOTER));
     public static final RegistryObject<Item> SNOWPEA_CARD = ITEMS.register("snowpea_card",

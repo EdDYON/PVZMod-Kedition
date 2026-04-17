@@ -58,6 +58,10 @@ public class SunItemModel {
         return LayerDefinition.create(meshdefinition, 32, 32);
     }
 
+    public void setupAnim(float ageInTicks) {
+        this.bone.zRot = ageInTicks * 0.1F;
+    }
+
     public void render(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay) {
         all.render(poseStack, vertexConsumer, packedLight, packedOverlay, 1F, 1F, 1F, 1F);
     }

@@ -34,6 +34,7 @@ public class PVZEntities {
     public static final RegistryObject<EntityType<FumeShroomEntity>> FUME_SHROOM = PVZEntities.ENTITIES.register("fume_shroom", () -> EntityType.Builder.of(FumeShroomEntity::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build(PVZMod.MODID + ".fume_shroom"));
     public static final RegistryObject<EntityType<ElectricPeashooterEntity>> ELECTRIC_PEASHOOTER = PVZEntities.ENTITIES.register("electric_peashooter", () -> EntityType.Builder.of(ElectricPeashooterEntity::new, MobCategory.MISC).sized(1.0F, 1.2f).clientTrackingRange(8).build(PVZMod.MODID + ".electric_peashooter"));
     public static final RegistryObject<EntityType<ScaredyShroomEntity>> SCAREDY_SHROOM = PVZEntities.ENTITIES.register("scaredy_shroom", () -> EntityType.Builder.of(ScaredyShroomEntity::new, MobCategory.MISC).sized(1.0F, 1.1f).clientTrackingRange(8).build(PVZMod.MODID + ".scaredy_shroom"));
+    public static final RegistryObject<EntityType<EntitySunFlower>> SUN_FLOWER = PVZEntities.ENTITIES.register("sun_flower", () -> EntityType.Builder.of(EntitySunFlower::new, MobCategory.MISC).sized(1.0F, 1.3f).clientTrackingRange(8).build(PVZMod.MODID + ".sun_flower"));
     public static final RegistryObject<EntityType<PeaProjectile>> PEA_PROJECTILE = PVZEntities.ENTITIES.register("pea_projectile",
             () -> EntityType.Builder.<PeaProjectile>of(PeaProjectile::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F)
@@ -66,6 +67,8 @@ public class PVZEntities {
                     .build("spore_projectile"));
 
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
+        event.put(SUN_FLOWER.get(), EntitySunFlower.createAttributes().build());
+
         event.put(PEA_SHOOTER.get(), EntityPeaShooter.createAttributes().build());
         event.put(SNOW_PEA.get(), EntitySnowPea.createAttributes().build());
         event.put(REPEATER.get(), EntityRepeater.createAttributes().build());
@@ -90,6 +93,8 @@ public class PVZEntities {
 
     @OnlyIn(Dist.CLIENT)
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(SUN_FLOWER.get(), SunFlowerRender::new);
+
         event.registerEntityRenderer(PEA_SHOOTER.get(), PeaShooterRender::new);
         event.registerEntityRenderer(PEA_PROJECTILE.get(), ThrownItemRenderer::new);
 
