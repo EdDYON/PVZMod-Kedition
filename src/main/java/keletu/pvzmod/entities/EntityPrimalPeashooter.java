@@ -28,6 +28,11 @@ public class EntityPrimalPeashooter extends EntityPlantShooterBase {
     }
 
     @Override
+    protected int getShootAnimationDurationTicks() {
+        return 55;
+    }
+
+    @Override
     public SoundEvent getShootSound() {
         return PVZSounds.PRIMALPEASHOOTER_SHOOT.get();
     }
@@ -56,12 +61,6 @@ public class EntityPrimalPeashooter extends EntityPlantShooterBase {
     }
 
     public void setupAnimationStates() {
-        if (this.isShooting()) {
-            this.idleAnimation.stop();
-            this.shootAnimation.startIfStopped(this.tickCount);
-        } else {
-            this.shootAnimation.stop();
-            this.idleAnimation.startIfStopped(this.tickCount);
-        }
+        this.updateShootAnimationState(this.idleAnimation, this.shootAnimation);
     }
 }

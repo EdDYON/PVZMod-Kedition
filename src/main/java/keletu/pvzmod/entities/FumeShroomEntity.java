@@ -22,7 +22,6 @@ public class FumeShroomEntity extends EntityPlantShooterBase {
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState shootAnimationState = new AnimationState();
 
-    private int idleAnimationTimeout = 0;
     // 可调参数
     private static final float BEAM_LENGTH = 10.0F;
     private static final float BEAM_RADIUS = 1.25F;
@@ -41,6 +40,11 @@ public class FumeShroomEntity extends EntityPlantShooterBase {
     @Override
     protected TrueRangedAttackGoal createRangedAttackGoal() {
         return new TrueRangedAttackGoal(this, 0.0F, this.range, 1, 0, 50, 40);
+    }
+
+    @Override
+    protected int getShootAnimationDurationTicks() {
+        return 50;
     }
 
     @Override
@@ -180,17 +184,6 @@ public class FumeShroomEntity extends EntityPlantShooterBase {
     }
 
     private void setupAnimationStates() {
-        if (this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = 50;
-            this.idleAnimationState.start(this.tickCount);
-        } else {
-            --this.idleAnimationTimeout;
-        }
-
-        if (this.isShooting()) {
-            this.shootAnimationState.startIfStopped(this.tickCount);
-        } else {
-            this.shootAnimationState.stop();
-        }
+        this.updateShootAnimationState(this.idleAnimationState, this.shootAnimationState);
     }
 }

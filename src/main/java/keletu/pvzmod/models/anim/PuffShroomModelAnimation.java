@@ -43,7 +43,7 @@ public class PuffShroomModelAnimation {
             ))
             .build();
 
-    public static final AnimationDefinition shoot = AnimationDefinition.Builder.withLength(1.5F).looping()
+    public static final AnimationDefinition shoot = AnimationDefinition.Builder.withLength(1.5F)
             .addAnimation("mouth", new AnimationChannel(AnimationChannel.Targets.SCALE,
                     new Keyframe(0.0F, KeyframeAnimations.scaleVec(1.0F, 1.0F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),
                     new Keyframe(0.4583F, KeyframeAnimations.scaleVec(1.0F, 0.9F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),

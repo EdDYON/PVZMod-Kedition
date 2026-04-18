@@ -111,7 +111,7 @@ public class SGPAnimation {
             ))
             .build();
 
-    public static final AnimationDefinition shoot = AnimationDefinition.Builder.withLength(1.5F).looping()
+    public static final AnimationDefinition shoot = AnimationDefinition.Builder.withLength(1.5F)
             .addAnimation("head", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.875F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
                     new Keyframe(1.125F, KeyframeAnimations.degreeVec(0.0F, 0.0F, -10.0F), AnimationChannel.Interpolations.CATMULLROM),

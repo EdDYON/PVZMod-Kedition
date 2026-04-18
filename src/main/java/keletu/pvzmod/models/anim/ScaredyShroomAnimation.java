@@ -342,7 +342,7 @@ public class ScaredyShroomAnimation {
             ))
             .build();
 
-    public static final AnimationDefinition shoot = AnimationDefinition.Builder.withLength(1.5F).looping()
+    public static final AnimationDefinition shoot = AnimationDefinition.Builder.withLength(1.5F)
             .addAnimation("hat", new AnimationChannel(AnimationChannel.Targets.POSITION,
                     new Keyframe(0.0F, KeyframeAnimations.posVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
                     new Keyframe(0.75F, KeyframeAnimations.posVec(0.0F, 1.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),

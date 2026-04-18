@@ -105,7 +105,7 @@ public class GatlingPeaModelAnimation {
             ))
             .build();
 
-    public static final AnimationDefinition shoot = AnimationDefinition.Builder.withLength(1.0F).looping()
+    public static final AnimationDefinition shoot = AnimationDefinition.Builder.withLength(1.0F)
             .addAnimation("head", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
                     new Keyframe(0.2917F, KeyframeAnimations.degreeVec(0.0F, 0.0F, -4.0F), AnimationChannel.Interpolations.CATMULLROM),

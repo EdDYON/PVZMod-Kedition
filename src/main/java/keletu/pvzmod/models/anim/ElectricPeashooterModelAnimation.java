@@ -283,7 +283,7 @@ public class ElectricPeashooterModelAnimation {
             ))
             .build();
 
-    public static final AnimationDefinition shoot = AnimationDefinition.Builder.withLength(2.25F).looping()
+    public static final AnimationDefinition shoot = AnimationDefinition.Builder.withLength(2.25F)
             .addAnimation("head", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.2083F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
                     new Keyframe(0.4167F, KeyframeAnimations.degreeVec(0.0F, 15.0F, 25.0F), AnimationChannel.Interpolations.CATMULLROM),

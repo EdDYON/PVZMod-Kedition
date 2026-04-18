@@ -201,12 +201,6 @@ public class ScaredyShroomEntity extends EntityPlantShooterBase {
             this.hideAnimation.stop();
         }
 
-        if (this.isShooting()) {
-            this.idleAnimationState.stop();
-            this.shootAnimationState.startIfStopped(this.tickCount);
-        } else {
-            this.shootAnimationState.stop();
-            this.idleAnimationState.startIfStopped(this.tickCount);
-        }
+        this.updateShootAnimationState(this.idleAnimationState, this.shootAnimationState);
     }
 }

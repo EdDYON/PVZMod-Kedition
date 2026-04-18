@@ -28,6 +28,7 @@ public class TrueRangedAttackGoal extends Goal {
     private int burstTimer;
     private int cooldown;
     private int cooldown_first;
+    private boolean attackCycleStarted;
 
     public TrueRangedAttackGoal(EntityPlantShooterBase pRangedAttackMob, double pSpeedModifier, float pAttackRadius) {
         this(pRangedAttackMob, pSpeedModifier, pAttackRadius, 1, 0, 20, 20);
@@ -61,7 +62,6 @@ public class TrueRangedAttackGoal extends Goal {
         LivingEntity living = this.mob.getTarget();
         if (living != null && living.isAlive() && this.mob.canAttack(living)) {
             this.target = living;
-            this.mob.setShooting(true);
             return true;
         } else {
             return false;
@@ -69,20 +69,30 @@ public class TrueRangedAttackGoal extends Goal {
     }
 
     public boolean canContinueToUse() {
-        if (this.target == null || !this.target.isAlive() || this.target.distanceTo(this.mob) > 24) {
+        if (this.target == null) {
+            return false;
+        }
+
+        if (!this.target.isAlive()) {
+            return this.isAttackCycleInProgress() || this.mob.isShootAnimationInProgress();
+        }
+
+        if (this.target.distanceTo(this.mob) > 24 && !this.isAttackCycleInProgress() && !this.mob.isShootAnimationInProgress()) {
             this.clearTargetAndStop();
             return false;
         }
+
         return true;
     }
 
     public void stop() {
-        this.target = this.mob.getTarget();
+        this.target = null;
         this.seeTime = 0;
         this.attackTime = -1;
         this.remainingShots = 0;
         this.burstTimer = 0;
-        this.mob.setShooting(false);
+        this.attackCycleStarted = false;
+        this.mob.stopShootingIfAnimationFinished();
     }
 
     public boolean requiresUpdateEveryTick() {
@@ -90,23 +100,41 @@ public class TrueRangedAttackGoal extends Goal {
     }
 
     public void tick() {
-        if (this.target == null || !this.target.isAlive() || !this.mob.canAttack(this.target)) {
+        if (this.target == null) {
             this.clearTargetAndStop();
             return;
         }
 
-        this.mob.faceTarget(this.target);
+        boolean targetAlive = this.target.isAlive();
+        if (!targetAlive && !this.isAttackCycleInProgress()) {
+            if (this.mob.isShootAnimationInProgress()) {
+                this.mob.getNavigation().stop();
+                return;
+            }
+
+            this.clearTargetAndStop();
+            return;
+        }
+
+        if (targetAlive && !this.mob.canAttack(this.target)) {
+            this.clearTargetAndStop();
+            return;
+        }
 
         double living = this.mob.distanceToSqr(this.target.getX(), this.target.getY(), this.target.getZ());
-        boolean hasSight = this.mob.hasAttackLineOfSight(this.target);
+        boolean hasSight = !targetAlive || this.mob.hasAttackLineOfSight(this.target);
 
-        if (hasSight) {
+        if (targetAlive) {
+            this.mob.faceTarget(this.target);
+        }
+
+        if (targetAlive && hasSight) {
             ++this.seeTime;
-        } else {
+        } else if (targetAlive) {
             this.seeTime = 0;
         }
 
-        if (!(living > (double) this.attackRadiusSqr) && this.seeTime >= 5) {
+        if (!targetAlive || (!(living > (double) this.attackRadiusSqr) && this.seeTime >= 5)) {
             this.mob.getNavigation().stop();
         } else {
             this.mob.getNavigation().moveTo(this.target, this.speedModifier);
@@ -117,12 +145,15 @@ public class TrueRangedAttackGoal extends Goal {
         if (this.remainingShots > 0) {
             --this.burstTimer;
             if (this.burstTimer <= 0) {
-                if (hasSight && this.target != null && this.target.isAlive()) {
+                if (hasSight && this.target != null) {
                     float f2 = (float) Math.sqrt(living) / this.attackRadius;
                     float f3 = Mth.clamp(f2, 0.1F, 1.0F);
                     this.mob.performRangedAttack(this.target, f3);
                 }
                 --this.remainingShots;
+                if (this.remainingShots <= 0) {
+                    this.attackCycleStarted = false;
+                }
 
                 if (this.remainingShots > 0) {
                     this.burstTimer = this.burstDelay;
@@ -130,7 +161,14 @@ public class TrueRangedAttackGoal extends Goal {
             }
         }
 
-        if (attackTime == 30 && this.mob instanceof FumeShroomEntity) {
+        if (!targetAlive && !this.isAttackCycleInProgress()) {
+            if (!this.mob.isShootAnimationInProgress()) {
+                this.clearTargetAndStop();
+            }
+            return;
+        }
+
+        if (this.attackCycleStarted && attackTime == 30 && this.mob instanceof FumeShroomEntity) {
             this.mob.playSound(
                     PVZSounds.FUME_SHROOM_SHOOT.get(),
                     1.0F,
@@ -138,7 +176,7 @@ public class TrueRangedAttackGoal extends Goal {
             );
         }
 
-        if (attackTime > 0 && attackTime <= 18 && this.mob instanceof FumeShroomEntity entity) {
+        if (this.attackCycleStarted && attackTime > 0 && attackTime <= 18 && this.mob instanceof FumeShroomEntity entity) {
             Vec3 flatDir = new Vec3(
                     this.target.getX() - entity.getX(),
                     0.0D,
@@ -153,23 +191,27 @@ public class TrueRangedAttackGoal extends Goal {
             }
 
             Vec3 nozzle = new Vec3(entity.getX(), entity.getY() + 0.7D, entity.getZ()).add(dir.scale(0.45D));
-            Vec3 end = nozzle.add(dir.scale(1.0F));
 
             entity.spawnBeamParticles((ServerLevel) entity.level(), nozzle, dir);
 
-            if (attackTime % 6 == 0 && this.target != null && this.target.isAlive()) {
+            if (attackTime % 6 == 0 && this.target != null) {
                 float f2 = (float) Math.sqrt(living) / this.attackRadius;
                 float f3 = Mth.clamp(f2, 0.1F, 1.0F);
                 this.mob.performRangedAttack(this.target, f3);
             }
         }
-        if (--this.attackTime == 0) {
+        if (this.attackCycleStarted) {
+            if (--this.attackTime != 0) {
+                return;
+            }
+
             if (!hasSight) {
                 return;
             }
 
             if (this.mob instanceof FumeShroomEntity) {
-                this.attackTime = cooldown;
+                this.attackCycleStarted = false;
+                this.attackTime = targetAlive ? cooldown : -1;
                 return;
             }
 
@@ -182,12 +224,35 @@ public class TrueRangedAttackGoal extends Goal {
             this.remainingShots = this.burstCount - 1;
             if (this.remainingShots > 0) {
                 this.burstTimer = this.burstDelay;
+            } else {
+                this.attackCycleStarted = false;
             }
 
-            this.attackTime = cooldown;
-        } else if (this.attackTime < 0) {
-            this.attackTime = cooldown_first;
+            this.attackTime = targetAlive ? cooldown : -1;
+            return;
         }
+
+        if (this.remainingShots > 0) {
+            return;
+        }
+
+        if (this.attackTime > 0) {
+            --this.attackTime;
+            return;
+        }
+
+        if (targetAlive) {
+            if (this.mob.startShootingAnimation()) {
+                this.attackCycleStarted = true;
+                this.attackTime = cooldown_first;
+            }
+        } else if (!this.mob.isShootAnimationInProgress()) {
+            this.clearTargetAndStop();
+        }
+    }
+
+    private boolean isAttackCycleInProgress() {
+        return this.attackCycleStarted || this.remainingShots > 0;
     }
 
     private void clearTargetAndStop() {
@@ -197,6 +262,7 @@ public class TrueRangedAttackGoal extends Goal {
         this.attackTime = -1;
         this.remainingShots = 0;
         this.burstTimer = 0;
+        this.attackCycleStarted = false;
         this.mob.setShooting(false);
     }
 }

@@ -9,6 +9,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
@@ -23,9 +24,11 @@ import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public abstract class EntityPlantShooterBase extends EntityPlantBase implements RangedAttackMob {
     private static final EntityDataAccessor<Boolean> IS_SHOOTING = SynchedEntityData.defineId(EntityPlantShooterBase.class, EntityDataSerializers.BOOLEAN);
+    private int shootingAnimationTicks;
 
     public EntityPlantShooterBase(EntityType<? extends EntityPlantBase> entityType, Level level) {
         super(entityType, level);
@@ -60,6 +63,55 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
     }
 
     @Override
+    public void tick() {
+        if (!this.level().isClientSide && this.shootingAnimationTicks > 0) {
+            --this.shootingAnimationTicks;
+            if (this.shootingAnimationTicks <= 0) {
+                this.setShooting(false);
+            }
+        }
+
+        super.tick();
+    }
+
+    protected int getShootAnimationDurationTicks() {
+        return 30;
+    }
+
+    public boolean isShootAnimationInProgress() {
+        return this.shootingAnimationTicks > 0;
+    }
+
+    public boolean startShootingAnimation() {
+        if (this.isShootAnimationInProgress()) {
+            return false;
+        }
+
+        this.shootingAnimationTicks = Math.max(1, this.getShootAnimationDurationTicks());
+        this.setShooting(true);
+        return true;
+    }
+
+    public void stopShootingIfAnimationFinished() {
+        if (!this.isShootAnimationInProgress()) {
+            this.setShooting(false);
+        }
+    }
+
+    protected void updateShootAnimationState(AnimationState idleAnimation, AnimationState shootAnimation) {
+        if (!this.level().isClientSide()) {
+            return;
+        }
+
+        idleAnimation.startIfStopped(this.tickCount);
+        if (this.isShooting()) {
+            shootAnimation.startIfStopped(this.tickCount);
+        } else {
+            shootAnimation.stop();
+        }
+    }
+
+    @Override
     public void performRangedAttack(LivingEntity target, float distanceFactor) {
         if (!this.level().isClientSide) {
             this.faceTarget(target);
@@ -69,6 +121,11 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
 
             double toX = target.getX() - this.getX();
             double toZ = target.getZ() - this.getZ();
+            if (toX * toX + toZ * toZ < 1.0E-6D) {
+                Vec3 look = this.getLookAngle();
+                toX = look.x;
+                toZ = look.z;
+            }
 
             projectile.shoot(toX, 0, toZ, 1.6F, 0.0F);
 
@@ -108,14 +165,14 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
     @Override
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
-        pCompound.putBoolean("Shooting", this.isShooting());
         //this.addPersistentAngerSaveData(pCompound);
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
-        this.setShooting(pCompound.getBoolean("Shooting"));
+        this.shootingAnimationTicks = 0;
+        this.setShooting(false);
         //this.readPersistentAngerSaveData(this.level(), pCompound);
     }
 
