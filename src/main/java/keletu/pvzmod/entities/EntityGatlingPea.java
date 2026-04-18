@@ -32,6 +32,11 @@ public class EntityGatlingPea extends EntityPlantShooterBase {
     }
 
     @Override
+    protected int getShootAnimationDurationTicks() {
+        return 20;
+    }
+
+    @Override
     public ThrowableProjectile entitySelect(Level world) {
         PeaProjectile ent = new PeaProjectile(world, this, 3);
         return ent;
@@ -49,13 +54,7 @@ public class EntityGatlingPea extends EntityPlantShooterBase {
     }
 
     public void setupAnimationStates() {
-        if (this.isShooting()) {
-            this.idleAnimation.stop();
-            this.shootAnimation.startIfStopped(this.tickCount);
-        } else {
-            this.shootAnimation.stop();
-            this.idleAnimation.startIfStopped(this.tickCount);
-        }
+        this.updateShootAnimationState(this.idleAnimation, this.shootAnimation);
     }
 
 }

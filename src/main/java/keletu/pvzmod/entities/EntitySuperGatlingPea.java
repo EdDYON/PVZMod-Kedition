@@ -183,12 +183,12 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase {
 
 
     public void setupAnimationStates() {
+        this.idleAnimation.startIfStopped(this.tickCount);
+
         if (this.isSuperFiring()) {
-            this.idleAnimation.stop();
             this.shootAnimation.stop();
             this.superAnimation.startIfStopped(this.tickCount);
         } else if (this.isShooting()) {
-            this.idleAnimation.stop();
             this.superAnimation.stop();
             this.shootAnimation.startIfStopped(this.tickCount);
         } else {

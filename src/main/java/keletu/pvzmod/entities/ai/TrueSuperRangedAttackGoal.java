@@ -22,6 +22,7 @@ public class TrueSuperRangedAttackGoal extends Goal {
     private int burstTimer;
     private int cooldown;
     private int cooldown_first;
+    private boolean attackCycleStarted;
 
     public TrueSuperRangedAttackGoal(EntitySuperGatlingPea attacker, double speedModifier, float attackRadius) {
         this(attacker, speedModifier, attackRadius, 1, 0, 30, 25);
@@ -48,7 +49,6 @@ public class TrueSuperRangedAttackGoal extends Goal {
         LivingEntity livingentity = this.mob.getTarget();
         if (livingentity != null && livingentity.isAlive()) {
             this.target = livingentity;
-            this.mob.setShooting(true);
             return true;
         }
         return false;
@@ -56,9 +56,12 @@ public class TrueSuperRangedAttackGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        if (this.target == null || !this.target.isAlive()) {
-            this.clearTargetAndStop();
+        if (this.target == null) {
             return false;
+        }
+
+        if (!this.target.isAlive()) {
+            return this.isAttackCycleInProgress() || this.mob.isShootAnimationInProgress();
         }
 
         return true;
@@ -71,7 +74,8 @@ public class TrueSuperRangedAttackGoal extends Goal {
         this.attackTime = -1;
         this.remainingShots = 0;
         this.burstTimer = 0;
-        this.mob.setShooting(false);
+        this.attackCycleStarted = false;
+        this.mob.stopShootingIfAnimationFinished();
     }
 
     @Override
@@ -81,27 +85,42 @@ public class TrueSuperRangedAttackGoal extends Goal {
 
     @Override
     public void tick() {
-        if (this.target == null || !this.target.isAlive() || !this.mob.canAttack(this.target)) {
+        if (this.target == null) {
+            this.clearTargetAndStop();
+            return;
+        }
+
+        boolean targetAlive = this.target.isAlive();
+        if (!targetAlive && !this.isAttackCycleInProgress()) {
+            if (this.mob.isShootAnimationInProgress()) {
+                this.mob.getNavigation().stop();
+                return;
+            }
+
+            this.clearTargetAndStop();
+            return;
+        }
+
+        if (targetAlive && !this.mob.canAttack(this.target)) {
             this.clearTargetAndStop();
             return;
         }
 
         if (this.mob.isSuperFiring()) {
             this.mob.getLookControl().setLookAt(this.target, 30.0F, 30.0F);
-            this.mob.setShooting(true);
             return;
         }
 
         double living = this.mob.distanceToSqr(this.target.getX(), this.target.getY(), this.target.getZ());
-        boolean hasSight = this.mob.getSensing().hasLineOfSight(this.target);
+        boolean hasSight = !targetAlive || this.mob.getSensing().hasLineOfSight(this.target);
 
-        if (hasSight) {
+        if (targetAlive && hasSight) {
             ++this.seeTime;
-        } else {
+        } else if (targetAlive) {
             this.seeTime = 0;
         }
 
-        if (!(living > (double) this.attackRadiusSqr) && this.seeTime >= 5) {
+        if (!targetAlive || (!(living > (double) this.attackRadiusSqr) && this.seeTime >= 5)) {
             this.mob.getNavigation().stop();
         } else {
             this.mob.getNavigation().moveTo(this.target, this.speedModifier);
@@ -112,13 +131,16 @@ public class TrueSuperRangedAttackGoal extends Goal {
         if (this.remainingShots > 0) {
             --this.burstTimer;
             if (this.burstTimer <= 0) {
-                if (hasSight && this.target != null && this.target.isAlive()) {
+                if (hasSight && this.target != null) {
                     float f2 = (float) Math.sqrt(living) / this.attackRadius;
                     float f3 = Mth.clamp(f2, 0.1F, 1.0F);
                     this.mob.performRangedAttack(this.target, f3);
                     this.tryTriggerSuperRapidFire();
                 }
                 --this.remainingShots;
+                if (this.remainingShots <= 0) {
+                    this.attackCycleStarted = false;
+                }
 
                 if (this.remainingShots > 0) {
                     this.burstTimer = this.burstDelay;
@@ -126,7 +148,18 @@ public class TrueSuperRangedAttackGoal extends Goal {
             }
         }
 
-        if (--this.attackTime == 0) {
+        if (!targetAlive && !this.isAttackCycleInProgress()) {
+            if (!this.mob.isShootAnimationInProgress()) {
+                this.clearTargetAndStop();
+            }
+            return;
+        }
+
+        if (this.attackCycleStarted) {
+            if (--this.attackTime != 0) {
+                return;
+            }
+
             if (!hasSight) {
                 return;
             }
@@ -141,12 +174,35 @@ public class TrueSuperRangedAttackGoal extends Goal {
             this.remainingShots = this.burstCount - 1;
             if (this.remainingShots > 0) {
                 this.burstTimer = this.burstDelay;
+            } else {
+                this.attackCycleStarted = false;
             }
 
-            this.attackTime = cooldown;
-        } else if (this.attackTime < 0) {
-            this.attackTime = cooldown_first;
+            this.attackTime = targetAlive ? cooldown : -1;
+            return;
         }
+
+        if (this.remainingShots > 0) {
+            return;
+        }
+
+        if (this.attackTime > 0) {
+            --this.attackTime;
+            return;
+        }
+
+        if (targetAlive) {
+            if (this.mob.startShootingAnimation()) {
+                this.attackCycleStarted = true;
+                this.attackTime = cooldown_first;
+            }
+        } else if (!this.mob.isShootAnimationInProgress()) {
+            this.clearTargetAndStop();
+        }
+    }
+
+    private boolean isAttackCycleInProgress() {
+        return this.attackCycleStarted || this.remainingShots > 0;
     }
 
     private void clearTargetAndStop() {
@@ -156,6 +212,7 @@ public class TrueSuperRangedAttackGoal extends Goal {
         this.attackTime = -1;
         this.remainingShots = 0;
         this.burstTimer = 0;
+        this.attackCycleStarted = false;
         this.mob.setShooting(false);
     }
 
