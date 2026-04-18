@@ -26,7 +26,8 @@ public class FumeShroomEntity extends EntityPlantShooterBase {
     // 可调参数
     private static final float BEAM_LENGTH = 10.0F;
     private static final float BEAM_RADIUS = 1.25F;
-    private static final float BEAM_DAMAGE = 6.0F;
+    private static final float BEAM_DAMAGE = 2.0F;
+    private static final double BEAM_KNOCKBACK = 0.04D;
 
     public FumeShroomEntity(EntityType<? extends EntityPlantShooterBase> entityType, Level par1World) {
         super(entityType, par1World, new ItemStack(PVZItems.FUME_SHROOM_CARD.get()));
@@ -64,7 +65,7 @@ public class FumeShroomEntity extends EntityPlantShooterBase {
         Vec3 nozzle = new Vec3(this.getX(), this.getY() + 0.7D, this.getZ()).add(dir.scale(0.45D));
         Vec3 end = nozzle.add(dir.scale(BEAM_LENGTH));
 
-        damageEntitiesAlongBeam(nozzle, end, BEAM_RADIUS, BEAM_DAMAGE);
+        damageEntitiesAlongBeam(nozzle, end, BEAM_RADIUS, BEAM_DAMAGE, dir);
 
         List<LivingEntity> hits = getEntitiesAlongBeam(nozzle, end, BEAM_RADIUS);
         for (LivingEntity hit : hits) {
@@ -76,12 +77,14 @@ public class FumeShroomEntity extends EntityPlantShooterBase {
         }
     }
 
-    private void damageEntitiesAlongBeam(Vec3 start, Vec3 end, float radius, float damage) {
+    private void damageEntitiesAlongBeam(Vec3 start, Vec3 end, float radius, float damage, Vec3 knockbackDir) {
         List<LivingEntity> entities = getEntitiesAlongBeam(start, end, radius);
 
         for (LivingEntity entity : entities) {
             if (entity == this) continue;
-            entity.hurt(this.damageSources().mobAttack(this), damage);
+            if (entity.hurt(this.damageSources().mobAttack(this), damage)) {
+                entity.push(knockbackDir.x * BEAM_KNOCKBACK, 0.0D, knockbackDir.z * BEAM_KNOCKBACK);
+            }
             entity.invulnerableTime = 0;
         }
     }
