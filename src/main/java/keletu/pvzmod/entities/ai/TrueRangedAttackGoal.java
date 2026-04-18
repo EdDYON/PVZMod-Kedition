@@ -70,8 +70,7 @@ public class TrueRangedAttackGoal extends Goal {
 
     public boolean canContinueToUse() {
         if (this.target == null || !this.target.isAlive() || this.target.distanceTo(this.mob) > 24) {
-            this.target = null;
-            this.mob.setTarget(null);
+            this.clearTargetAndStop();
             return false;
         }
         return true;
@@ -92,9 +91,7 @@ public class TrueRangedAttackGoal extends Goal {
 
     public void tick() {
         if (this.target == null || !this.target.isAlive() || !this.mob.canAttack(this.target)) {
-            this.target = null;
-            this.mob.setTarget(null);
-            this.mob.setShooting(false);
+            this.clearTargetAndStop();
             return;
         }
 
@@ -141,11 +138,11 @@ public class TrueRangedAttackGoal extends Goal {
             );
         }
 
-        if (attackTime > 0 && attackTime < 16 && this.mob instanceof FumeShroomEntity entity) {
+        if (attackTime > 0 && attackTime <= 18 && this.mob instanceof FumeShroomEntity entity) {
             Vec3 flatDir = new Vec3(
-                    target.getX() - entity.getX(),
+                    this.target.getX() - entity.getX(),
                     0.0D,
-                    target.getZ() - entity.getZ()
+                    this.target.getZ() - entity.getZ()
             );
 
             Vec3 dir;
@@ -160,9 +157,19 @@ public class TrueRangedAttackGoal extends Goal {
 
             entity.spawnBeamParticles((ServerLevel) entity.level(), nozzle, dir);
 
+            if (attackTime % 6 == 0 && this.target != null && this.target.isAlive()) {
+                float f2 = (float) Math.sqrt(living) / this.attackRadius;
+                float f3 = Mth.clamp(f2, 0.1F, 1.0F);
+                this.mob.performRangedAttack(this.target, f3);
+            }
         }
         if (--this.attackTime == 0) {
             if (!hasSight) {
+                return;
+            }
+
+            if (this.mob instanceof FumeShroomEntity) {
+                this.attackTime = cooldown;
                 return;
             }
 
@@ -181,5 +188,15 @@ public class TrueRangedAttackGoal extends Goal {
         } else if (this.attackTime < 0) {
             this.attackTime = cooldown_first;
         }
+    }
+
+    private void clearTargetAndStop() {
+        this.target = null;
+        this.mob.setTarget(null);
+        this.seeTime = 0;
+        this.attackTime = -1;
+        this.remainingShots = 0;
+        this.burstTimer = 0;
+        this.mob.setShooting(false);
     }
 }

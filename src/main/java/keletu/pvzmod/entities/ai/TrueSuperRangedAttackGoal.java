@@ -56,7 +56,12 @@ public class TrueSuperRangedAttackGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        return this.canUse();
+        if (this.target == null || !this.target.isAlive()) {
+            this.clearTargetAndStop();
+            return false;
+        }
+
+        return true;
     }
 
     @Override
@@ -77,14 +82,7 @@ public class TrueSuperRangedAttackGoal extends Goal {
     @Override
     public void tick() {
         if (this.target == null || !this.target.isAlive() || !this.mob.canAttack(this.target)) {
-            if (this.mob.isSuperFiring()) {
-                this.mob.setShooting(true);
-                return;
-            }
-
-            this.target = null;
-            this.mob.setTarget(null);
-            this.mob.setShooting(false);
+            this.clearTargetAndStop();
             return;
         }
 
@@ -149,6 +147,16 @@ public class TrueSuperRangedAttackGoal extends Goal {
         } else if (this.attackTime < 0) {
             this.attackTime = cooldown_first;
         }
+    }
+
+    private void clearTargetAndStop() {
+        this.target = null;
+        this.mob.setTarget(null);
+        this.seeTime = 0;
+        this.attackTime = -1;
+        this.remainingShots = 0;
+        this.burstTimer = 0;
+        this.mob.setShooting(false);
     }
 
     private void tryTriggerSuperRapidFire() {
