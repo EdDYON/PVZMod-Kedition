@@ -1,9 +1,6 @@
 package keletu.pvzmod.items;
 
-import keletu.pvzmod.entities.EntityPlantBase;
-import keletu.pvzmod.entities.EntityPlantShooterBase;
-import keletu.pvzmod.entities.EntityPotatoMine;
-import keletu.pvzmod.entities.EntitySuperGatlingPea;
+import keletu.pvzmod.entities.*;
 import keletu.pvzmod.init.PVZBlocks;
 import keletu.pvzmod.init.PVZEntities;
 import keletu.pvzmod.init.PVZItems;
@@ -102,6 +99,90 @@ public class ItemPlantCard extends Item {
                     player.level().addFreshEntity(newOne);
 
                     newOne.setOwnerUUID(player.getUUID());
+
+                    if (!player.isCreative()) {
+                        stack.shrink(1);
+                    }
+                }
+                return InteractionResult.SUCCESS;
+            }
+        } else if (entity instanceof EntityPlantBase target && entityTypeSupplier == PVZEntities.PUMPKIN && !target.isPassenger() && !(target instanceof EntityPumpkin)) {
+            if (entity.level().isClientSide) {
+                return InteractionResult.SUCCESS;
+            } else {
+                BlockPos pos = BlockPos.containing(entity.position());
+                if (target.getOwnerUUID() == null || target.getOwnerUUID().equals(player.getUUID())) {
+                    player.level().playSound(null, player.blockPosition(), PVZSounds.PLANT.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                    ((ServerLevel) player.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.DIRT.defaultBlockState()),
+                            pos.getX() + 0.5,
+                            pos.getY(),
+                            pos.getZ() + 0.5,
+                            20,
+                            0.25D,
+                            0.25D,
+                            0.25D,
+                            0.15D);
+
+
+                    EntityPumpkin pumpkin = (EntityPumpkin) entityTypeSupplier.get().create(entity.level());
+
+                    if (pumpkin == null)
+                        return InteractionResult.FAIL;
+
+                    double spawnX = target.getX();
+                    double spawnY = target.getY();
+                    double spawnZ = target.getZ();
+                    float yaw = player.getYRot();
+
+                    pumpkin.moveTo(spawnX, spawnY, spawnZ, yaw, 0.0F);
+                    applyPlantYaw(pumpkin, yaw);
+
+                    player.level().addFreshEntity(pumpkin);
+
+                    pumpkin.setOwnerUUID(player.getUUID());
+                    target.startRiding(pumpkin);
+
+                    if (!player.isCreative()) {
+                        stack.shrink(1);
+                    }
+                }
+                return InteractionResult.SUCCESS;
+            }
+        } else if (entity instanceof EntityPumpkin target && entityTypeSupplier != PVZEntities.PUMPKIN) {
+            if (entity.level().isClientSide) {
+                return InteractionResult.SUCCESS;
+            } else {
+                BlockPos pos = BlockPos.containing(entity.position());
+                if (target.getOwnerUUID() == null || target.getOwnerUUID().equals(player.getUUID())) {
+                    player.level().playSound(null, player.blockPosition(), PVZSounds.PLANT.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                    ((ServerLevel) player.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.DIRT.defaultBlockState()),
+                            pos.getX() + 0.5,
+                            pos.getY(),
+                            pos.getZ() + 0.5,
+                            20,
+                            0.25D,
+                            0.25D,
+                            0.25D,
+                            0.15D);
+
+
+                    EntityPlantBase targetPlant = (EntityPlantBase) entityTypeSupplier.get().create(entity.level());
+
+                    if (targetPlant == null)
+                        return InteractionResult.FAIL;
+
+                    double spawnX = target.getX();
+                    double spawnY = target.getY();
+                    double spawnZ = target.getZ();
+                    float yaw = player.getYRot();
+
+                    targetPlant.moveTo(spawnX, spawnY, spawnZ, yaw, 0.0F);
+                    applyPlantYaw(targetPlant, yaw);
+
+                    player.level().addFreshEntity(targetPlant);
+
+                    targetPlant.setOwnerUUID(player.getUUID());
+                    targetPlant.startRiding(target);
 
                     if (!player.isCreative()) {
                         stack.shrink(1);

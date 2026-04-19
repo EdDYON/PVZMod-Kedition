@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pvz_kedit:item/card/blue",
+    "layer1": "pvz_kedit:item/plant/pumpkin"
+  }
+}

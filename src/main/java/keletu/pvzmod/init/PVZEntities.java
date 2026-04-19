@@ -35,6 +35,7 @@ public class PVZEntities {
     public static final RegistryObject<EntityType<ElectricPeashooterEntity>> ELECTRIC_PEASHOOTER = PVZEntities.ENTITIES.register("electric_peashooter", () -> EntityType.Builder.of(ElectricPeashooterEntity::new, MobCategory.MISC).sized(1.0F, 1.2f).clientTrackingRange(8).build(PVZMod.MODID + ".electric_peashooter"));
     public static final RegistryObject<EntityType<ScaredyShroomEntity>> SCAREDY_SHROOM = PVZEntities.ENTITIES.register("scaredy_shroom", () -> EntityType.Builder.of(ScaredyShroomEntity::new, MobCategory.MISC).sized(1.0F, 1.1f).clientTrackingRange(8).build(PVZMod.MODID + ".scaredy_shroom"));
     public static final RegistryObject<EntityType<EntitySunFlower>> SUN_FLOWER = PVZEntities.ENTITIES.register("sun_flower", () -> EntityType.Builder.of(EntitySunFlower::new, MobCategory.MISC).sized(1.0F, 1.3f).clientTrackingRange(8).build(PVZMod.MODID + ".sun_flower"));
+    public static final RegistryObject<EntityType<EntityPumpkin>> PUMPKIN = PVZEntities.ENTITIES.register("pumpkin", () -> EntityType.Builder.of(EntityPumpkin::new, MobCategory.MISC).sized(1.2F, 0.8F).clientTrackingRange(8).build(PVZMod.MODID + ".pumpkin"));
     public static final RegistryObject<EntityType<PeaProjectile>> PEA_PROJECTILE = PVZEntities.ENTITIES.register("pea_projectile",
             () -> EntityType.Builder.<PeaProjectile>of(PeaProjectile::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F)
@@ -78,6 +79,7 @@ public class PVZEntities {
 
         event.put(WALNUT.get(), EntityWalnut.createAttributes().build());
         event.put(TALL_NUT.get(), EntityTallnut.createAttributes().build());
+        event.put(PUMPKIN.get(), EntityPumpkin.createAttributes().build());
 
         event.put(SUPER_GATLING_PEA.get(), EntitySuperGatlingPea.createAttributes().build());
         event.put(SUPER_SNOW_GATLING_PEA.get(), EntitySuperSnowGatlingPea.createAttributes().build());
@@ -117,6 +119,7 @@ public class PVZEntities {
 
         event.registerEntityRenderer(WALNUT.get(), WalnutRender::new);
         event.registerEntityRenderer(TALL_NUT.get(), TallnutRender::new);
+        event.registerEntityRenderer(PUMPKIN.get(), PumpkinRender::new);
 
         event.registerEntityRenderer(POTATO_MINE.get(), PotatoMineRenderer::new);
 

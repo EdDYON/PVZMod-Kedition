@@ -94,6 +94,8 @@ public class ClientEvents {
         event.registerLayerDefinition(WalnutModel1.LAYER_LOCATION, WalnutModel1::createBodyLayer);
         event.registerLayerDefinition(WalnutModel2.LAYER_LOCATION, WalnutModel2::createBodyLayer);
 
+        event.registerLayerDefinition(PumpkinModel.LAYER_LOCATION, PumpkinModel::createBodyLayer);
+
         event.registerLayerDefinition(PotBlockModel.LAYER_LOCATION, PotBlockModel::createBodyLayer);
         event.registerLayerDefinition(GardenShovelModel.LAYER_LOCATION, GardenShovelModel::createBodyLayer);
         event.registerLayerDefinition(SunItemModel.LAYER_LOCATION, SunItemModel::createBodyLayer);

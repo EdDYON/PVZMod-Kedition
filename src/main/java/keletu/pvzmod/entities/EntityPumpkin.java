@@ -7,7 +7,10 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -20,19 +23,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class EntityWalnut extends EntityPlantBase implements IProtectPlant {
+public class EntityPumpkin extends EntityPlantBase implements IProtectPlant {
 
-    private static final EntityDataAccessor<String> DATA_STUCK_ARROW_RECORDS = SynchedEntityData.defineId(EntityWalnut.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<String> DATA_STUCK_ARROW_RECORDS = SynchedEntityData.defineId(EntityPumpkin.class, EntityDataSerializers.STRING);
     private static final int MAX_STUCK_ARROW_RECORDS = 12;
-    public final AnimationState idleAnimation0 = new AnimationState();
-    public final AnimationState idleAnimation1 = new AnimationState();
-    public final AnimationState idleAnimation2 = new AnimationState();
-    private final double protectRadio;
+    public final AnimationState idleAnimation = new AnimationState();
+    private final double protectRadio = 8;
     private static final int RETARGET_INTERVAL = 10;
 
-    public EntityWalnut(EntityType<? extends EntityPlantBase> type, Level par1World, float protectRadio) {
+    public EntityPumpkin(EntityType<? extends EntityPlantBase> type, Level par1World) {
         super(type, par1World, new ItemStack(PVZItems.WALNUT_CARD.get(), 1));
-        this.protectRadio = protectRadio;
     }
 
     @Override
@@ -64,6 +64,15 @@ public class EntityWalnut extends EntityPlantBase implements IProtectPlant {
             return;
         }
 
+        List<EntityPlantBase> entityPlants = this.level().getEntitiesOfClass(EntityPlantBase.class, this.getBoundingBox());
+
+        for (EntityPlantBase base : entityPlants) {
+
+            if (!base.isPassenger() && this.getFirstPassenger() == null && base != this) {
+                base.startRiding(this);
+            }
+        }
+
         AABB searchBox = new AABB(
                 this.getX() - protectRadio, this.getY(), this.getZ() - protectRadio,
                 this.getX() + protectRadio, this.getY() + 1.0D, this.getZ() + protectRadio
@@ -71,9 +80,9 @@ public class EntityWalnut extends EntityPlantBase implements IProtectPlant {
 
         List<Mob> nearbyMobs = this.level().getEntitiesOfClass(Mob.class, searchBox);
 
-        for (Mob mob : nearbyMobs) {
-            LivingEntity target = mob.getTarget();
-            if (target instanceof EntityPlantBase plant && !(plant instanceof IProtectPlant)) {
+        for (
+                Mob mob : nearbyMobs) {
+            if (this.getFirstPassenger() != null && mob.getTarget() == this.getFirstPassenger() && !(this.getFirstPassenger() instanceof EntityPumpkin)) {
                 mob.setTarget(this);
             }
         }
@@ -112,20 +121,13 @@ public class EntityWalnut extends EntityPlantBase implements IProtectPlant {
         return true;
     }
 
+    @Override
+    public double getPassengersRidingOffset() {
+        return 0.0D;
+    }
+
     public void setupAnimationStates() {
-        if (this.getHealth() > this.getMaxHealth() * 2 / 3) {
-            this.idleAnimation1.stop();
-            this.idleAnimation2.stop();
-            this.idleAnimation0.startIfStopped(this.tickCount);
-        } else if (this.getHealth() > this.getMaxHealth() * 1 / 3 && this.getHealth() <= this.getMaxHealth() * 2 / 3) {
-            this.idleAnimation0.stop();
-            this.idleAnimation2.stop();
-            this.idleAnimation1.startIfStopped(this.tickCount);
-        } else {
-            this.idleAnimation0.stop();
-            this.idleAnimation1.stop();
-            this.idleAnimation2.startIfStopped(this.tickCount);
-        }
+        this.idleAnimation.startIfStopped(this.tickCount);
     }
 
     public List<StuckArrowRecord> getStuckArrowRecords() {
