@@ -42,7 +42,7 @@ public class EntityPumpkin extends EntityPlantBase implements IProtectPlant {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return EntityPlantBase.createAttributes().add(Attributes.MAX_HEALTH, 10.0D * 16);
+        return EntityPlantBase.createAttributes().add(Attributes.MAX_HEALTH, 10.0D * 35);
     }
 
     @Override

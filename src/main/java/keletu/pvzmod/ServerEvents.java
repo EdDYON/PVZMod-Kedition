@@ -1,6 +1,7 @@
 package keletu.pvzmod;
 
 import keletu.pvzmod.entities.EntityPlantBase;
+import keletu.pvzmod.entities.EntityPumpkin;
 import keletu.pvzmod.entities.EntityTallnut;
 import keletu.pvzmod.init.PVZSounds;
 import keletu.pvzmod.items.ItemGardenShovel;
@@ -84,6 +85,10 @@ public class ServerEvents {
     public static void livingHurtEvent(LivingDamageEvent event) {
         if (event.getEntity() instanceof EntityTallnut tallnut && event.getAmount() > tallnut.getMaxHealth() * 1 / 2) {
             event.setAmount(tallnut.getMaxHealth() * 1 / 2);
+        }
+
+        if (event.getEntity() instanceof EntityPumpkin pumpkin && event.getAmount() > pumpkin.getMaxHealth() * 1 / 3) {
+            event.setAmount(pumpkin.getMaxHealth() * 1 / 3);
         }
     }
 }
