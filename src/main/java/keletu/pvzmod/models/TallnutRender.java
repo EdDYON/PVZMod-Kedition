@@ -3,6 +3,7 @@ package keletu.pvzmod.models;
 import com.mojang.blaze3d.vertex.PoseStack;
 import keletu.pvzmod.PVZMod;
 import keletu.pvzmod.entities.EntityTallnut;
+import keletu.pvzmod.models.render.WalnutHelmetLayer;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -22,6 +23,7 @@ public class TallnutRender extends MobRenderer<EntityTallnut, HierarchicalModel<
         this.modelDamaged = new TallNutModel1(pContext.bakeLayer(TallNutModel1.LAYER_LOCATION));
         this.modelCritical = new TallNutModel2(pContext.bakeLayer(TallNutModel2.LAYER_LOCATION));
         this.addLayer(new PlantStuckArrowLayer<>(pContext, this));
+        this.addLayer(new WalnutHelmetLayer(this, pContext));
     }
 
     @Override

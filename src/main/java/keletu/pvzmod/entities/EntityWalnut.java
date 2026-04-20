@@ -5,12 +5,18 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -23,6 +29,7 @@ import java.util.Locale;
 public class EntityWalnut extends EntityPlantBase implements IProtectPlant {
 
     private static final EntityDataAccessor<String> DATA_STUCK_ARROW_RECORDS = SynchedEntityData.defineId(EntityWalnut.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<ItemStack> HELMET_ARMOR = SynchedEntityData.defineId(EntityWalnut.class, EntityDataSerializers.ITEM_STACK);
     private static final int MAX_STUCK_ARROW_RECORDS = 12;
     public final AnimationState idleAnimation0 = new AnimationState();
     public final AnimationState idleAnimation1 = new AnimationState();
@@ -39,6 +46,7 @@ public class EntityWalnut extends EntityPlantBase implements IProtectPlant {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_STUCK_ARROW_RECORDS, "");
+        this.entityData.define(HELMET_ARMOR, ItemStack.EMPTY);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -95,9 +103,98 @@ public class EntityWalnut extends EntityPlantBase implements IProtectPlant {
     }
 
     @Override
+    public void remove(RemovalReason reason) {
+        if (reason.shouldDestroy()) {
+            if (!this.level().isClientSide) {
+                ItemStack itemstack = this.getItemBySlot(EquipmentSlot.HEAD);
+                if (!itemstack.isEmpty()) {
+                    this.spawnAtLocation(itemstack);
+                    this.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
+                }
+            }
+        }
+        super.remove(reason);
+    }
+
+    @Override
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.entityData.set(DATA_STUCK_ARROW_RECORDS, pCompound.getString("StuckArrowRecords"));
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack heldItem = player.getItemInHand(hand);
+
+        if (tryPlaceHelmet(player, hand, heldItem)) {
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
+        }
+
+        if (tryRemoveHelmet(player, hand, heldItem)) {
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
+        }
+
+        return super.mobInteract(player, hand);
+    }
+
+    private boolean tryPlaceHelmet(Player player, InteractionHand hand, ItemStack heldItem) {
+        if (heldItem.isEmpty()) {
+            return false;
+        }
+
+        if (!(heldItem.getItem() instanceof ArmorItem armor) || armor.getType() != ArmorItem.Type.HELMET) {
+            return false;
+        }
+
+        if (this.hasHelmet()) {
+            return false;
+        }
+
+        if (!this.level().isClientSide) {
+            ItemStack placed = heldItem.copy();
+            placed.setCount(1);
+            this.setItemSlot(EquipmentSlot.HEAD, placed);
+
+            if (!player.getAbilities().instabuild) {
+                heldItem.shrink(1);
+            }
+
+            this.level().playSound(null, this.blockPosition(), SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.PLAYERS, 1.0F, 1.0F);
+        }
+
+        return true;
+    }
+
+    private boolean tryRemoveHelmet(Player player, InteractionHand hand, ItemStack heldItem) {
+        if (!heldItem.isEmpty()) {
+            return false;
+        }
+
+        if (!this.hasHelmet()) {
+            return false;
+        }
+
+        if (!this.level().isClientSide) {
+            ItemStack removed = this.removeHelmetItem();
+
+            if (!player.addItem(removed)) {
+                player.drop(removed, false);
+            }
+
+            this.level().playSound(null, this.blockPosition(), SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.PLAYERS, 1.0F, 0.8F);
+        }
+
+        return true;
+    }
+
+    public boolean hasHelmet() {
+        return !this.getItemBySlot(EquipmentSlot.HEAD).isEmpty();
+    }
+
+    public ItemStack removeHelmetItem() {
+        ItemStack stack = this.getItemBySlot(EquipmentSlot.HEAD);
+        this.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
+        return stack;
     }
 
     @Override
