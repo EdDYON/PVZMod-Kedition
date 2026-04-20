@@ -38,9 +38,9 @@ public class PlantStuckArrowLayer<T extends EntityWalnut, M extends Hierarchical
         for (EntityWalnut.StuckArrowRecord arrow : arrows) {
             poseStack.pushPose();
             body.translateAndRotate(poseStack);
-            poseStack.translate(arrow.x / 16.0F, arrow.y / 16.0F, arrow.z / 16.0F);
+            poseStack.translate(-arrow.x / 16.0F, arrow.y / 16.0F, arrow.z / 16.0F);
 
-            renderArrow(poseStack, buffer, packedLight, entity, arrow.dirX, arrow.dirY, arrow.dirZ, partialTick);
+            renderArrow(poseStack, buffer, packedLight, entity, -arrow.dirX, arrow.dirY, arrow.dirZ, partialTick);
 
             poseStack.popPose();
         }

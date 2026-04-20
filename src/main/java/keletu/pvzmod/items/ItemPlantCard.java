@@ -132,7 +132,7 @@ public class ItemPlantCard extends Item {
                     double spawnX = target.getX();
                     double spawnY = target.getY();
                     double spawnZ = target.getZ();
-                    float yaw = player.getYRot();
+                    float yaw = target.getYRot();
 
                     pumpkin.moveTo(spawnX, spawnY, spawnZ, yaw, 0.0F);
                     applyPlantYaw(pumpkin, yaw);
@@ -180,6 +180,7 @@ public class ItemPlantCard extends Item {
                     applyPlantYaw(targetPlant, yaw);
 
                     player.level().addFreshEntity(targetPlant);
+                    applyPlantYaw(target, yaw);
 
                     targetPlant.setOwnerUUID(player.getUUID());
                     targetPlant.startRiding(target);
