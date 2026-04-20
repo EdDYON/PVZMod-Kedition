@@ -72,8 +72,6 @@ public class TallNutModel0 extends HierarchicalModel<EntityTallnut> {
 
         this.animate(entity.idleAnimation0, TallNutAnimation0.animation, ageInTicks, 1.0F);
 
-        this.all.yRot = netHeadYaw * ((float) Math.PI / 180F);
-        this.all.xRot = headPitch * ((float) Math.PI / 180F);
     }
 
     @Override

@@ -75,8 +75,6 @@ public class WalnutModel1 extends HierarchicalModel<EntityWalnut> {
 
         this.animate(entity.idleAnimation1, WallnutNew0Animation.animation1, ageInTicks, 1.0F);
 
-        this.all.yRot = netHeadYaw * ((float) Math.PI / 180F);
-        this.all.xRot = headPitch * ((float) Math.PI / 180F);
     }
 
     @Override
