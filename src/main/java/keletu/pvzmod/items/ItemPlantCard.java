@@ -148,7 +148,7 @@ public class ItemPlantCard extends Item {
                 }
                 return InteractionResult.SUCCESS;
             }
-        } else if (entity instanceof EntityPumpkin target && entityTypeSupplier != PVZEntities.PUMPKIN) {
+        } else if (entity instanceof EntityPumpkin target && entityTypeSupplier != PVZEntities.PUMPKIN && target.getFirstPassenger() == null) {
             if (entity.level().isClientSide) {
                 return InteractionResult.SUCCESS;
             } else {
