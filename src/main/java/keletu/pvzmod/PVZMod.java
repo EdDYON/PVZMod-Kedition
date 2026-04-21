@@ -2,7 +2,9 @@ package keletu.pvzmod;
 
 import keletu.pvzmod.init.*;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(PVZMod.MODID)
@@ -22,5 +24,7 @@ public class PVZMod {
         modEventBus.addListener(PVZEntities::registerEntityAttributes);
 
         PVZTabs.TABS.register(modEventBus);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, PVZConfig.COMMON_SPEC);
     }
 }

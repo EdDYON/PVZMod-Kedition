@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import keletu.pvzmod.PVZConfig;
 import keletu.pvzmod.entities.EntityTallnut;
 import keletu.pvzmod.entities.EntityWalnut;
 import net.minecraft.client.model.HierarchicalModel;
@@ -24,6 +25,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -54,7 +56,7 @@ public class WalnutHelmetLayer<T extends EntityWalnut, M extends HierarchicalMod
 
         poseStack.pushPose();
 
-        translateToTop(poseStack, entity);
+        translateToTop(itemstack, poseStack, entity);
 
         if (itemstack.getItem() instanceof ArmorItem armorItem
                 && armorItem.getType() == ArmorItem.Type.HELMET) {
@@ -105,13 +107,24 @@ public class WalnutHelmetLayer<T extends EntityWalnut, M extends HierarchicalMod
         poseStack.popPose();
     }
 
-    private void translateToTop(PoseStack poseStack, T entity) {
+    private void translateToTop(ItemStack stack, PoseStack poseStack, T entity) {
+        for (String entry : PVZConfig.HELEMET.get()) {
+            String registryName = entry.split(";")[0];
+            if (stack.is(ForgeRegistries.ITEMS.getValue(new ResourceLocation(registryName.split(":")[0], registryName.split(":")[1])))) {
+                poseStack.scale(Float.parseFloat(entry.split(";")[1]), Float.parseFloat(entry.split(";")[2]), Float.parseFloat(entry.split(";")[3]));
+                if (entity instanceof EntityTallnut) {
+                    poseStack.translate(Float.parseFloat(entry.split(";")[7]), Float.parseFloat(entry.split(";")[8]), Float.parseFloat(entry.split(";")[9]));
+                } else {
+                    poseStack.translate(Float.parseFloat(entry.split(";")[4]), Float.parseFloat(entry.split(";")[5]), Float.parseFloat(entry.split(";")[6]));
+                }
+                return;
+            }
+        }
         poseStack.scale(3.0F, 2.0F, 2.8F);
         if (entity instanceof EntityTallnut) {
             poseStack.translate(0.0F, -0.425F, -0.01F);
         } else {
             poseStack.translate(0.0F, -0.1F, 0.0F);
-
         }
     }
 
