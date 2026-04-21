@@ -123,7 +123,7 @@ public class EntityPumpkin extends EntityPlantBase implements IProtectPlant {
 
     @Override
     public double getPassengersRidingOffset() {
-        return 0.0D;
+        return 0.1D;
     }
 
     public void setupAnimationStates() {

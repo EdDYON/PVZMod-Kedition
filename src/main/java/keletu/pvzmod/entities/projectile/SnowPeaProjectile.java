@@ -70,7 +70,7 @@ public class SnowPeaProjectile extends ThrowableProjectile {
 
         if (!this.level().isClientSide) {
             this.spawnBreakParticles();
-            this.playSound(PVZSounds.PEA_BOOM.get(), 0.8F, 1.2F);
+            this.playSound(PVZSounds.PEA_BOOM.get(), 1.0F, 1.0F);
             this.discard();
         }
     }

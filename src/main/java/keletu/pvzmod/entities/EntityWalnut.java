@@ -146,11 +146,15 @@ public class EntityWalnut extends EntityPlantBase implements IProtectPlant {
             return false;
         }
 
-        if (this.hasHelmet()) {
-            return false;
-        }
-
         if (!this.level().isClientSide) {
+            if (this.hasHelmet()) {
+                ItemStack removed = this.removeHelmetItem();
+
+                if (!player.addItem(removed)) {
+                    player.drop(removed, false);
+                }
+            }
+
             ItemStack placed = heldItem.copy();
             placed.setCount(1);
             this.setItemSlot(EquipmentSlot.HEAD, placed);

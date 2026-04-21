@@ -23,9 +23,9 @@ public class PumpkinRender extends MobRenderer<EntityPumpkin, HierarchicalModel<
         } else if (percent > 1.0F / 2.0F) {
             return new ResourceLocation(PVZMod.MODID, "textures/entity/plant/pumpkin_1.png");
         } else if (percent > 1.0F / 4.0F) {
-            return new ResourceLocation(PVZMod.MODID, "textures/entity/plant/pumpkin_1.png");
-        } else {
             return new ResourceLocation(PVZMod.MODID, "textures/entity/plant/pumpkin_2.png");
+        } else {
+            return new ResourceLocation(PVZMod.MODID, "textures/entity/plant/pumpkin_3.png");
         }
     }
 }
