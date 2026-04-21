@@ -32,10 +32,10 @@ public class PotBlockRenderer implements BlockEntityRenderer<PotBlockEntity> {
         Direction facing = entity.getBlockState().getValue(Pot.FACING);
         poseStack.mulPose(Axis.YP.rotationDegrees(
                 switch (facing) {
-                    case NORTH -> 180.0F;
-                    case SOUTH -> 0.0F;
-                    case WEST -> -90.0F;
-                    case EAST -> 90.0F;
+                    case NORTH -> 0.0F;
+                    case SOUTH -> 180.0F;
+                    case WEST -> 90.0F;
+                    case EAST -> -90.0F;
                     default -> 0.0F;
                 }
         ));

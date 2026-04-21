@@ -120,11 +120,11 @@ public class WalnutHelmetLayer<T extends EntityWalnut, M extends HierarchicalMod
                 return;
             }
         }
-        poseStack.scale(3.0F, 2.0F, 2.8F);
+        poseStack.scale(3.0F, 3.0F, 2.8F);
         if (entity instanceof EntityTallnut) {
-            poseStack.translate(0.0F, -0.425F, -0.01F);
+            poseStack.translate(0.0F, -0.36F, -0.01F);
         } else {
-            poseStack.translate(0.0F, -0.1F, 0.0F);
+            poseStack.translate(0.0F, -0.16F, 0.0F);
         }
     }
 
