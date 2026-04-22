@@ -408,11 +408,13 @@ public class ElectricPeashooterModelAnimation {
             ))
             .addAnimation("bone2", new AnimationChannel(AnimationChannel.Targets.POSITION,
                     new Keyframe(0.4583F, KeyframeAnimations.posVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
-                    new Keyframe(0.6667F, KeyframeAnimations.posVec(0.0F, 4.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)
+                    new Keyframe(0.6667F, KeyframeAnimations.posVec(0.0F, 4.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
+                    new Keyframe(2.25F, KeyframeAnimations.posVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)
             ))
             .addAnimation("bone2", new AnimationChannel(AnimationChannel.Targets.SCALE,
                     new Keyframe(0.4583F, KeyframeAnimations.scaleVec(1.0F, 1.0F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),
-                    new Keyframe(0.5833F, KeyframeAnimations.scaleVec(1.315F, 1.315F, 1.325F), AnimationChannel.Interpolations.CATMULLROM)
+                    new Keyframe(0.5833F, KeyframeAnimations.scaleVec(1.315F, 1.315F, 1.325F), AnimationChannel.Interpolations.CATMULLROM),
+                    new Keyframe(2.25F, KeyframeAnimations.scaleVec(1.0F, 1.0F, 1.0F), AnimationChannel.Interpolations.CATMULLROM)
             ))
             .addAnimation("leave5", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.2083F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),

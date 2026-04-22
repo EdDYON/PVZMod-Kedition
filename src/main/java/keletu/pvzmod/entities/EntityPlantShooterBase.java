@@ -103,11 +103,12 @@ public abstract class EntityPlantShooterBase extends EntityPlantBase implements 
             return;
         }
 
-        idleAnimation.startIfStopped(this.tickCount);
         if (this.isShooting()) {
+            idleAnimation.stop();
             shootAnimation.startIfStopped(this.tickCount);
         } else {
             shootAnimation.stop();
+            idleAnimation.startIfStopped(this.tickCount);
         }
     }
 

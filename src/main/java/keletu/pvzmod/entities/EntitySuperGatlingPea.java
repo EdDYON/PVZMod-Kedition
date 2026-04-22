@@ -8,6 +8,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,9 +18,33 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class EntitySuperGatlingPea extends EntityPlantShooterBase {
-    public static final int SUPER_RAPID_FIRE_DURATION = 60;
+    public static final int SUPER_RAPID_FIRE_DURATION = 40;
     public static final int SUPER_RAPID_FIRE_COOLDOWN = 300;
     public static final float SUPER_RAPID_FIRE_CHANCE = 0.02F;
+    private static final int SUPER_STARTUP_TICKS = 4;
+    private static final int SUPER_MAIN_PROJECTILE_COUNT_MIN = 4;
+    private static final int SUPER_MAIN_PROJECTILE_COUNT_MAX = 5;
+    private static final int SUPER_LAYER_PROJECTILE_COUNT_MIN = 2;
+    private static final int SUPER_LAYER_PROJECTILE_COUNT_MAX = 3;
+    private static final float SUPER_TARGET_MAIN_HALF_SPREAD = 18.0F;
+    private static final float SUPER_TARGET_LAYER_HALF_SPREAD = 10.0F;
+    private static final float SUPER_FORWARD_MAIN_HALF_SPREAD = 24.0F;
+    private static final float SUPER_FORWARD_LAYER_HALF_SPREAD = 14.0F;
+    private static final float SUPER_MAIN_YAW_JITTER = 4.0F;
+    private static final float SUPER_LAYER_YAW_JITTER = 3.0F;
+    private static final float SUPER_MAIN_PITCH_JITTER = 1.5F;
+    private static final float SUPER_LAYER_PITCH_JITTER = 1.8F;
+    private static final float SUPER_UPPER_LAYER_PITCH = -6.5F;
+    private static final float SUPER_LOWER_LAYER_PITCH = 5.5F;
+    private static final float SUPER_VOLLEY_YAW_BIAS = 5.0F;
+    private static final float SUPER_VOLLEY_PITCH_BIAS = 1.5F;
+    private static final float SUPER_SPREAD_CHAOS_FACTOR = 0.35F;
+    private static final double SUPER_MOUTH_FORWARD_OFFSET = 0.82D;
+    private static final double SUPER_MOUTH_VERTICAL_OFFSET = -0.18D;
+    private static final double SUPER_SPAWN_SIDE_OFFSET = 0.12D;
+    private static final double SUPER_SPAWN_Y_OFFSET = 0.10D;
+    private static final float SUPER_PROJECTILE_SPEED = 1.2F;
+    private static final float SUPER_PROJECTILE_SPEED_JITTER = 0.12F;
     public final AnimationState idleAnimation = new AnimationState();
     public final AnimationState shootAnimation = new AnimationState();
     public final AnimationState superAnimation = new AnimationState();
@@ -27,23 +52,24 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase {
             SynchedEntityData.defineId(EntitySuperGatlingPea.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> SUPER_COOLDOWN =
             SynchedEntityData.defineId(EntitySuperGatlingPea.class, EntityDataSerializers.INT);
+    private boolean queuedSuperRapidFire;
+    private int superStartupTicks;
 
     public EntitySuperGatlingPea(EntityType<? extends EntitySuperGatlingPea> type, Level level) {
         super(type, level, new ItemStack(PVZItems.SUPER_GATLING_PEA_CARD.get()));
     }
 
-
     @Override
     protected TrueSuperRangedAttackGoal createRangedAttackGoal() {
-        if (this.isSuperFiring())
+        if (this.isSuperFiring()) {
             return new TrueSuperRangedAttackGoal(this, 0.0D, 15.0F, 4, 2, 60, 0);
+        }
         return new TrueSuperRangedAttackGoal(this, 0.0D, 15.0F, 4, 2, 30, 25);
     }
 
     @Override
     public ThrowableProjectile entitySelect(Level world) {
-        PeaProjectile ent = new PeaProjectile(world, this, 3);
-        return ent;
+        return new PeaProjectile(world, this, 3);
     }
 
     @Override
@@ -74,12 +100,24 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase {
     }
 
     public boolean canTriggerSuperRapidFire() {
-        return this.getSuperTick() <= 0 && this.getSuperCooldown() <= 0;
+        return this.getSuperTick() <= 0 && this.getSuperCooldown() <= 0 && !this.queuedSuperRapidFire;
     }
 
     public void triggerSuperRapidFire() {
+        if (this.isShootAnimationInProgress()) {
+            this.queuedSuperRapidFire = true;
+            return;
+        }
+
+        this.startSuperRapidFire();
+    }
+
+    private void startSuperRapidFire() {
         this.setSuperTick(SUPER_RAPID_FIRE_DURATION);
         this.setSuperCooldown(SUPER_RAPID_FIRE_COOLDOWN);
+        this.superStartupTicks = SUPER_STARTUP_TICKS;
+        this.queuedSuperRapidFire = false;
+        this.setShooting(false);
     }
 
     @Override
@@ -108,17 +146,26 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase {
                 this.setSuperCooldown(this.getSuperCooldown() - 1);
             }
 
-            if (this.getSuperTick() > 0) {
-                LivingEntity target = this.getTarget();
+            if (!this.isSuperFiring() && this.queuedSuperRapidFire && !this.isShootAnimationInProgress()) {
+                this.startSuperRapidFire();
+            }
 
-                if (target != null && target.isAlive() && this.canAttack(target)) {
-                    //this.getLookControl().setLookAt(target, 30.0F, 30.0F);
-                    this.performRangedAttack(target, 1.0F);
+            if (this.getSuperTick() > 0) {
+                if (this.superStartupTicks > 0) {
+                    --this.superStartupTicks;
                 } else {
-                    this.fireSuperShotForward();
+                    LivingEntity target = this.getTarget();
+
+                    if (target != null && target.isAlive() && this.canAttack(target)) {
+                        this.performRangedAttack(target, 1.0F);
+                    } else {
+                        this.fireSuperShotForward();
+                    }
                 }
 
                 this.setSuperTick(this.getSuperTick() - 1);
+            } else {
+                this.superStartupTicks = 0;
             }
         }
 
@@ -133,32 +180,8 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase {
         }
 
         this.faceTarget(target);
-
-        ThrowableProjectile pea = this.entitySelect(this.level());
-
-        pea.setPos(
-                this.getX(),
-                this.getEyeY() - 0.1D,
-                this.getZ()
-        );
-
-        double dx = target.getX() - pea.getX();
-        double dy = target.getEyeY() - pea.getY();
-        double dz = target.getZ() - pea.getZ();
-
-        Vec3 direction = new Vec3(dx, dy, dz).normalize();
-
-        float spreadYaw = (this.random.nextFloat() * 15.0F) - 7.5F;
-        float spreadPitch = (this.random.nextFloat() * 15.0F) - 7.5F;
-
-        Vec3 spreadDirection = direction
-                .yRot((float) Math.toRadians(spreadYaw))
-                .xRot((float) Math.toRadians(spreadPitch))
-                .normalize();
-
-        pea.shoot(spreadDirection.x, 0, spreadDirection.z, 1.2F, 0.0F);
-
-        this.level().addFreshEntity(pea);
+        Vec3 baseDirection = new Vec3(target.getX() - this.getX(), 0.0D, target.getZ() - this.getZ());
+        this.fireSuperVolley(baseDirection, SUPER_TARGET_MAIN_HALF_SPREAD, SUPER_TARGET_LAYER_HALF_SPREAD);
     }
 
     private void fireSuperShotForward() {
@@ -166,21 +189,101 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase {
             return;
         }
 
-        ThrowableProjectile pea = this.entitySelect(this.level());
-
-        float yawOffset = (this.random.nextFloat() * 30.0F) - 7.5F;
-        float pitchOffset = (this.random.nextFloat() * 30.0F) - 7.5F;
-
-        float shootYaw = this.yHeadRot + yawOffset;
-        //float shootPitch = this.getXRot() + pitchOffset;
-
-        Vec3 look = Vec3.directionFromRotation(0, shootYaw);
-
-        pea.setPos(this.getX(), this.getEyeY() - 0.1D, this.getZ());
-        pea.shoot(look.x, look.y, look.z, 1.2F, 0.0F);
-        this.level().addFreshEntity(pea);
+        Vec3 look = Vec3.directionFromRotation(0.0F, this.yHeadRot);
+        this.fireSuperVolley(look, SUPER_FORWARD_MAIN_HALF_SPREAD, SUPER_FORWARD_LAYER_HALF_SPREAD);
     }
 
+    private void fireSuperVolley(Vec3 baseDirection, float mainHalfSpread, float layerHalfSpread) {
+        Vec3 flattenedDirection = new Vec3(baseDirection.x, 0.0D, baseDirection.z);
+        if (flattenedDirection.lengthSqr() < 1.0E-6D) {
+            Vec3 look = this.getLookAngle();
+            flattenedDirection = new Vec3(look.x, 0.0D, look.z);
+        }
+
+        if (flattenedDirection.lengthSqr() < 1.0E-6D) {
+            flattenedDirection = Vec3.directionFromRotation(0.0F, this.yHeadRot);
+        }
+
+        Vec3 normalizedDirection = flattenedDirection.normalize();
+
+        float volleyYawBias = randomCentered(SUPER_VOLLEY_YAW_BIAS);
+        float volleyPitchBias = randomCentered(SUPER_VOLLEY_PITCH_BIAS);
+
+        this.fireSuperBand(
+                normalizedDirection,
+                randomCount(SUPER_MAIN_PROJECTILE_COUNT_MIN, SUPER_MAIN_PROJECTILE_COUNT_MAX),
+                mainHalfSpread,
+                volleyYawBias,
+                volleyPitchBias,
+                SUPER_MAIN_YAW_JITTER,
+                SUPER_MAIN_PITCH_JITTER
+        );
+        this.fireSuperBand(
+                normalizedDirection,
+                randomCount(SUPER_LAYER_PROJECTILE_COUNT_MIN, SUPER_LAYER_PROJECTILE_COUNT_MAX),
+                layerHalfSpread,
+                volleyYawBias + randomCentered(2.5F),
+                volleyPitchBias + SUPER_UPPER_LAYER_PITCH + randomCentered(1.0F),
+                SUPER_LAYER_YAW_JITTER,
+                SUPER_LAYER_PITCH_JITTER
+        );
+        this.fireSuperBand(
+                normalizedDirection,
+                randomCount(SUPER_LAYER_PROJECTILE_COUNT_MIN, SUPER_LAYER_PROJECTILE_COUNT_MAX),
+                layerHalfSpread,
+                volleyYawBias + randomCentered(2.5F),
+                volleyPitchBias + SUPER_LOWER_LAYER_PITCH + randomCentered(1.0F),
+                SUPER_LAYER_YAW_JITTER,
+                SUPER_LAYER_PITCH_JITTER
+        );
+    }
+
+    private void fireSuperBand(Vec3 baseDirection, int projectileCount, float halfSpread, float baseYaw, float basePitch, float yawJitter, float pitchJitter) {
+        for (int i = 0; i < projectileCount; ++i) {
+            float step = projectileCount == 1 ? 0.5F : (float) i / (projectileCount - 1);
+            float fanOffset = Mth.lerp(step, -halfSpread, halfSpread) + randomCentered(halfSpread * SUPER_SPREAD_CHAOS_FACTOR);
+            float yawOffset = baseYaw + fanOffset + randomCentered(yawJitter);
+            float pitchOffset = basePitch + randomCentered(pitchJitter);
+
+            Vec3 shotDirection = baseDirection
+                    .yRot((float) Math.toRadians(yawOffset))
+                    .xRot((float) Math.toRadians(pitchOffset))
+                    .normalize();
+
+            this.spawnSuperProjectile(shotDirection);
+        }
+    }
+
+    private int randomCount(int min, int max) {
+        return this.random.nextInt(max - min + 1) + min;
+    }
+
+    private float randomCentered(float range) {
+        return (this.random.nextFloat() * 2.0F - 1.0F) * range;
+    }
+
+    private void spawnSuperProjectile(Vec3 direction) {
+        ThrowableProjectile projectile = this.entitySelect(this.level());
+        Vec3 forward = direction.normalize();
+        Vec3 flattenedDirection = new Vec3(forward.x, 0.0D, forward.z);
+        if (flattenedDirection.lengthSqr() < 1.0E-6D) {
+            flattenedDirection = Vec3.directionFromRotation(0.0F, this.yHeadRot);
+        }
+
+        Vec3 horizontalForward = flattenedDirection.normalize();
+        Vec3 lateral = new Vec3(-horizontalForward.z, 0.0D, horizontalForward.x).normalize();
+
+        double sideOffset = randomCentered((float) SUPER_SPAWN_SIDE_OFFSET);
+        double yOffset = randomCentered((float) SUPER_SPAWN_Y_OFFSET);
+        Vec3 spawnPos = new Vec3(this.getX(), this.getEyeY() + SUPER_MOUTH_VERTICAL_OFFSET, this.getZ())
+                .add(horizontalForward.scale(SUPER_MOUTH_FORWARD_OFFSET))
+                .add(lateral.scale(sideOffset))
+                .add(0.0D, yOffset, 0.0D);
+
+        projectile.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
+        projectile.shoot(direction.x, direction.y, direction.z, SUPER_PROJECTILE_SPEED + randomCentered(SUPER_PROJECTILE_SPEED_JITTER), 0.0F);
+        this.level().addFreshEntity(projectile);
+    }
 
     public void setupAnimationStates() {
         if (this.isSuperFiring()) {
@@ -197,5 +300,4 @@ public class EntitySuperGatlingPea extends EntityPlantShooterBase {
             this.idleAnimation.startIfStopped(this.tickCount);
         }
     }
-
 }
